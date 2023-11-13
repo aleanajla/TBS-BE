@@ -1,22 +1,74 @@
 [
     {
         "id": 1,
-        "IsoCode": "22G1"
+        "Iso_Code": "22G1",
+        "Size": "20",
+        "Type" : "Dry",
+        "Width" : 8,
+        "Height": 8.6
     },
     {
         "id": 2,
-        "IsoCode": "2580"
+        "Iso_Code": "4200",
+        "Size": "40",
+        "Type" : "Dry",
+        "Width" : 8,
+        "Height": 8.6
     },
     {
         "id": 3,
-        "IsoCode": "28U1"
+        "Iso_Code": "2000",
+        "Size": "20",
+        "Type" : "Dry",
+        "Width" : 8,
+        "Height": 8
     },
     {
         "id": 4,
-        "IsoCode": "2960"
+        "Iso_Code": "20G0",
+        "Size": "20",
+        "Type" : "Dry",
+        "Width" : 8,
+        "Height": 8.6
     },
     {
         "id": 5,
-        "IsoCode": "4200"
+        "Iso_Code": "2200",
+        "Size": "20",
+        "Type" : "Dry",
+        "Width" : 8,
+        "Height": 8.6
+    },
+    {
+        "id": 6,
+        "Iso_Code": "42G0",
+        "Size": "20",
+        "Type" : "Dry",
+        "Width" : 8,
+        "Height": 8.6
+    },
+    {
+        "id": 7,
+        "Iso_Code": "45G0",
+        "Size": "40",
+        "Type" : "HQ",
+        "Width" : 8,
+        "Height": 9.6
+    },
+    {
+        "id": 8,
+        "Iso_Code": "45G1",
+        "Size": "40",
+        "Type" : "HQ",
+        "Width" : 8,
+        "Height": 9.6
+    },
+    {
+        "id": 9,
+        "Iso_Code": "9500",
+        "Size": "45",
+        "Type" : "HQ",
+        "Width" : 8,
+        "Height": 8.6
     }
 ]

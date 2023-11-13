@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "Port_Name": "Jakarta International Container Terminal I (JICT I)"
+    },
+    {
+        "id": 2,
+        "Port_Name": "Jakarta International Container Terminal II (JICT II)"
+    },
+    {
+        "id": 3,
+        "Port_Name": "Terminal Petikemas Koja (TPK Koja)"
+    },
+    {
+        "id": 4,
+        "Port_Name": "Mustika Alam Lestari (MAL)"
+    },
+    {
+        "id": 5,
+        "Port_Name": "Multi Terminal Indonesia (MTI)"
+    }
+]
