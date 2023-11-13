@@ -1,0 +1,172 @@
+[
+    {
+        "id":1,
+        "Company_Name": "PT. Putra Trucking",
+        "Company_Type": "Trucking Company",
+        "PMKU": "PMKU.IDJKT.0501.000001",
+        "Email": "putra_trucking@gmail.com",
+        "Address": "Jl. Griya Sejahtera Blk. C No.9, RT.8/RW.4, Sunter Agung, Kec. Tj. Priok, Jkt Utara, Daerah Khusus Ibukota Jakarta 14350",
+        "Phone_Number": "081905312998",
+        "NIB": "9120001380361"
+    },
+    {
+        "id":2,
+        "Company_Name": "PT. SNG Logistic",
+        "Company_Type": "Freight Forwarder",
+        "PMKU": "PMKU.IDJKT.0501.000002",
+        "Email": "sng_logistic@gmail.com",
+        "Address": "Pool Bis Sinar Jaya, Jl. Cipto Mangunkusumo, Paninggilan, Kec. Ciledug, Kota Tangerang, Banten 15153",
+        "Phone_Number": "081296098056",
+        "NIB": "9120001380258"
+    },
+    {
+        "id":3,
+        "Company_Name": "PT. Sentral Cargo",
+        "Company_Type": "Freight Forwarder",
+        "PMKU": "PMKU.IDJKT.0501.000003",
+        "Email": "sentralcargo2001@gmail.com",
+        "Address": "Jl. Lautze No.17K, RT.11/RW.3, Karang Anyar, Kecamatan Sawah Besar, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10740",
+        "Phone_Number": "0213457712",
+        "NIB": "9120001380165"
+    },
+    {
+        "id":4,
+        "Company_Name": "PT Putra Rajawali Kencana",
+        "Company_Type": "Trucking Company",
+        "PMKU": "PMKU.IDJKT.0501.000004",
+        "Email": "putra_rajawali@gmail.com",
+        "Address": "Ruko Section One Blok F 10, Jl. Rungkut Industri Raya No.1, Kendangsari, Tenggilis Mejoyo, Surabaya, Jawa Timur 60292",
+        "Phone_Number": "03199013573",
+        "NIB": "9120001386385"
+    },
+    {
+        "id":5,
+        "Company_Name": "PT Ritra Cargo Indonesia",
+        "Company_Type": "Freight Forwarder",
+        "PMKU": "PMKU.IDJKT.0501.000005",
+        "Email": "ritracargo01@gmail.com",
+        "Address": "Jl. Tongkol Bl A-1%2F4 Tanjung Priok Tanjung Priok Jakarta Utara DKI Jakarta, RT.6/RW.8, Tj. Priok, Kec. Tj. Priok, Jkt Utara, Daerah Khusus Ibukota Jakarta 14330",
+        "Phone_Number": "0217980650",
+        "NIB": "91200016372385"
+    },
+    {
+        "id":6,
+        "Company_Name": "PT Yamato Freight Forwarding",
+        "Company_Type": "Freight Forwarder",
+        "PMKU": "PMKU.IDJKT.0501.000006",
+        "Email": "yamatologistic@gmail.com",
+        "Address": "Wisma Keiai, 21st Floor, Jl. Jend. Sudirman, Kav-3, Jakarta Pusat 10220, Indonesia",
+        "Phone_Number": "0812-8650-4493",
+        "NIB": "9178401386320"
+    },
+    {
+        "id":7,
+        "Company_Name": "PT Tera Logistics",
+        "Company_Type": "Freight Forwarder",
+        "PMKU": "PMKU.IDJKT.0501.000007",
+        "Email": "teralogistic9@gmail.com",
+        "Address": "Equity Tower, 49th Floor, RT.5/RW.3, Senayan, Kec. Kby. Baru, Jakarta, Daerah Khusus Ibukota Jakarta 12190",
+        "Phone_Number": "02129651172",
+        "NIB": "91200016374872"
+    },
+    {
+        "id":8,
+        "Company_Name": "PT. Indah Prakasa Sentosa",
+        "Company_Type": "Trucking Company",
+        "PMKU": "PMKU.IDJKT.0501.000008",
+        "Email": "indahprakasa_sentosa@gmail.com",
+        "Address": "PT. Indah Prakasa Sentosa Tbk",
+        "Phone_Number": "02165837621",
+        "NIB": "9120637486385"
+    },
+    {
+        "id":9,
+        "Company_Name": "PT Armada Berjaya Trans",
+        "Company_Type": "Trucking Company",
+        "PMKU": "PMKU.IDJKT.0501.000009",
+        "Email": "corporate@armadaberjaya.com",
+        "Address": "Green Sedayu Bizpark Cakung GS 7 No.19 l. Raya Cakung Cilincin, Cakung East Jakarta DKI Jakarta 13910",
+        "Phone_Number": "0214609433",
+        "NIB": "9120001375849"
+    },
+    {
+        "id":10,
+        "Company_Name": "PT . Sidomulyo Selaras",
+        "Company_Type": "Trucking Company",
+        "PMKU": "PMKU.IDJKT.0501.000010",
+        "Email": "enquiry@sidomulyo.com",
+        "Address": "Jl. Gunung Sahari III No.12A, RT.11/RW.7, Gn. Sahari Sel., Kec. Kemayoran, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10610",
+        "Phone_Number": "0214266002",
+        "NIB": "9120001386385"
+    },
+    {
+        "id":11,
+        "Company_Name": "PT. Guna Timur Raya",
+        "Company_Type": "Trucking Company",
+        "PMKU": "PMKU.IDJKT.0501.000011",
+        "Email": "corsec@gunatimurraya.com",
+        "Address": "Jl. R. E. Martadinata No.8, RT.6/RW.4, Ancol, Kec. Pademangan, Jkt Utara, Daerah Khusus Ibukota Jakarta 14430",
+        "Phone_Number": "0216910618",
+        "NIB": "9120009478485"
+    },
+    {
+        "id":12,
+        "Company_Name": "PT Elite Global Marketing",
+        "Company_Type": "Freight Forwarder",
+        "PMKU": "PMKU.IDJKT.0501.0000012",
+        "Email": "co@elite-global.com",
+        "Address": "Wisma Kodel, Jl. H. R. Rasuna Said, RT.10/RW.7, Karet Kuningan, Setiabudi, South Jakarta City, Jakarta 12910",
+        "Phone_Number": "08161603692",
+        "NIB": "9120001029637"
+    },
+    {
+        "id":13,
+        "Company_Name": "PT. Agoeng Sejahtera Logistics",
+        "Company_Type": "Freight Forwarder",
+        "PMKU": "PMKU.IDJKT.0501.000013",
+        "Email": "corporate@agoengsejahtera.com",
+        "Address": "Jl. Malibu Raya No.7, RT.7/RW.14, Cengkareng Tim., Kecamatan Cengkareng, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11730",
+        "Phone_Number": "02154353161",
+        "NIB": "9120067186902"
+    },
+    {
+        "id":14,
+        "Company_Name": "PT. Multiguna international Persada",
+        "Company_Type": "Freight Forwarder",
+        "PMKU": "PMKU.IDJKT.0501.000014",
+        "Email": " support@multiguna-ip.co.id",
+        "Address": "Rukan Business Park Kirana Cawang Blok B15, Jalan DI. Panjaitan Kav. 48, RT.8/RW.2, 13340, RT.8/RW.2, Cipinang Cempedak, Jatinegara, East Jakarta City, Jakarta 13340",
+        "Phone_Number": "0313543485",
+        "NIB": "9120001728301"
+    },
+    {
+        "id":15,
+        "Company_Name": "PT. Crown global Ocean Lines",
+        "Company_Type": "Freight Forwarder",
+        "PMKU": "PMKU.IDJKT.0501.000015",
+        "Email": "info.jkt@crownline.co.id",
+        "Address": "GF , Mega Glodok Kemayoran ( MGK ) , JL. Raya Angkasa , Gunung Sahari Selatan, Kemayoran, 10610 Jakarta Pusat, DKI Jakarta, RW.10, South Gunung Sahari, Kemayoran, Central Jakarta City, Jakarta 10610",
+        "Phone_Number": "02140920430",
+        "NIB": "9120001904192"
+    },
+    {
+        "id":16,
+        "Company_Name": "Terminal Peti Kemas Koja",
+        "Company_Type": "Terminal",
+        "PMKU": "",
+        "Email": "",
+        "Address": "RW.1, Koja, Kec. Koja, Jkt Utara, Daerah Khusus Ibukota Jakarta 14220",
+        "Phone_Number": "0214374142",
+        "NIB": ""
+    },
+    {
+        "id":17,
+        "Company_Name": null,
+        "Company_Type": null,
+        "PMKU": "PMKU.IDJKT.2341.000233",
+        "Email": null,
+        "Address": null,
+        "Phone_Number": null,
+        "NIB": null
+    }
+]

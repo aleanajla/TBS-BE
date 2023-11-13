@@ -1,0 +1,51 @@
+[
+    {
+        "id":1,
+        "Driver_Name": "Balidin Halim",
+        "Driver_ID": "D0001",
+        "Phone_Number": "08125786533",
+        "SIM_Number": "1127-7346-000032"
+    },
+    {
+        "id":2,
+        "Driver_Name": "Lasmanto Pratama",
+        "Driver_ID": "D0002",
+        "Phone_Number": "08211598560",
+        "SIM_Number": "1348-1983-000345"
+    },
+    {
+        "id":3,
+        "Driver_Name": "Laksana Firgantoro",
+        "Driver_ID": "D0003",
+        "Phone_Number": "0812186135",
+        "SIM_Number": "2312-3412-000698"
+    },
+    {
+        "id":4,
+        "Driver_Name": "Kawaca Utama",
+        "Driver_ID": "D0004",
+        "Phone_Number": "0812021634",
+        "SIM_Number": "9832-3212-023287"
+    },
+    {
+        "id":5,
+        "Driver_Name": "Mahfud Nainggolan",
+        "Driver_ID": "D0005",
+        "Phone_Number": "082194126878",
+        "SIM_Number": "8123-2314-000128"
+    },
+    {
+        "id":6,
+        "Driver_Name": "Umaya Gunarto",
+        "Driver_ID": "D0006",
+        "Phone_Number": "08217776622",
+        "SIM_Number": "2391-3124-000432"
+    },
+    {
+        "id":7,
+        "Driver_Name": "Manah Anggriawan",
+        "Driver_ID": "D0007",
+        "Phone_Number": "08127092044",
+        "SIM_Number": "4321-2314-000239"
+    }
+]

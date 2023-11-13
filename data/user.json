@@ -1,0 +1,162 @@
+[
+    {
+        "id":1,
+        "Role_ID": 2,
+        "Customer_ID": 1,
+        "Username": "andre_p",
+        "Name": "Andre Putra",
+        "Password": "Andre123",
+        "Phone_Number": "082108912967",
+        "Email": "andre_putra@gmail.com"
+    },
+    {
+        "id":2,
+        "Role_ID": 1,
+        "Customer_ID": 2,
+        "Username": "kamal_budiman",
+        "Name": "Kamal Budiman",
+        "Password": "Kamal123",
+        "Phone_Number": "081296098734",
+        "Email": "kamal_budiman@gmail.com"
+    },
+    {
+        "id":3,
+        "Role_ID": 1,
+        "Customer_ID": 3,
+        "Username": "martani_sirait",
+        "Name": "Martani Sirait",
+        "Password": "Martani123",
+        "Phone_Number": "082198478723",
+        "Email": "martani_sirait@gmail.com"
+    },
+    {
+        "id":4,
+        "Role_ID": 2,
+        "Customer_ID": 4,
+        "Username": "lanjar_parnowo",
+        "Name": "Lanjar Pranowo",
+        "Password": "Lanjar12345",
+        "Phone_Number": "081294372345",
+        "Email": "lanjar_pranowo@gmail.com"
+    },
+    {
+        "id":5,
+        "Role_ID": 1,
+        "Customer_ID": 5,
+        "Username": "raditya_ardianto",
+        "Name": "Raditya Ardianto",
+        "Password": "Raditya123",
+        "Phone_Number": "081239874340",
+        "Email": "raditya_ardianto@gmail.com"
+    },
+    {
+        "id":6,
+        "Role_ID": 1,
+        "Customer_ID": 6,
+        "Username": "ikin_ramadan",
+        "Name": "Ikin Ramadan",
+        "Password": "Ikin1234",
+        "Phone_Number": "081239345987",
+        "Email": "ikin_ramadan@gmail.com"
+    },
+    {
+        "id":7,
+        "Role_ID": 1,
+        "Customer_ID": 7,
+        "Username": "daliono_mandala",
+        "Name": "Daliono Mandala",
+        "Password": "Daliono123",
+        "Phone_Number": "081212987643",
+        "Email": "daliono_mandala@gmail.com"
+    },{
+        "id":8,
+        "Role_ID": 2,
+        "Customer_ID": 8,
+        "Username": "usman_widodo",
+        "Name": "Usman Widodo",
+        "Password": "Usman1234",
+        "Phone_Number": "081282749842",
+        "Email": "usman_widodo@gmail.com"
+    },
+    {
+        "id":9,
+        "Role_ID": 2,
+        "Customer_ID": 9,
+        "Username": "kacung_permadi",
+        "Name": "Kacung Permadi",
+        "Password": "Kacung123",
+        "Phone_Number": "081237684740",
+        "Email": "kacung_permadi@gmail.com"
+    },
+    {
+        "id":10,
+        "Role_ID": 2,
+        "Customer_ID": 10,
+        "Username": "mulyono_nababan",
+        "Name": "Mulyono Nababan",
+        "Password": "Mulyono123",
+        "Phone_Number": "08129816798",
+        "Email": "mulyono_nababan@gmail.com"
+    },
+    {
+        "id":11,
+        "Role_ID": 2,
+        "Customer_ID": 11,
+        "Username": "koko_tamba",
+        "Name": "Koko Tamba",
+        "Password": "Koko12345",
+        "Phone_Number": "08129873568",
+        "Email": "koko_tamba@gmail.com"
+    },
+    {
+        "id":12,
+        "Role_ID": 1,
+        "Customer_ID": 12,
+        "Username": "karman_budiyanto",
+        "Name": "Karman Budiyanto",
+        "Password": "Karman1234",
+        "Phone_Number": "081223874637",
+        "Email": "karman_budiyanto@gmail.com"
+    },
+    {
+        "id":13,
+        "Role_ID": 1,
+        "Customer_ID": 13,
+        "Username": "wisnu_mansur",
+        "Name": "Wisnu Mansur",
+        "Password": "Wisnu123",
+        "Phone_Number": "081287394812",
+        "Email": "wisnu_mansur@gmail.com"
+    },
+    {
+        "id":14,
+        "Role_ID": 1,
+        "Customer_ID": 14,
+        "Username": "cahyono_wijaya",
+        "Name": "Cahyono Wijaya",
+        "Password": "Cahyono123",
+        "Phone_Number": "08128736423",
+        "Email": "cahyono_wijaya@gmail.com"
+    },
+    {
+        "id":15,
+        "Role_ID": 1,
+        "Customer_ID": 14,
+        "Username": "wira_wibisono",
+        "Name": "Wira Wibisono",
+        "Password": "Wira12345",
+        "Phone_Number": "081287239833",
+        "Email": "wira_wibisono@gmail.com"
+    },
+    {
+        "id":16,
+        "Role_ID": 3,
+        "Customer_ID": 16,
+        "Username": "TPK_Koja",
+        "Name": "Terminal Peti Kemas Koja",
+        "Password": "TPK_Koja123",
+        "Phone_Number": "0214374142",
+        "Email": "tpk_koja@gmail.com"
+    }
+    
+]
