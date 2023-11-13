@@ -13,24 +13,15 @@ module.exports = (sequelize, DataTypes) => {
       masterContainer.belongsTo(models.masterIsoCode, {
         foreignKey: "ID_Iso_Code"
       })
-      masterContainer.belongsTo(models.masterContType, {
-        foreignKey: "ID_Cont_Type"
-      })
-      masterContainer.belongsTo(models.masterContSize, {
-        foreignKey: "ID_Cont_Size"
-      })
     }
   }
   masterContainer.init(
     {
       Container_Number: DataTypes.INTEGER,
-      Iso_Code: DataTypes.STRING,
+      ID_Iso_Code: DataTypes.STRING,
       Sling: DataTypes.STRING,
       MD: DataTypes.STRING,
-      OD: DataTypes.STRING,
-      Cont_Size: DataTypes.INTEGER,
-      Cont_type: DataTypes.STRING,
-      Weight: DataTypes.INTEGER,
+      OD: DataTypes.STRING
     },
     {
       sequelize,

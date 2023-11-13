@@ -16,20 +16,6 @@ module.exports = {
           key: "id",
         },
       },
-      ID_Cont_Size: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: "masterContSizes",
-          key: "id",
-        },
-      },
-      ID_Cont_type: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: "masterContTypes",
-          key: "id",
-        },
-      },
       Container_Number: {
         type: Sequelize.INTEGER,
       },
@@ -41,9 +27,6 @@ module.exports = {
       },
       OD: {
         type: Sequelize.STRING,
-      },
-      Weight: {
-        type: Sequelize.INTEGER,
       },
       createdAt: {
         allowNull: false,

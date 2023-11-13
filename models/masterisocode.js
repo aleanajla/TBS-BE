@@ -14,7 +14,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   masterIsoCode.init({
-    Iso_Code: DataTypes.STRING
+    Iso_Code: DataTypes.STRING,
+    Size: DataTypes.STRING,
+    Type: DataTypes.STRING,
+    Width: DataTypes.STRING,
+    Height: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'masterIsoCode',

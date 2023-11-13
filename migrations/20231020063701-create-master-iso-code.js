@@ -12,6 +12,18 @@ module.exports = {
       Iso_Code: {
         type: Sequelize.STRING
       },
+      Size: {
+        type: Sequelize.STRING
+      },
+      Type: {
+        type: Sequelize.STRING
+      },
+      Width: {
+        type: Sequelize.STRING
+      },
+      Height: {
+        type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
