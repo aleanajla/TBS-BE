@@ -1,0 +1,10 @@
+[
+    {
+        "id": 1,
+        "Service_Name": "Receiving"
+    },
+    {
+        "id": 2,
+        "Service_Name": "Delivery"
+    }
+]
