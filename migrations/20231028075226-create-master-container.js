@@ -9,11 +9,17 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      Container_Number: {
+      ID_Iso_Code: {
         type: Sequelize.INTEGER
       },
-      Iso_Code: {
-        type: Sequelize.STRING
+      ID_Cont_Size: {
+        type: Sequelize.INTEGER
+      },
+      ID_Cont_type: {
+        type: Sequelize.INTEGER
+      },
+      Container_Number: {
+        type: Sequelize.INTEGER
       },
       Sling: {
         type: Sequelize.STRING
@@ -22,12 +28,6 @@ module.exports = {
         type: Sequelize.STRING
       },
       OD: {
-        type: Sequelize.STRING
-      },
-      Cont_Size: {
-        type: Sequelize.INTEGER
-      },
-      Cont_type: {
         type: Sequelize.STRING
       },
       Weight: {

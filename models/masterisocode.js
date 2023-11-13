@@ -1,0 +1,23 @@
+'use strict';
+const {
+  Model
+} = require('sequelize');
+module.exports = (sequelize, DataTypes) => {
+  class masterIsoCode extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
+    }
+  }
+  masterIsoCode.init({
+    Iso_Code: DataTypes.STRING
+  }, {
+    sequelize,
+    modelName: 'masterIsoCode',
+  });
+  return masterIsoCode;
+};
