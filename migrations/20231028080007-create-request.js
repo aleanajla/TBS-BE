@@ -8,12 +8,7 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
-      },
-      No_Request: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true
-      },
+      }, 
       ID_Vessel: {
         type: Sequelize.INTEGER,
         references: {
@@ -35,22 +30,39 @@ module.exports = {
           key: "id",
         },
       },
-      Layanan: {
+      ID_Service: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "masterServices",
+          key: "id",
+        },
+      },
+      ID_Commodity: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "masterCommodities",
+          key: "id",
+        },
+      },
+      ID_OI: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "masterIOs",
+          key: "id",
+        },
+      },
+      No_Request: {
         type: Sequelize.STRING,
+        allowNull: false,
+        unique: true
       },
       Qty: {
         type: Sequelize.INTEGER,
-      },
-      Commodity: {
-        type: Sequelize.STRING,
       },
       POD: {
         type: Sequelize.STRING,
       },
       FPOD: {
-        type: Sequelize.STRING,
-      },
-      OI: {
         type: Sequelize.STRING,
       },
       createdAt: {

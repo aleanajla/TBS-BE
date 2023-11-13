@@ -71,10 +71,11 @@ module.exports.searchSTID = async (req, res) => {
         const search = await STID.findAll({
             where: {
                 STID_Number: {
-                    [Op.substring]: [`$stid`],
+                    [Op.substring]: [`${stid}`],
                 }
             }
         })
+        console.log(stid);
         res.status(200).send(search);
     }
     catch{

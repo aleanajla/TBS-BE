@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      masterContSize.hasOne(models.masterContainer, {foreignKey: "ID_Cont_Size"})
     }
   }
   masterContSize.init({
