@@ -16,7 +16,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    await queryInterface.bulkInsert("masterCommoditys", commodity, {});
+    await queryInterface.bulkInsert("masterCommodities", commodity, {});
   },
 
   async down (queryInterface, Sequelize) {
@@ -26,6 +26,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete('masterCommoditys', null, {});
+    await queryInterface.bulkDelete('masterCommodities', null, {});
   }
 };

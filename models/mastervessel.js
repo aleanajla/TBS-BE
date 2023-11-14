@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   masterVessel.init({
     Vessel_Name: DataTypes.STRING,
-    Closing_Time: DataTypes.INTEGER,
+    Closing_Time: DataTypes.DATE,
     Vessel_Code: DataTypes.STRING
   }, {
     sequelize,

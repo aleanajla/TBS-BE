@@ -13,7 +13,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       Closing_Time: {
-        type: Sequelize.INTEGER
+        type: Sequelize.DATE
       },
       Vessel_Code: {
         type: Sequelize.STRING

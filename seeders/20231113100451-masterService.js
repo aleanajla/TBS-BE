@@ -7,7 +7,7 @@ module.exports = {
     service.forEach(e => {
         e.createdAt = new Date(),
         e.updatedAt = new Date()
-    })
+    });
     /**
      * Add seed commands here.
      *
@@ -18,7 +18,7 @@ module.exports = {
      * }], {});
     */
 
-    await queryInterface.bulkInsert('masterServives', service, {});
+    await queryInterface.bulkInsert('masterServices', service, {});
   },
 
   async down(queryInterface, Sequelize) {
