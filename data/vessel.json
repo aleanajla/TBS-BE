@@ -2,67 +2,67 @@
     {
         "id": 1,
         "Vessel_Name": "THEMAS LINE",
-        "Closing_Time": "",
+        "Closing_Time": "2024-03-28 10:00:00",
         "Vessel_Code": "TMS"
     },
     {
         "id": 2,
         "Vessel_Name": "Meratus Line",
-        "Closing_Time": "",
+        "Closing_Time": "2024-01-19 14:30:00",
         "Vessel_Code": "MRT"
     },
     {
         "id": 3,
         "Vessel_Name": "Samudera",
-        "Closing_Time": "",
+        "Closing_Time": "2024-01-22 09:15:00",
         "Vessel_Code": "AV"
     },
     {
         "id": 4,
         "Vessel_Name": "Samudera",
-        "Closing_Time": "",
+        "Closing_Time": "2024-02-17 17:00:00",
         "Vessel_Code": "SV"
     },
     {
         "id": 5,
         "Vessel_Name": "Evergreen Marine Company",
-        "Closing_Time": "",
+        "Closing_Time": "2024-02-14 12:00:00",
         "Vessel_Code": "EMC"
     },
     {
         "id": 6,
         "Vessel_Name": "CMA",
-        "Closing_Time": "",
+        "Closing_Time": "2024-03-01 11:00:00",
         "Vessel_Code": "CMA"
     },
     {
         "id": 7,
         "Vessel_Name": "PIL",
-        "Closing_Time": "",
+        "Closing_Time": "2024-03-30 19:00:00",
         "Vessel_Code": "PIL"
     },
     {
         "id": 8,
         "Vessel_Name": "COSCO",
-        "Closing_Time": "",
+        "Closing_Time": "2024-04-28 07:00:00",
         "Vessel_Code": "COS"
     },
     {
         "id": 9,
         "Vessel_Name": "TANTO INTIM LINE",
-        "Closing_Time": "",
+        "Closing_Time": "2024-01-31 22:00:00",
         "Vessel_Code": "TNT"
     },
     {
         "id": 10,
         "Vessel_Name": "MCC",
-        "Closing_Time": "",
+        "Closing_Time": "2024-04-11 13:30:00",
         "Vessel_Code": "MCC"
     },
     {
         "id": 11,
         "Vessel_Name": "samudera shipping line",
-        "Closing_Time": "",
+        "Closing_Time": "2024-04-19 15:00:00",
         "Vessel_Code": "SSL"
     }
 ]
