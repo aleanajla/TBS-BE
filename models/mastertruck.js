@@ -11,9 +11,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       masterTruck.hasOne(models.masterSTID, {foreignKey: "Truck_ID"})
+      masterTruck.belongsTo(models.masterCustomer, {foreignKey: "ID_Customer"})
     }
   }
   masterTruck.init({
+    ID_Customer : DataTypes.INTEGER,
     Plat_Number: DataTypes.STRING,
     Size: DataTypes.STRING
   }, {

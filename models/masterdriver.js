@@ -11,9 +11,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       masterDriver.hasOne(models.masterSTID, {foreignKey: "Driver_ID"})
+      masterDriver.belongsTo(models.masterCustomer, {foreignKey: "ID_Customer"})
     }
   }
   masterDriver.init({
+    ID_Customer: DataTypes.INTERGER,
     Driver_Name: DataTypes.STRING,
     Driver_ID: DataTypes.STRING,
     Phone_Number: DataTypes.STRING,

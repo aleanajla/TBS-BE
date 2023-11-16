@@ -9,6 +9,13 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      ID_Customer:{
+        type : Sequelize.INTEGER,
+        references:{
+          model: 'masterCustomers',
+          key: 'id'
+        }
+      },
       Driver_Name: {
         type: Sequelize.STRING
       },

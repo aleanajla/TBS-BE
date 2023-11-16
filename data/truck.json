@@ -1,36 +1,43 @@
 [
     {
         "id":1,
+        "ID_Customer" : "1",
         "Plat_Number": "B 3287 BLK",
         "Size": "20"
     },
     {
         "id":2,
+        "ID_Customer" : "1",
         "Plat_Number": "B 0987 BDF",
         "Size": "40"
     },
     {
         "id":3,
+        "ID_Customer" : "4",
         "Plat_Number": "B 2908 HJF",
         "Size": "20"
     },
     {
         "id":4,
+        "ID_Customer" : "4",
         "Plat_Number": "B 1863 TFT",
         "Size": "40"
     },
     {
         "id":5,
+        "ID_Customer" : "4",
         "Plat_Number": "B 9823 UDF",
         "Size": "20"
     },
     {
         "id":6,
+        "ID_Customer" : "8",
         "Plat_Number": "B 8108 UFG",
         "Size": "40"
     },
     {
         "id":7,
+        "ID_Customer" : "8",
         "Plat_Number": "B 0129 EHJ",
         "Size": "20"
     }
