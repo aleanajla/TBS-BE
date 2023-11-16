@@ -1,9 +1,10 @@
 const db = require("../models");
-const { Op } = require('sequelize');
+const { Op, literal, Sequelize } = require('sequelize');
 
 const Truck = db.masterTruck
 const Driver = db.masterDriver
 const STID = db.masterSTID
+
 
 module.exports.viewTruck = async (req,res) => {
     try{
@@ -75,10 +76,43 @@ module.exports.searchSTID = async (req, res) => {
                 }
             }
         })
-        console.log(stid);
         res.status(200).send(search);
     }
     catch{
+        res.status(500).send({message : error.message})
+    }
+}
+
+module.exports.searchTruck = async (req, res) => {
+    const truck = req.params.truck;
+    try{
+        const search = await Truck.findAll({
+            where: {
+                Plat_Number: db.sequelize.where(db.sequelize.fn('lower', db.sequelize.col("Plat_Number")), {
+                    [Op.like]: `%${truck}%`
+                })
+            }
+        })
+        res.status(200).send(search);
+    }
+    catch(error){
+        res.status(500).send({message : error.message})
+    }
+}
+
+module.exports.searchDriver = async (req, res) => {
+    const driver = req.params.driver;
+    try{
+        const search = await Driver.findAll({
+            where: {
+                Driver_Name: db.sequelize.where(db.sequelize.fn('lower', db.sequelize.col("Driver_Name")), {
+                    [Op.like]: `%${driver}%`
+                })
+            }
+        })
+        res.status(200).send(search);
+    }
+    catch (error){
         res.status(500).send({message : error.message})
     }
 }

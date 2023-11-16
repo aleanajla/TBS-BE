@@ -10,6 +10,7 @@ app.use(express.json())
 const router = require("./routes")
 app.use("/api", router.user_router)
 app.use("/api", router.STID_router)
+app.use("/api", router.booking_router)
 
 app.listen(port, () =>{
     console.log(`Listenting to port: ${port} `)

@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class masterPort extends Model {
     /**
@@ -10,19 +8,19 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      masterPort.hasMany(models.request, { foreignKey: "ID_Port"});
+      masterPort.hasMany(models.slot, { foreignKey: "ID_Port" });
+      masterPort.hasOne(models.viewEtiket, { foreignKey: "ID_Port" });
     }
   }
-  masterPort.init({
-    Port_Name: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'masterPort',
-  });
-  masterPort.associate = function (models){
-    masterPort.hasMany(models.request, {as: "port_req"})
-    masterPort.hasMany(models.slot, {as: "port_slot"})
-    masterPort.hasOne(models.viewEtiket, {as: "port_view"})
-  }
+  masterPort.init(
+    {
+      Port_Name: DataTypes.STRING,
+    },
+    {
+      sequelize,
+      modelName: "masterPort",
+    }
+  );
   return masterPort;
 };

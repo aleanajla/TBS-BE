@@ -8,11 +8,9 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      masterContainer.hasMany(models.booking, { as: "container_booking" });
-      masterContainer.hasOne(models.viewEtiket, { as: "container_view" });
-      masterContainer.belongsTo(models.masterIsoCode, {
-        foreignKey: "ID_Iso_Code"
-      })
+      masterContainer.hasOne(models.viewEtiket, { foreignKey: "ID_Container" });
+      masterContainer.belongsTo(models.masterIsoCode, {foreignKey: "ID_Iso_Code"})
+      masterContainer.hasMany(models.requestContainer, {foreignKey: "ID_Container"})
     }
   }
   masterContainer.init(

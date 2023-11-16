@@ -1,42 +1,39 @@
-"use strict";
+'use strict';
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("bookings", {
+    await queryInterface.createTable('requestContainers', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER,
+        type: Sequelize.INTEGER
       },
-      No_Request: {
-        type: Sequelize.STRING,
-        references: {
-          model: "requests",
-          key: "No_Request",
-        },
-      },
-      ID_Booking_Slot: {
+      ID_Container: {
         type: Sequelize.INTEGER,
         references: {
-          model: "slots",
+          model: "masterContainers",
           key: "id",
         },
       },
-      No_Booking: {
-        type: Sequelize.STRING,
+      ID_request: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "requests",
+          key: "id",
+        },
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE,
+        type: Sequelize.DATE
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE,
-      },
+        type: Sequelize.DATE
+      }
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("bookings");
-  },
+    await queryInterface.dropTable('requestContainers');
+  }
 };

@@ -8,14 +8,14 @@
     },
     {
         "id": 2,
-        "Port_Name": "Jakarta International Container Terminal II (JICT II)",
+        "Terminal_Name": "Jakarta International Container Terminal II (JICT II)",
         "Address": "VVVX+Q93, RT.1/RW.1, Koja, North Jakarta City, Jakarta 14220",
         "Phone_Number": "021678565",
         "NPWP": "08.333.234.3-557.000"
     },
     {
         "id": 3,
-        "Port_Name": "Terminal Petikemas Koja (TPK Koja)",
+        "Terminal_Name": "Terminal Petikemas Koja (TPK Koja)",
         "Address": "Digul No.1, RW.1, Koja, Kec. Koja, Jkt Utara, Daerah Khusus Ibukota Jakarta 14220",
         "Phone_Number": "021678599",
         "NPWP": "08.333.234.3-997.000"

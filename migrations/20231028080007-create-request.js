@@ -23,6 +23,13 @@ module.exports = {
           key: "id",
         },
       },
+      ID_User: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "masterUsers",
+          key: "id"
+        }
+      },
       ID_Terminal: {
         type: Sequelize.INTEGER,
         references: {
@@ -44,7 +51,7 @@ module.exports = {
           key: "id",
         },
       },
-      ID_OI: {
+      ID_IO: {
         type: Sequelize.INTEGER,
         references: {
           model: "masterIOs",
