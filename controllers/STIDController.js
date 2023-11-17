@@ -7,8 +7,13 @@ const STID = db.masterSTID
 
 
 module.exports.viewTruck = async (req,res) => {
+    const ID_Customer = req.params.id
     try{
-        const dataTruck = await Truck.findAll();
+        const dataTruck = await Truck.findAll({
+            where: {
+                ID_Customer: ID_Customer
+            }
+        });
 
         res.status(200).send(dataTruck)
     }
@@ -18,8 +23,13 @@ module.exports.viewTruck = async (req,res) => {
 }
 
 module.exports.viewDriver = async (req,res) => {
+    const ID_Customer = req.params.id
     try{
-        const dataDriver = await Driver.findAll();
+        const dataDriver = await Driver.findAll({
+            where: {
+                ID_Customer: ID_Customer
+            }
+        });
 
         res.status(200).send(dataDriver)
     }
@@ -67,30 +77,43 @@ module.exports.addSTID = async(req,res) => {
 }
 
 module.exports.searchSTID = async (req, res) => {
-    const stid = req.params.stid;
+    const {stid, ID_Customer} = req.query;
     try{
         const search = await STID.findAll({
             where: {
-                STID_Number: {
-                    [Op.substring]: [`${stid}`],
+                STID_Number: db.sequelize.where(db.sequelize.fn('lower', db.sequelize.col("STID_Number")), {
+                    [Op.like] : `%${stid}%`
+                })
+            },
+            include: [
+                {
+                    model: Driver,
+                    where: {
+                        ID_Customer: ID_Customer
+                    }
                 }
-            }
+            ]
         })
+        console.log(search);
         res.status(200).send(search);
     }
-    catch{
+    catch (error){
+        console.log(error);
         res.status(500).send({message : error.message})
     }
 }
 
 module.exports.searchTruck = async (req, res) => {
-    const truck = req.params.truck;
+    const {truck, ID_Customer} = req.query;
     try{
         const search = await Truck.findAll({
             where: {
-                Plat_Number: db.sequelize.where(db.sequelize.fn('lower', db.sequelize.col("Plat_Number")), {
-                    [Op.like]: `%${truck}%`
-                })
+                [Op.and]: [
+                    {Plat_Number: db.sequelize.where(db.sequelize.fn('lower', db.sequelize.col("Plat_Number")), {
+                        [Op.like]: `%${truck}%`
+                    })},
+                    {ID_Customer: ID_Customer}
+                ]
             }
         })
         res.status(200).send(search);
@@ -101,13 +124,16 @@ module.exports.searchTruck = async (req, res) => {
 }
 
 module.exports.searchDriver = async (req, res) => {
-    const driver = req.params.driver;
+    const {driver, ID_Customer} = req.query;
     try{
         const search = await Driver.findAll({
             where: {
-                Driver_Name: db.sequelize.where(db.sequelize.fn('lower', db.sequelize.col("Driver_Name")), {
-                    [Op.like]: `%${driver}%`
-                })
+                [Op.and]: [
+                    {Driver_Name: db.sequelize.where(db.sequelize.fn('lower', db.sequelize.col("Driver_Name")), {
+                        [Op.like]: `%${driver}%`
+                    })},
+                    {ID_Customer: ID_Customer}
+                ]
             }
         })
         res.status(200).send(search);
@@ -117,24 +143,69 @@ module.exports.searchDriver = async (req, res) => {
     }
 }
 
-// module.exports.addDriver = async(req,res) => {
-//     const {Driver_Name, Driver_ID, Phone_Number, SIM_Number} = req.body;
-//     try{
-//         // bikin function untuk generate uid untuk driver ID
-        
+module.exports.viewSTID = async (req,res) => {
+    const ID_Customer = req.params.id
+    try{
+        const result = await STID.findAll({
+            attributes: ['STID_Number'],
+            include: [
+                {
+                    model: Driver,
+                    attributes: ['Driver_Name'],
+                    where: {
+                        ID_Customer: ID_Customer
+                    }
+                },
+                {
+                    model: Truck,
+                    attributes: ['Plat_Number', 'Size'],
+                    where: {
+                        ID_Customer: ID_Customer
+                    }
+                }
+            ]
+        })
+        res.status(200).send(result)
+    }
+    catch(error) {
+        res.status(500).send({message : error.message})
+    }
+}
 
-//         const createDriver = await Driver.create({
-//             Driver_Name: Driver_Name,
-//             Driver_ID: Driver_ID, //mesti generate uid 
-//             Phone_Number: Phone_Number,
-//             SIM_Number: SIM_Number
-//         })
+module.exports.editSTID = async (req,res) => {
+    const {driver, truck, id} = req.body
+    try{
+        const update = await STID.update({
+            Driver_ID: driver,
+            Truck_ID: truck
+        }, {
+            where: {
+                id: id
+            }
+        })
+        res.status(200).send(update)
+    }
+    catch(error) {
+        res.status(500).send({message : error.message})
+    }
+}
 
-//         res.status(200).send(addDriver)
-//     }
-//     catch(error) {
-//         res.status(500).send({message : error.message})
-//     }
-// }
+module.exports.deleteSTID = async (req,res) => {
+    // tinggal nambahin id customernya
+    const {id} = req.body
+    try{
+        const remove = await STID.destroy({
+            where : {
+                id: id
+            }
+        })
+
+        console.log(remove);
+        res.status(200).send("Successfully Deleted")
+    }
+    catch(error){
+        res.status(500).send({message : error.message})
+    }
+}
 
 

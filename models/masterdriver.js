@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   masterDriver.init({
-    ID_Customer: DataTypes.INTERGER,
+    ID_Customer: DataTypes.INTEGER,
     Driver_Name: DataTypes.STRING,
     Driver_ID: DataTypes.STRING,
     Phone_Number: DataTypes.STRING,

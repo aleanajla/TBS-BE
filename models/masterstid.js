@@ -10,8 +10,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      masterSTID.belongsTo(models.masterDriver, { foreignKey: "Driver_ID", as: "ass_driver" })
-      masterSTID.belongsTo(models.masterTruck, { foreignKey: "Truck_ID", as: "ass_truck" })
+      masterSTID.belongsTo(models.masterDriver, { foreignKey: "Driver_ID"})
+      masterSTID.belongsTo(models.masterTruck, { foreignKey: "Truck_ID"})
     }
   }
   masterSTID.init({
