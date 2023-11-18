@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class slot extends Model {
     /**
@@ -10,21 +8,23 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      slot.belongsTo(models.masterTerminal, {
+        foreignKey: "ID_Terminal"
+      });
+      slot.hasMany(models.detailSlot, { foreignKey: "ID_Slot" });
+      slot.hasMany(models.booking, { foreignKey: "ID_Slot" });
+      slot.hasOne(models.viewEtiket, { foreignKey: "ID_Slot" });
     }
   }
-  slot.init({
-    ID_Terminal: DataTypes.INTEGER,
-    Date: DataTypes.DATEONLY
-  }, {
-    sequelize,
-    modelName: 'slot',
-  });
-  slot.associate = function (models) {
-    slot.belongsTo(models.masterTerminal, {foreignKey: "ID_Terminal", as: "mst_terminal_slot"})
-    slot.hasMany(models.detailSlot, {as: "detail"})
-    slot.hasMany(models.booking, {as: "slot_booking"})
-    slot.hasOne(models.viewEtiket, {as: "slot_view"})
-  }
+  slot.init(
+    {
+      ID_Terminal: DataTypes.INTEGER,
+      Date: DataTypes.DATEONLY,
+    },
+    {
+      sequelize,
+      modelName: "slot",
+    }
+  );
   return slot;
 };

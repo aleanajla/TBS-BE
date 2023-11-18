@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      detailSlot.belongsTo(models.slot, {foreignKey: "ID_Slot"})
     }
   }
   detailSlot.init({
@@ -23,8 +23,5 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'detailSlot',
   });
-  detailSlot.associate = function (models) {
-    detailSlot.belongsTo(models.slot, {foreignKey: "ID_Slot", as: "slot"})
-  }
   return detailSlot;
 };
