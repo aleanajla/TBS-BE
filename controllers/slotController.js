@@ -5,6 +5,7 @@ const detailSlot = db.detailSlot
 const user = db.user
 
 module.exports.addSlot = async (req,res) => {
+    const {ID_Terminal, }
     try{
         const createSlot = await Slot.create({
             
@@ -15,25 +16,25 @@ module.exports.addSlot = async (req,res) => {
     }
 }
 
-module.exports.addDetailSlot = async (req, res) => {
-    const {Slot_id, Start, End} = req.body
-    let flag = 0;
-    let slot = null;
+// module.exports.addDetailSlot = async (req, res) => {
+//     const {Slot_id, Start, End} = req.body
+//     let flag = 0;
+//     let slot = null;
 
-    try {
-        do{
-            const searchSlot = await Slot.findOne({
-                where:{
-                    id: Slot_id
-                }
-            })
+//     try {
+//         do{
+//             const searchSlot = await Slot.findOne({
+//                 where:{
+//                     id: Slot_id
+//                 }
+//             })
 
-            const createDetailSlot = await detailSlot.create({
+//             const createDetailSlot = await detailSlot.create({
                 
-            })
-        }
-    } catch (error) {
+//             })
+//         }
+//     } catch (error) {
         
-    }
-}
+//     }
+// }
 
