@@ -16,6 +16,9 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "ID_Booking_Slot",
         as: "mst_slot",
       });
+      booking.belongsTo(models.masterCustomer, {
+        foreignKey: "Customer_ID"
+      })
       booking.hasOne(models.assignJob, { foreignKey: "ID_Booking" });
       booking.hasOne(models.viewEtiket, { as: "ID_Booking" });
     }
@@ -23,6 +26,7 @@ module.exports = (sequelize, DataTypes) => {
   booking.init(
     {
       No_Request: DataTypes.STRING,
+      Customer_ID: DataTypes.INTEGER,
       ID_Booking_Slot: DataTypes.INTEGER,
       No_Booking: DataTypes.STRING,
     },
