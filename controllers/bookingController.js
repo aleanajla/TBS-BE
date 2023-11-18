@@ -50,7 +50,6 @@ module.exports.viewRequest = async (req,res) => {
 // search request -> no request only
 module.exports.searchRequest = async (req,res) => {
     const {search, ID_User} = req.query
-    console.log(ID_User);
     try{
         const result = await Request.findAll({
             attributes: ['No_Request', 'createdAt'],
@@ -242,6 +241,71 @@ module.exports.filterService = async (req,res) => {
     }
 }
 
+// sort createdAt date
+module.exports.sortDate = async (req,res) => {
+    const {sort, ID_User} = req.query
+    try{
+        if(sort == 1){
+            const result = await Request.findAll({
+                attributes: ['No_Request', 'createdAt'],
+                order: [['createdAt', 'DESC']],
+                where: {
+                    ID_User: ID_User
+                },
+                include: [
+                    {
+                        model: Vessel,
+                        attributes: ['Vessel_Name', 'Closing_Time'],
+                    },
+                    {
+                        model: Service,
+                        attributes: ['Service_Name']
+                    },
+                    {
+                        model: Port,
+                        attributes: ['Port_Name']
+                    },
+                    {
+                        model: Terminal,
+                        attributes: ['Terminal_Name']
+                    }
+                ]
+            })
+            res.status(200).send(result)
+        }
+        const result = await Request.findAll({
+            attributes: ['No_Request', 'createdAt'],
+            order: [['createdAt', 'ASC']],
+            where: {
+                ID_User: ID_User
+            },
+            include: [
+                {
+                    model: Vessel,
+                    attributes: ['Vessel_Name', 'Closing_Time'],
+                },
+                {
+                    model: Service,
+                    attributes: ['Service_Name']
+                },
+                {
+                    model: Port,
+                    attributes: ['Port_Name']
+                },
+                {
+                    model: Terminal,
+                    attributes: ['Terminal_Name']
+                }
+            ]
+        })
+
+        res.status(200).send(result)
+    }
+    catch (error){
+        res.status(500).send({message : error.message})
+    }
+}
+
 // view container
 module.exports.viewContainer = async (req,res) => {
     const {ID_User, ID_Request} = req.query
@@ -276,7 +340,7 @@ module.exports.viewContainer = async (req,res) => {
 module.exports.viewTruckingCompany = async (req,res) => {
     try{
         const result = await Trucking.findAll({
-            attributes: ['Company_Name'],
+            attributes: ['id','Company_Name'],
             where: {
                 Company_Type: 'Trucking Company'
             }
@@ -284,6 +348,58 @@ module.exports.viewTruckingCompany = async (req,res) => {
         res.status(200).send(result)
     }
     catch (error) {
+        res.status(500).send({message : error.message})
+    }
+}
+
+// view port
+module.exports.viewPort = async (req,res) => {
+    try{
+        const result = await Port.findAll({
+            attributes: ['id','Port_Name']
+        })
+        res.status(200).send(result)
+    }
+    catch(error){
+        res.status(500).send({message : error.message})
+    }
+}
+
+// view terminal
+module.exports.viewTerminal = async (req,res) => {
+    try{
+        const result = await Terminal.findAll({
+            attributes: ['id','Terminal_Name']
+        })
+        res.status(200).send(result)
+    }
+    catch(error){
+        res.status(500).send({message : error.message})
+    }
+}
+
+// view vessel
+module.exports.viewVessel = async (req,res) => {
+    try{
+        const result = await Vessel.findAll({
+            attributes: ['id','Vessel_Name']
+        })
+        res.status(200).send(result)
+    }
+    catch(error){
+        res.status(500).send({message : error.message})
+    }
+}
+
+// view service
+module.exports.viewService = async (req,res) => {
+    try{
+        const result = await Service.findAll({
+            attributes: ['id','Service_Name']
+        })
+        res.status(200).send(result)
+    }
+    catch(error){
         res.status(500).send({message : error.message})
     }
 }
