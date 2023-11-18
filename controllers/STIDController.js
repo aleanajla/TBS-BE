@@ -173,22 +173,32 @@ module.exports.viewSTID = async (req,res) => {
 }
 
 module.exports.editSTID = async (req,res) => {
-    const {driver, truck, id} = req.body
+    console.log(req.body);
+    const {Driver_ID, Truck_ID, id} = req.body
     try{
         const update = await STID.update({
-            Driver_ID: driver,
-            Truck_ID: truck
+            Driver_ID,
+            Truck_ID,
+            updatedAt: new Date()
         }, {
             where: {
                 id: id
             }
         })
-        res.status(200).send(update)
+
+        const updatedData = await STID.findOne({
+            where:{
+                id
+            }
+        })
+
+        res.status(200).json(updatedData)
     }
     catch(error) {
         res.status(500).send({message : error.message})
     }
 }
+
 
 module.exports.deleteSTID = async (req,res) => {
     // tinggal nambahin id customernya
