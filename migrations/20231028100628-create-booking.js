@@ -16,6 +16,13 @@ module.exports = {
           key: "No_Request",
         },
       },
+      Customer_ID:{
+        type: Sequelize.INTEGER,
+        references:{
+          model: "masterCustomers",
+          key: "id"
+        }
+      },
       ID_Booking_Slot: {
         type: Sequelize.INTEGER,
         references: {

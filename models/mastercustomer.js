@@ -10,7 +10,8 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       masterCustomer.hasMany(models.masterUser, {foreignKey: "Customer_ID"});
       masterCustomer.hasMany(models.masterDriver, {foreignKey: "ID_Customer"});
-      masterCustomer.hasMany(models.masterTruck, {foreignKey: "ID_Customer"})
+      masterCustomer.hasMany(models.masterTruck, {foreignKey: "ID_Customer"});
+      masterCustomer.hasMany(models.booking, {foreignKey: "Customer_ID"});
     }
   }
   masterCustomer.init(
