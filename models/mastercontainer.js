@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   masterContainer.init(
     {
-      Container_Number: DataTypes.INTEGER,
+      Container_Number: DataTypes.STRING,
       ID_Iso_Code: DataTypes.STRING,
       Sling: DataTypes.STRING,
       MD: DataTypes.STRING,

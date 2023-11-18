@@ -17,7 +17,7 @@ module.exports = {
         },
       },
       Container_Number: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
       },
       Sling: {
         type: Sequelize.STRING,

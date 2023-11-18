@@ -6,6 +6,9 @@ const Vessel = db.masterVessel
 const Service = db.masterService
 const Port = db.masterPort
 const Terminal = db.masterTerminal
+const RequestContainer = db.requestContainer
+const Container = db.masterContainer
+const Trucking = db.masterCustomer
 
 module.exports.viewRequest = async (req,res) => {
     const {ID_User} = req.body
@@ -242,10 +245,46 @@ module.exports.filterService = async (req,res) => {
 
 // view container
 module.exports.viewContainer = async (req,res) => {
+    const {ID_User, ID_Request} = req.query
     try{
-
+        const result = await RequestContainer.findAll({
+            attributes: ['id'],
+            include: [
+                {
+                    model: Request,
+                    where: {
+                        [Op.and]: [
+                            {ID_User: ID_User},
+                            {id: ID_Request}
+                        ]
+                    },
+                    attributes: []
+                },
+                {
+                    model: Container,
+                    attributes: ['Container_Number']
+                }
+            ]
+        })
+        res.status(200).send(result)
     }
     catch (error){
-        
+        res.status(500).send({message : error.message})
+    }
+}
+
+// view trucking company
+module.exports.viewTruckingCompany = async (req,res) => {
+    try{
+        const result = await Trucking.findAll({
+            attributes: ['Company_Name'],
+            where: {
+                Company_Type: 'Trucking Company'
+            }
+        })
+        res.status(200).send(result)
+    }
+    catch (error) {
+        res.status(500).send({message : error.message})
     }
 }

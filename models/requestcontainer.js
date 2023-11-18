@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   requestContainer.init({
     ID_Container: DataTypes.INTEGER,
-    ID_request: DataTypes.INTEGER
+    ID_Request: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'requestContainer',
