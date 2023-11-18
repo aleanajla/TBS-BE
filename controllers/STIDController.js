@@ -199,7 +199,6 @@ module.exports.deleteSTID = async (req,res) => {
                 id: id
             }
         })
-
         console.log(remove);
         res.status(200).send("Successfully Deleted")
     }

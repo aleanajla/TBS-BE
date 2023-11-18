@@ -9,7 +9,6 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       masterPort.hasMany(models.request, { foreignKey: "ID_Port"});
-      masterPort.hasMany(models.slot, { foreignKey: "ID_Port" });
       masterPort.hasOne(models.viewEtiket, { foreignKey: "ID_Port" });
     }
   }

@@ -403,3 +403,16 @@ module.exports.viewService = async (req,res) => {
         res.status(500).send({message : error.message})
     }
 }
+
+//assign trucking company
+module.exports.assignTruckingCompany = async (req,res) => {
+    const {id} = req.body
+    
+    try {
+        const assignTC = await booking.create({
+            Customer_ID: id
+        })
+    } catch (error) {
+        res.status(500).send({message : error.message})
+    }
+}

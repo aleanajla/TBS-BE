@@ -1,61 +1,51 @@
 [
     {
         "id": 1,
-        "ID_Port": 1,
         "ID_Terminal": 1,
         "Date": "2023-11-18"
     },
     {
         "id": 2,
-        "ID_Port": 1,
         "ID_Terminal": 1,
         "Date": "2023-11-19"
     },
     {
         "id": 3,
-        "ID_Port": 1,
         "ID_Terminal": 1,
         "Date": "2023-11-20"
     },
     {
         "id": 4,
-        "ID_Port": 1,
         "ID_Terminal": 1,
         "Date": "2023-11-21"
     },
     {
         "id": 5,
-        "ID_Port": 1,
         "ID_Terminal": 1,
         "Date": "2023-11-22"
     },
     {
         "id": 6,
-        "ID_Port": 1,
         "ID_Terminal": 2,
         "Date": "2023-11-18"
     },
     {
         "id": 7,
-        "ID_Port": 1,
         "ID_Terminal": 2,
         "Date": "2023-11-19"
     },
     {
         "id": 8,
-        "ID_Port": 1,
         "ID_Terminal": 2,
         "Date": "2023-11-20"
     },
     {
         "id": 9,
-        "ID_Port": 1,
         "ID_Terminal": 2,
         "Date": "2023-11-21"
     },
     {
         "id": 10,
-        "ID_Port": 1,
         "ID_Terminal": 2,
         "Date": "2023-11-22"
     }
