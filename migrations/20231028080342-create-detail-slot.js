@@ -17,10 +17,10 @@ module.exports = {
         },
       },
       Start: {
-        type: Sequelize.STRING,
+        type: Sequelize.TIME,
       },
       End: {
-        type: Sequelize.STRING,
+        type: Sequelize.TIME,
       },
       Qty: {
         type: Sequelize.INTEGER,

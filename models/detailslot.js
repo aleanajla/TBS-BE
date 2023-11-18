@@ -15,8 +15,8 @@ module.exports = (sequelize, DataTypes) => {
   }
   detailSlot.init({
     ID_Slot: DataTypes.INTEGER,
-    Start: DataTypes.STRING,
-    End: DataTypes.STRING,
+    Start: DataTypes.TIME,
+    End: DataTypes.TIME,
     Qty: DataTypes.INTEGER,
     Booking_Qty: DataTypes.INTEGER
   }, {

@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   slot.init({
     ID_Port: DataTypes.INTEGER,
     ID_Terminal: DataTypes.INTEGER,
-    Date: DataTypes.DATE
+    Date: DataTypes.DATEONLY
   }, {
     sequelize,
     modelName: 'slot',
