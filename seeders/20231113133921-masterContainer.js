@@ -3,6 +3,11 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
+    const container = require("../data/container.json");
+    container.forEach((e) => {
+      e.createdAt = new Date(), 
+      e.updatedAt = new Date();
+    })
     /**
      * Add seed commands here.
      *
@@ -12,6 +17,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
+    await queryInterface.bulkInsert("masterContainers", container, {});
   },
 
   async down (queryInterface, Sequelize) {
@@ -21,5 +27,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
+    await queryInterface.bulkDelete('masterContainers', null, {});
   }
 };

@@ -47,12 +47,13 @@ module.exports.viewRequest = async (req,res) => {
 
 // search request -> no request only
 module.exports.searchRequest = async (req,res) => {
-    const {search, ID_User} = req.body
+    const {search, ID_User} = req.query
+    console.log(ID_User);
     try{
         const result = await Request.findAll({
             attributes: ['No_Request', 'createdAt'],
             where: {
-                [Op.or]: [
+                [Op.and]: [
                     { ID_User: ID_User },
                     { No_Request: db.sequelize.where(db.sequelize.fn('lower', db.sequelize.col("No_Request")),{
                         [Op.like]: `%${search}%`
@@ -62,47 +63,19 @@ module.exports.searchRequest = async (req,res) => {
             include: [
                 {
                     model: Vessel,
-                    attributes: ['Vessel_Name', 'Closing_Time'],
-                    where: {
-                        [Op.or]: [
-                            {Vessel_Name: db.sequelize.where(db.sequelize.fn('lower', db.sequelize.col("Vessel_Name")), {
-                                [Op.like]: `%${search}%`
-                            })}
-                        ]
-                    }
+                    attributes: ['Vessel_Name', 'Closing_Time']
                 },
                 {
                     model: Service,
                     attributes: ['Service_Name'],
-                    where: {
-                        [Op.or]: [
-                       {     Service_Name: db.sequelize.where(db.sequelize.fn('lower', db.sequelize.col("Service_Name")), {
-                                [Op.like]: `%${search}%`
-                            })}
-                        ]
-                    }
                 },
                 {
                     model: Port,
                     attributes: ['Port_Name'],
-                    where: {
-                        [Op.or]: [
-                            {Port_Name: db.sequelize.where(db.sequelize.fn('lower', db.sequelize.col("Port_Name")), {
-                                [Op.like]: `%${search}%`
-                            })}
-                        ]
-                    }
                 },
                 {
                     model: Terminal,
                     attributes: ['Terminal_Name'],
-                    where: {
-                        [Op.or]: [
-                            {Terminal_Name: db.sequelize.where(db.sequelize.fn('lower', db.sequelize.col("Terminal_Name")), {
-                                [Op.like]: `%${search}%`
-                            })}
-                        ]
-                    }
                 }
             ]
         })
@@ -117,40 +90,162 @@ module.exports.searchRequest = async (req,res) => {
 
 // search by vessel
 module.exports.filterVessel = async (req,res) => {
+    const {ID_User, id} = req.query
     try{
-
+        const result = await Request.findAll({
+            attributes: ['No_Request', 'createdAt'],
+            where: {
+                ID_User: ID_User
+            },
+            include: [
+                {
+                    model: Vessel,
+                    attributes: ['Vessel_Name', 'Closing_Time'],
+                    where: {
+                        id: id
+                    }
+                },
+                {
+                    model: Service,
+                    attributes: ['Service_Name']
+                },
+                {
+                    model: Port,
+                    attributes: ['Port_Name']
+                },
+                {
+                    model: Terminal,
+                    attributes: ['Terminal_Name']
+                }
+            ]
+        })
+        res.status(200).send(result)
     }
     catch (error) {
-
+        res.status(500).send({message : error.message})
     }
 }
 
 // search by port
 module.exports.filterPort = async (req,res) => {
+    const {ID_User, id} = req.query
     try{
-
+        const result = await Request.findAll({
+            attributes: ['No_Request', 'createdAt'],
+            where: {
+                ID_User: ID_User
+            },
+            include: [
+                {
+                    model: Vessel,
+                    attributes: ['Vessel_Name', 'Closing_Time'],
+                },
+                {
+                    model: Service,
+                    attributes: ['Service_Name']
+                },
+                {
+                    model: Port,
+                    attributes: ['Port_Name'],
+                    where: {
+                        id: id
+                    }
+                },
+                {
+                    model: Terminal,
+                    attributes: ['Terminal_Name']
+                }
+            ]
+        })
+        res.status(200).send(result)
     }
-    catch{
-
+    catch (error) {
+        res.status(500).send({message : error.message})
     }
 }
 
 // search by terminal
 module.exports.filterTerminal = async (req,res) => {
+    const {ID_User, id} = req.query
     try{
-
+        const result = await Request.findAll({
+            attributes: ['No_Request', 'createdAt'],
+            where: {
+                ID_User: ID_User
+            },
+            include: [
+                {
+                    model: Vessel,
+                    attributes: ['Vessel_Name', 'Closing_Time'],
+                },
+                {
+                    model: Service,
+                    attributes: ['Service_Name']
+                },
+                {
+                    model: Port,
+                    attributes: ['Port_Name'],
+                },
+                {
+                    model: Terminal,
+                    attributes: ['Terminal_Name'],
+                    where: {
+                        id: id
+                    }
+                }
+            ]
+        })
+        res.status(200).send(result)
     }
-    catch{
-
+    catch (error) {
+        res.status(500).send({message : error.message})
     }
 }
 
 // search by service
 module.exports.filterService = async (req,res) => {
+    const {ID_User, id} = req.query
+    try{
+        const result = await Request.findAll({
+            attributes: ['No_Request', 'createdAt'],
+            where: {
+                ID_User: ID_User
+            },
+            include: [
+                {
+                    model: Vessel,
+                    attributes: ['Vessel_Name', 'Closing_Time'],
+                },
+                {
+                    model: Service,
+                    attributes: ['Service_Name'],
+                    where: {
+                        id: id
+                    }
+                },
+                {
+                    model: Port,
+                    attributes: ['Port_Name']
+                },
+                {
+                    model: Terminal,
+                    attributes: ['Terminal_Name']
+                }
+            ]
+        })
+        res.status(200).send(result)
+    }
+    catch (error) {
+        res.status(500).send({message : error.message})
+    }
+}
+
+// view container
+module.exports.viewContainer = async (req,res) => {
     try{
 
     }
-    catch{
+    catch (error){
         
     }
 }
