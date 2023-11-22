@@ -9,13 +9,17 @@ const Terminal = db.masterTerminal
 const RequestContainer = db.requestContainer
 const Container = db.masterContainer
 const Trucking = db.masterCustomer
+const Slot = db.slot 
+const detailSlot = db.detailSlot
+const Booking = db.booking
 
+// kurang buat ambil jumlah container yang udh melakukan booking / done tbs
 module.exports.viewRequest = async (req,res) => {
     const {ID_User} = req.body
     try{
         // kurang buat ambil slot dan detail slot
-        const result = await Request.findAll({
-            attributes: ['No_Request', 'createdAt'],
+        const request = await Request.findAll({
+            attributes: ['No_Request', 'createdAt', 'Qty'],
             where: {
                 'ID_User': ID_User
             },
@@ -37,15 +41,16 @@ module.exports.viewRequest = async (req,res) => {
                     attributes: ['Terminal_Name']
                 }
             ]
-        })
-        console.log(result);
-        res.status(200).send(result)
+        }) 
+
+        res.status(200).send(request)
     }
     catch(error) {
         console.log(error);
         res.status(500).send({message : error.message})
     }
 }
+
 
 // search request -> no request only
 module.exports.searchRequest = async (req,res) => {

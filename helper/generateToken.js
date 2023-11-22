@@ -13,7 +13,14 @@ function payload (token){
     )
 }
 
+function createTokenForgotPassword (data){
+    return (
+        jwt.sign(data,key)
+    )
+}
+
 module.exports = {
     createToken,
-    payload
+    payload,
+    createTokenForgotPassword
 }
