@@ -7,10 +7,20 @@ const {
   createToken,
   createTokenForgotPassword,
   payload,
+  payloadForgotPassword
 } = require("../helper/generateToken");
 
 module.exports.signUp = async (req, res) => {
-  const {Username, Email, Password, Confirm_Password, PMKU, Name, Phone_Number, Role_ID} = req.body
+  const {
+    Username,
+    Email,
+    Password,
+    Confirm_Password,
+    PMKU,
+    Name,
+    Phone_Number,
+    Role_ID,
+  } = req.body;
   try {
     // check username is unique
     const check_username = await User.findOne({
@@ -25,7 +35,7 @@ module.exports.signUp = async (req, res) => {
     // check email is unique
     const check_email = await User.findOne({
       where: {
-        Email:Email,
+        Email: Email,
       },
     });
     if (check_email) {
@@ -47,8 +57,10 @@ module.exports.signUp = async (req, res) => {
         Phone_Number: "",
         NIB: "",
         createdAt: new Date(),
-        updatedAt: new Date()
-      },{ fields: ['PMKU'] });
+        updatedAt: new Date(),
+      },
+      { fields: ["PMKU"] }
+    );
 
     const user = await User.create({
       Role_ID: Role_ID,
@@ -59,7 +71,7 @@ module.exports.signUp = async (req, res) => {
       Phone_Number: Phone_Number,
       Email: Email,
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
     });
 
     res.status(200).send(user);
@@ -107,15 +119,14 @@ module.exports.login = async (req, res) => {
   }
 };
 
-// token verify 
-module.exports.verifyToken = async (req,res) => {
-  try{
-    res.status(200).send(req.dataToken)
-  }
-  catch (error){
+// token verify
+module.exports.verifyToken = async (req, res) => {
+  try {
+    res.status(200).send(req.dataToken);
+  } catch (error) {
     res.status(500).send({ message: error.message });
   }
-}
+};
 
 // forgot password
 module.exports.sendResetToken = async (req, res) => {
@@ -131,7 +142,7 @@ module.exports.sendResetToken = async (req, res) => {
       return res.status(404).send("Email is not registered");
     }
 
-    const token = createTokenForgotPassword(check_email.id);
+    const token = createTokenForgotPassword({ id: check_email.id });
     console.log(token);
 
     await transporter.sendMail({
@@ -141,7 +152,7 @@ module.exports.sendResetToken = async (req, res) => {
       html: `
       <h1 style="text-align: center;">Reset Your Password</h1>
       <p>We have received your request to reset the password for your account</p>
-      <a href='http://localhost:3000/api/auth/user/verify-resetpassword/${token}'>Click here to set new password</a>
+      <a href='http://localhost:3000/newPassword?token=${token}'>Click here to set new password</a>
       `,
     });
     res.status(200).send("Email has been sent to reset your password");
@@ -150,54 +161,86 @@ module.exports.sendResetToken = async (req, res) => {
   }
 };
 
-module.exports.userVerifyResetPassword = async (req, res) => {
-  const token = req.params.token;
-
+module.exports.userSetNewPassword = async (req, res) => {
+  const {password, confirm_password} = req.body
+  
   try {
-    try {
-      const ID_User = payload(token);
-      return res.status(200).send(ID_User);
-    } catch (error) {
-      return res.status(500).send({ message: error.message });
+    const {authorization} = req.headers;
+    const ID_User = payloadForgotPassword(authorization.split(' ').pop())
+
+    if (password !== confirm_password) {
+      return res.status(400).send("Password and confirm password doesn't match");
     }
+
+    // 1. Verify userId
+    const CHECK_USER = await User.findOne({
+      where: {
+        id: ID_User.id,
+      },
+    });
+
+    if (!CHECK_USER) {
+      return res.status(404).send("Account is not found");
+    }
+
+    const hashedPassword = hashPassword(password);
+
+    // 2. Update Password
+    const update = await User.update(
+      {
+        Password: hashedPassword,
+        updatedAt: new Date(),
+      },
+      {
+        where: {
+          id: ID_User.id,
+        },
+      }
+    );
+
+    res.status(200).send("Password Has Been Changed");
   } catch (error) {
     return res.status(500).send({ message: error.message });
   }
 };
 
-module.exports.userSetNewPassword = async (req, res) => {
-  const { password, ID_User, confirm_password } = req.body;
-  try {
-      if (password !== confirm_password) {
-          return res.status(400).send("Password and confirm password doesn't match");
-      }
+// module.exports.userSetNewPassword = async (req, res) => {
+//   const { password, ID_User, confirm_password } = req.body;
+//   try {
+//     if (password !== confirm_password) {
+//       return res
+//         .status(400)
+//         .send("Password and confirm password doesn't match");
+//     }
 
-      // 1. Verify userId
-      const CHECK_USER = await User.findOne({
-        where: {
-          id: ID_User
-        }
-      });
+//     // 1. Verify userId
+//     const CHECK_USER = await User.findOne({
+//       where: {
+//         id: ID_User,
+//       },
+//     });
 
-      if (!CHECK_USER) {
-          return res.status(404).send("Account is not found");
-      }
+//     if (!CHECK_USER) {
+//       return res.status(404).send("Account is not found");
+//     }
 
-      const hashedPassword = hashPassword(password);
+//     const hashedPassword = hashPassword(password);
 
-      // 2. Update Password
-      const update = await User.update({
-        Password: password,
-        updatedAt: new Date()
-      }, {
-        where: {
-          id : ID_User
-        }
-      })
-      
+//     // 2. Update Password
+//     const update = await User.update(
+//       {
+//         Password: password,
+//         updatedAt: new Date(),
+//       },
+//       {
+//         where: {
+//           id: ID_User,
+//         },
+//       }
+//     );
 
-      res.status(200).send("Password Has Been Changed");
-  } catch (error) {
-      return res.status(500).send("Internal service Error");
-  }
-};
+//     res.status(200).send("Password Has Been Changed");
+//   } catch (error) {
+//     return res.status(500).send("Internal service Error");
+//   }
+// };
