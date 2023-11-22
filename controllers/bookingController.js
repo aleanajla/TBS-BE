@@ -1,4 +1,4 @@
-const db = require("../models"); 
+const db = require("../models");
 const { Op } = require('sequelize');
 
 const Request = db.request
@@ -13,10 +13,9 @@ const Slot = db.slot
 const detailSlot = db.detailSlot
 const Booking = db.booking
 
-// kurang buat ambil jumlah container yang udh melakukan booking / done tbs
-module.exports.viewRequest = async (req,res) => {
-    const {ID_User} = req.body
-    try{
+module.exports.viewRequest = async (req, res) => {
+    const { ID_User } = req.body
+    try {
         // kurang buat ambil slot dan detail slot
         const request = await Request.findAll({
             attributes: ['No_Request', 'createdAt', 'Qty'],
@@ -45,25 +44,27 @@ module.exports.viewRequest = async (req,res) => {
 
         res.status(200).send(request)
     }
-    catch(error) {
+    catch (error) {
         console.log(error);
-        res.status(500).send({message : error.message})
+        res.status(500).send({ message: error.message })
     }
 }
 
 
 // search request -> no request only
-module.exports.searchRequest = async (req,res) => {
-    const {search, ID_User} = req.query
-    try{
+module.exports.searchRequest = async (req, res) => {
+    const { search, ID_User } = req.query
+    try {
         const result = await Request.findAll({
             attributes: ['No_Request', 'createdAt'],
             where: {
                 [Op.and]: [
                     { ID_User: ID_User },
-                    { No_Request: db.sequelize.where(db.sequelize.fn('lower', db.sequelize.col("No_Request")),{
-                        [Op.like]: `%${search}%`
-                    })}
+                    {
+                        No_Request: db.sequelize.where(db.sequelize.fn('lower', db.sequelize.col("No_Request")), {
+                            [Op.like]: `%${search}%`
+                        })
+                    }
                 ]
             },
             include: [
@@ -88,16 +89,16 @@ module.exports.searchRequest = async (req,res) => {
         console.log(result);
         res.status(200).send(result)
     }
-    catch(error){
+    catch (error) {
         console.log(error);
-        res.status(500).send({message : error.message})
+        res.status(500).send({ message: error.message })
     }
 }
 
 // search by vessel
-module.exports.filterVessel = async (req,res) => {
-    const {ID_User, id} = req.query
-    try{
+module.exports.filterVessel = async (req, res) => {
+    const { ID_User, id } = req.query
+    try {
         const result = await Request.findAll({
             attributes: ['No_Request', 'createdAt'],
             where: {
@@ -128,14 +129,14 @@ module.exports.filterVessel = async (req,res) => {
         res.status(200).send(result)
     }
     catch (error) {
-        res.status(500).send({message : error.message})
+        res.status(500).send({ message: error.message })
     }
 }
 
 // search by port
-module.exports.filterPort = async (req,res) => {
-    const {ID_User, id} = req.query
-    try{
+module.exports.filterPort = async (req, res) => {
+    const { ID_User, id } = req.query
+    try {
         const result = await Request.findAll({
             attributes: ['No_Request', 'createdAt'],
             where: {
@@ -166,14 +167,14 @@ module.exports.filterPort = async (req,res) => {
         res.status(200).send(result)
     }
     catch (error) {
-        res.status(500).send({message : error.message})
+        res.status(500).send({ message: error.message })
     }
 }
 
 // search by terminal
-module.exports.filterTerminal = async (req,res) => {
-    const {ID_User, id} = req.query
-    try{
+module.exports.filterTerminal = async (req, res) => {
+    const { ID_User, id } = req.query
+    try {
         const result = await Request.findAll({
             attributes: ['No_Request', 'createdAt'],
             where: {
@@ -204,14 +205,14 @@ module.exports.filterTerminal = async (req,res) => {
         res.status(200).send(result)
     }
     catch (error) {
-        res.status(500).send({message : error.message})
+        res.status(500).send({ message: error.message })
     }
 }
 
 // search by service
-module.exports.filterService = async (req,res) => {
-    const {ID_User, id} = req.query
-    try{
+module.exports.filterService = async (req, res) => {
+    const { ID_User, id } = req.query
+    try {
         const result = await Request.findAll({
             attributes: ['No_Request', 'createdAt'],
             where: {
@@ -242,15 +243,15 @@ module.exports.filterService = async (req,res) => {
         res.status(200).send(result)
     }
     catch (error) {
-        res.status(500).send({message : error.message})
+        res.status(500).send({ message: error.message })
     }
 }
 
 // sort createdAt date
-module.exports.sortDate = async (req,res) => {
-    const {sort, ID_User} = req.query
-    try{
-        if(sort == 1){
+module.exports.sortDate = async (req, res) => {
+    const { sort, ID_User } = req.query
+    try {
+        if (sort == 1) {
             const result = await Request.findAll({
                 attributes: ['No_Request', 'createdAt'],
                 order: [['createdAt', 'DESC']],
@@ -306,15 +307,15 @@ module.exports.sortDate = async (req,res) => {
 
         res.status(200).send(result)
     }
-    catch (error){
-        res.status(500).send({message : error.message})
+    catch (error) {
+        res.status(500).send({ message: error.message })
     }
 }
 
 // view container
-module.exports.viewContainer = async (req,res) => {
-    const {ID_User, ID_Request} = req.query
-    try{
+module.exports.viewContainer = async (req, res) => {
+    const { ID_User, ID_Request } = req.query
+    try {
         const result = await RequestContainer.findAll({
             attributes: ['id'],
             include: [
@@ -322,8 +323,8 @@ module.exports.viewContainer = async (req,res) => {
                     model: Request,
                     where: {
                         [Op.and]: [
-                            {ID_User: ID_User},
-                            {id: ID_Request}
+                            { ID_User: ID_User },
+                            { id: ID_Request }
                         ]
                     },
                     attributes: []
@@ -336,16 +337,17 @@ module.exports.viewContainer = async (req,res) => {
         })
         res.status(200).send(result)
     }
-    catch (error){
-        res.status(500).send({message : error.message})
+    catch (error) {
+        res.status(500).send({ message: error.message })
     }
 }
 
+
 // view trucking company
-module.exports.viewTruckingCompany = async (req,res) => {
-    try{
+module.exports.viewTruckingCompany = async (req, res) => {
+    try {
         const result = await Trucking.findAll({
-            attributes: ['id','Company_Name'],
+            attributes: ['id', 'Company_Name'],
             where: {
                 Company_Type: 'Trucking Company'
             }
@@ -353,71 +355,80 @@ module.exports.viewTruckingCompany = async (req,res) => {
         res.status(200).send(result)
     }
     catch (error) {
-        res.status(500).send({message : error.message})
+        res.status(500).send({ message: error.message })
     }
 }
 
 // view port
-module.exports.viewPort = async (req,res) => {
-    try{
+module.exports.viewPort = async (req, res) => {
+    try {
         const result = await Port.findAll({
-            attributes: ['id','Port_Name']
+            attributes: ['id', 'Port_Name']
         })
         res.status(200).send(result)
     }
-    catch(error){
-        res.status(500).send({message : error.message})
+    catch (error) {
+        res.status(500).send({ message: error.message })
     }
 }
 
 // view terminal
-module.exports.viewTerminal = async (req,res) => {
-    try{
+module.exports.viewTerminal = async (req, res) => {
+    try {
         const result = await Terminal.findAll({
-            attributes: ['id','Terminal_Name']
+            attributes: ['id', 'Terminal_Name']
         })
         res.status(200).send(result)
     }
-    catch(error){
-        res.status(500).send({message : error.message})
+    catch (error) {
+        res.status(500).send({ message: error.message })
     }
 }
 
 // view vessel
-module.exports.viewVessel = async (req,res) => {
-    try{
+module.exports.viewVessel = async (req, res) => {
+    try {
         const result = await Vessel.findAll({
-            attributes: ['id','Vessel_Name']
+            attributes: ['id', 'Vessel_Name']
         })
         res.status(200).send(result)
     }
-    catch(error){
-        res.status(500).send({message : error.message})
+    catch (error) {
+        res.status(500).send({ message: error.message })
     }
 }
 
 // view service
-module.exports.viewService = async (req,res) => {
-    try{
+module.exports.viewService = async (req, res) => {
+    try {
         const result = await Service.findAll({
-            attributes: ['id','Service_Name']
+            attributes: ['id', 'Service_Name']
         })
         res.status(200).send(result)
     }
-    catch(error){
-        res.status(500).send({message : error.message})
+    catch (error) {
+        res.status(500).send({ message: error.message })
     }
 }
 
 //assign trucking company
-module.exports.assignTruckingCompany = async (req,res) => {
-    const {id} = req.body
-    
+module.exports.assignTruckingCompany = async (req, res) => {
+    const { id } = req.body
+
     try {
         const assignTC = await booking.create({
-            Customer_ID: id
+            
         })
     } catch (error) {
-        res.status(500).send({message : error.message})
+        res.status(500).send({ message: error.message })
+    }
+}
+
+//new booking after req acc by tc
+module.exports.newBooking = async (req, res) => {
+    try {
+
+    } catch (error) {
+        res.status(500).send({ message: error.message })
     }
 }

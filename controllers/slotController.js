@@ -3,7 +3,7 @@ const { Op, literal, Sequelize, where } = require('sequelize');
 
 const Slot = db.slot
 const detailSlot = db.detailSlot
-const user = db.user
+const booking = db.booking
 
 module.exports.addSlot = async (req, res) => {
     const { ID_Terminal, date, Start, End, Qty } = req.body
@@ -91,6 +91,62 @@ module.exports.viewSlot = async (req, res) => {
 
         res.status(200).send(viewSlot)
 
+    } catch (error) {
+        res.status(500).send({ message: error.message })
+    }
+}
+
+module.exports.addTimeSlot = async (req, res) => {
+    const id = req.params.id
+    try {
+
+        constUpdateBooking = await booking.update({
+
+        })
+
+        const updateBookingQty = await detailSlot.increment({
+            Booking_Qty: 1
+        }, {
+            where: {
+                id
+            }
+        })
+
+        const updatedData = await detailSlot.findOne({
+            where: {
+                id
+            }
+        })
+
+        res.status(200).send(updatedData)
+
+    } catch (error) {
+        res.status(500).send({ message: error.message })
+    }
+}
+
+module.exports.editTimeSlot = async (req, res) => {
+    const prevId = req.params.id
+    const updatedId = req.params.id
+
+    try {
+        const updatePrevBookingQty = await detailSlot.decrement({
+            Booking_Qty: 1
+        }, {
+            where: {
+                id: prevId
+            }
+        })
+
+        const updateBookingQty = await detailSlot.increment({
+            Booking_Qty: 1
+        }, {
+            where: {
+                id: updatedId
+            }
+        })
+
+        res.status(200).send("edit success!")
     } catch (error) {
         res.status(500).send({ message: error.message })
     }
