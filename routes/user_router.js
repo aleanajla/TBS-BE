@@ -1,4 +1,4 @@
-const router = require("express").Router();
+    const router = require("express").Router();
 
 const {signUp, login, sendResetToken, userVerifyResetPassword, userSetNewPassword, verifyToken} = require('../controllers/authController')
 const {authentication} = require("../middleware/authJWT")

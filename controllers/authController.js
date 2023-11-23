@@ -106,6 +106,7 @@ module.exports.login = async (req, res) => {
     const dataPayload = {
       ID: check_user.id,
       Username: check_user.Username,
+      Role_ID: check_user.Role_ID
     };
 
     const token = createToken(dataToken);
