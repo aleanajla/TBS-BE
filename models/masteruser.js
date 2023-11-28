@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       masterUser.belongsTo(models.masterCustomer, {
         foreignKey: "Customer_ID"
       });
-      masterUser.hasMany(models.booking, {foreignKey: "User_ID"})
+      // masterUser.hasMany(models.booking, {foreignKey: "User_ID"})
     }
   }
   masterUser.init(

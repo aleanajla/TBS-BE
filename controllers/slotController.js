@@ -100,10 +100,6 @@ module.exports.addTimeSlot = async (req, res) => {
     const id = req.params.id
     try {
 
-        constUpdateBooking = await booking.update({
-
-        })
-
         const updateBookingQty = await detailSlot.increment({
             Booking_Qty: 1
         }, {

@@ -9,24 +9,31 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      No_Request: {
-        type: Sequelize.STRING,
-        references: {
-          model: "requests",
-          key: "No_Request",
-        },
-      },
-      Customer_ID:{
+      // No_Request: {
+      //   type: Sequelize.STRING,
+      //   references: {
+      //     model: "requests",
+      //     key: "No_Request",
+      //   },
+      // },
+      // Customer_ID:{
+      //   type: Sequelize.INTEGER,
+      //   references:{
+      //     model: "masterCustomers",
+      //     key: "id"
+      //   }
+      // },
+      ID_Request_TC:{
         type: Sequelize.INTEGER,
         references:{
-          model: "masterCustomers",
+          model: "requestTruckingCompanies",
           key: "id"
         }
       },
-      ID_Booking_Slot: {
+      ID_Detail_Slot: {
         type: Sequelize.INTEGER,
         references: {
-          model: "slots",
+          model: "detailSlots",
           key: "id",
         },
       },

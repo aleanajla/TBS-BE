@@ -1,3 +1,4 @@
+const { setDefaultHighWaterMark } = require("nodemailer/lib/xoauth2");
 const db = require("../models");
 const { Op } = require('sequelize');
 
@@ -9,7 +10,7 @@ const Terminal = db.masterTerminal
 const RequestContainer = db.requestContainer
 const Container = db.masterContainer
 const Trucking = db.masterCustomer
-const Slot = db.slot 
+const Slot = db.slot
 const detailSlot = db.detailSlot
 const Booking = db.booking
 
@@ -40,7 +41,7 @@ module.exports.viewRequest = async (req, res) => {
                     attributes: ['Terminal_Name']
                 }
             ]
-        }) 
+        })
 
         res.status(200).send(request)
     }
@@ -342,23 +343,6 @@ module.exports.viewContainer = async (req, res) => {
     }
 }
 
-
-// view trucking company
-module.exports.viewTruckingCompany = async (req, res) => {
-    try {
-        const result = await Trucking.findAll({
-            attributes: ['id', 'Company_Name'],
-            where: {
-                Company_Type: 'Trucking Company'
-            }
-        })
-        res.status(200).send(result)
-    }
-    catch (error) {
-        res.status(500).send({ message: error.message })
-    }
-}
-
 // view port
 module.exports.viewPort = async (req, res) => {
     try {
@@ -411,24 +395,67 @@ module.exports.viewService = async (req, res) => {
     }
 }
 
-//assign trucking company
-module.exports.assignTruckingCompany = async (req, res) => {
-    const { id } = req.body
-
-    try {
-        const assignTC = await booking.create({
-            
-        })
-    } catch (error) {
-        res.status(500).send({ message: error.message })
-    }
-}
-
-//new booking after req acc by tc
+//new booking after jpt select TimeSlot
 module.exports.newBooking = async (req, res) => {
+    const { ID_Request_TC, ID_Detail_Slot } = req.body
+    let flag = 0
+    let No_Booking = null
     try {
+        do {
+            const generateBookingNo = () => {
+                const randomNumbers = Math.floor(100000 + Math.random() * 900000); // Generate 6 random digits
+                No_Booking = `BK${randomNumbers}`
+                return No_Booking;
+            };
 
-    } catch (error) {
-        res.status(500).send({ message: error.message })
-    }
+            const searchBookingNo = await Booking.findOne({
+                where: {
+                    No_Booking: generateBookingNo()
+                }
+            })
+            console.log(No_Booking)
+
+            if (!searchBookingNo) {
+                flag = 1;
+                break;
+            }
+        } while (flag == 1);
+
+        const createBooking = await Booking.create({
+            ID_Request_TC,
+            ID_Detail_Slot,
+            No_Booking
+        })
+
+        const updateDetailSlot = await detailSlot.decrement({
+            Booking_Qty: 1
+        }, {
+            where: {
+                id: ID_Detail_Slot
+            }
+        })
+
+    //     const updatedData = await Booking.findOne({
+    //         attributes: ['id'],
+    //         where: {
+    //             No_Booking
+    //         },
+    //         include: [
+    //             {
+    //                 model: Booking
+    //             },
+    //             {
+    //                 model: detailSlot
+    //             },
+    //             {
+    //                 model: 
+    //             }
+                
+    //         ]
+    // })
+
+    res.status(200).send(updatedData)
+} catch (error) {
+    res.status(500).send({ message: error.message })
+}
 }

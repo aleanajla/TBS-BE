@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       detailSlot.belongsTo(models.slot, {foreignKey: "ID_Slot"})
+      detailSlot.hasMany(models.booking, {foreignKey: "ID_Detail_Slot"})
     }
   }
   detailSlot.init({

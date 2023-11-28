@@ -12,8 +12,8 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "ID_Terminal"
       });
       slot.hasMany(models.detailSlot, { foreignKey: "ID_Slot" });
-      slot.hasMany(models.booking, { foreignKey: "ID_Slot" });
       slot.hasOne(models.viewEtiket, { foreignKey: "ID_Slot" });
+      // slot.hasMany(models.booking, { foreignKey: "ID_Slot" });
     }
   }
   slot.init(

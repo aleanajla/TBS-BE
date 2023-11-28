@@ -12,6 +12,7 @@ app.use("/api", router.user_router)
 app.use("/api", router.STID_router)
 app.use("/api", router.booking_router)
 app.use("/api", router.slot_router)
+app.use("/api", router.assignJob_router)
 // app.use("/api", router.)
 
 app.listen(port, () =>{

@@ -17,12 +17,14 @@ module.exports = (sequelize, DataTypes) => {
       request.belongsTo(models.masterTerminal, {
         foreignKey: "ID_Terminal",
       });
-      request.hasMany(models.booking, { foreignKey: "No_Request" });
+      // request.hasMany(models.booking, { foreignKey: "No_Request" });
+      request.hasOne(models.requestTruckingCompany, {foreignKey: "ID_Request"})
       request.hasOne(models.viewEtiket, { foreignKey: "ID_request" });
       request.belongsTo(models.masterIO, {foreignKey: "ID_IO"})
       request.belongsTo(models.masterCommodity, {foreignKey: "ID_Commodity"})
       request.belongsTo(models.masterService, {foreignKey: "ID_Service"})
       request.hasMany(models.requestContainer, {foreignKey: "ID_Request"})
+      request.hasOne(models.requestTruckingCompany, {foreignKey: "ID_Request"})
     }
   }
   request.init(
