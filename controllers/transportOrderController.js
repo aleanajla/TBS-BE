@@ -11,6 +11,17 @@ const Container = db.masterContainer
 const JPT = db.masterCustomer
 const User = db.masterUser
 
+module.exports.viewRequest = async(req, res) => {
+  const {ID_Customer} = req.params
+  try {
+    
+    res.status(200).send(result)
+  } catch (error) {
+    
+    res.status(500).send({message : error.message})
+  }
+}
+
 module.exports.filterJPT = async(req, res) => {
   const {ID_User, id} = req.query
   try {

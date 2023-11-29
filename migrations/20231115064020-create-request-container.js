@@ -9,19 +9,36 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      ID_Container: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: "masterContainers",
-          key: "id",
-        },
-      },
       ID_Request: {
         type: Sequelize.INTEGER,
         references: {
           model: "requests",
           key: "id",
         },
+      },
+      Container_Number: {
+        type: Sequelize.STRING,
+      },
+      Iso_Code: {
+        type: Sequelize.STRING,
+      },
+      Container_Type:{
+        type: Sequelize.STRING
+      },
+      Container_Size:{
+        type: Sequelize.STRING,
+      },
+      Weight:{
+        type: Sequelize.INTEGER
+      },
+      Sling: {
+        type: Sequelize.STRING,
+      },
+      MD: {
+        type: Sequelize.STRING,
+      },
+      OD: {
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,

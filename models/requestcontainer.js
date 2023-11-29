@@ -10,13 +10,19 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      requestContainer.belongsTo(models.masterContainer, {foreignKey: "ID_Container"})
       requestContainer.belongsTo(models.request, {foreignKey: "ID_Request"})
     }
   }
   requestContainer.init({
-    ID_Container: DataTypes.INTEGER,
-    ID_Request: DataTypes.INTEGER
+    ID_Request: DataTypes.INTEGER,
+    Container_Number: DataTypes.STRING,
+    Iso_Code: DataTypes.STRING,
+    Container_Type: DataTypes.STRING,
+    Container_Size: DataTypes.STRING,
+    Weight: DataTypes.INTEGER,
+    Sling: DataTypes.STRING,
+    MD: DataTypes.STRING,
+    OD: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'requestContainer',

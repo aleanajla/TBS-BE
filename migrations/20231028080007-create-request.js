@@ -9,20 +9,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       }, 
-      ID_Vessel: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: "masterVessels",
-          key: "id",
-        },
-      },
-      ID_Port: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: "masterPorts",
-          key: "id",
-        },
-      },
       ID_User: {
         type: Sequelize.INTEGER,
         references: {
@@ -30,33 +16,23 @@ module.exports = {
           key: "id"
         }
       },
-      ID_Terminal: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: "masterTerminals",
-          key: "id",
-        },
+      Vessel_Name: {
+        type: Sequelize.STRING
       },
-      ID_Service: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: "masterServices",
-          key: "id",
-        },
+      Port_Name: {
+        type: Sequelize.STRING
       },
-      ID_Commodity: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: "masterCommodities",
-          key: "id",
-        },
+      Terminal_Name: {
+        type: Sequelize.STRING
       },
-      ID_IO: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: "masterIOs",
-          key: "id",
-        },
+      Service_Name: {
+        type: Sequelize.STRING
+      },
+      Commodity_Name: {
+        type: Sequelize.STRING
+      },
+      IO_Type: {
+        type: Sequelize.STRING,
       },
       No_Request: {
         type: Sequelize.STRING,
@@ -71,6 +47,9 @@ module.exports = {
       },
       FPOD: {
         type: Sequelize.STRING,
+      },
+      Closing_Time:{
+        type: Sequelize.DATE
       },
       createdAt: {
         allowNull: false,

@@ -9,10 +9,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      ID_Container: {
+      ID_Request_Container: {
         type: Sequelize.INTEGER,
         references: {
-          model: "masterContainers",
+          model: "requestContainers",
           key: "id",
         },
       },
@@ -34,27 +34,6 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: {
           model: "slots",
-          key: "id",
-        },
-      },
-      ID_Vessel: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: "masterVessels",
-          key: "id",
-        },
-      },
-      ID_Port: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: "masterPorts",
-          key: "id",
-        },
-      },
-      ID_Terminal: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: "masterTerminals",
           key: "id",
         },
       },

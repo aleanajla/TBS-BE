@@ -8,13 +8,14 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      masterTerminal.hasMany(models.request, { foreignKey: "ID_Terminal"});
+      masterTerminal.belongsTo(models.masterPort, {foreignKey: "ID_Port"})
       masterTerminal.hasMany(models.slot, { foreignKey: "ID_Terminal" });
       masterTerminal.hasOne(models.viewEtiket, { foreignKey: "ID_Terminal" });
     }
   }
   masterTerminal.init(
     {
+      ID_Port: DataTypes.INTEGER,
       Terminal_Name: DataTypes.STRING,
       Address: DataTypes.STRING,
       Phone_Number: DataTypes.STRING,

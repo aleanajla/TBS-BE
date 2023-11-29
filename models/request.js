@@ -8,38 +8,26 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      request.belongsTo(models.masterVessel, {
-        foreignKey: "ID_Vessel",
-      });
-      request.belongsTo(models.masterPort, {
-        foreignKey: "ID_Port",
-      });
-      request.belongsTo(models.masterTerminal, {
-        foreignKey: "ID_Terminal",
-      });
-      // request.hasMany(models.booking, { foreignKey: "No_Request" });
+      request.belongsTo(models.masterUser, {foreignKey: "ID_User"})
       request.hasOne(models.requestTruckingCompany, {foreignKey: "ID_Request"})
       request.hasOne(models.viewEtiket, { foreignKey: "ID_request" });
-      request.belongsTo(models.masterIO, {foreignKey: "ID_IO"})
-      request.belongsTo(models.masterCommodity, {foreignKey: "ID_Commodity"})
-      request.belongsTo(models.masterService, {foreignKey: "ID_Service"})
       request.hasMany(models.requestContainer, {foreignKey: "ID_Request"})
-      request.hasOne(models.requestTruckingCompany, {foreignKey: "ID_Request"})
     }
   }
   request.init(
     {
-      No_Request: DataTypes.STRING,
-      ID_Vessel: DataTypes.INTEGER,
-      ID_Port: DataTypes.INTEGER,
       ID_User: DataTypes.INTEGER,
-      ID_Terminal: DataTypes.INTEGER,
-      ID_Service: DataTypes.INTEGER,
-      ID_Commodity: DataTypes.INTEGER,
-      ID_IO: DataTypes.INTEGER,
+      No_Request: DataTypes.STRING,
+      Vessel_Name: DataTypes.STRING,
+      Port_Name: DataTypes.STRING,
+      Terminal_Name: DataTypes.STRING,
+      Service_Name: DataTypes.STRING,
+      Commodity_Name: DataTypes.STRING,
+      IO_Type: DataTypes.STRING,
       Qty: DataTypes.INTEGER,
       POD: DataTypes.STRING,
       FPOD: DataTypes.STRING,
+      Closing_Time: DataTypes.DATE
     },
     {
       sequelize,

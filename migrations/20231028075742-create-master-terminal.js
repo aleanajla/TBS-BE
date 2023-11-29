@@ -9,6 +9,13 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      ID_Port:{
+        type: Sequelize.INTEGER,
+        references:{
+          model: "masterPorts",
+          key: "id"
+        }
+      },
       Terminal_Name: {
         type: Sequelize.STRING
       },
