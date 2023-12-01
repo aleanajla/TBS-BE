@@ -1,7 +1,7 @@
 [
     {
         "id": 1,
-        "ID_User" : 2,
+        "ID_Customer" : 2,
         "No_Request": "REC00000001",
         "Vessel_Name": "THEMAS LINE",
         "Port_Name": "IDJKT",
@@ -16,7 +16,7 @@
     },
     {
         "id": 2,
-        "ID_User": 2,
+        "ID_Customer": 2,
         "No_Request": "REC00000002",
         "Vessel_Name": "THEMAS LINE",
         "Port_Name": "IDJKT",
@@ -31,7 +31,7 @@
     },
     {
         "id": 3,
-        "ID_User" : 2,
+        "ID_Customer" : 3,
         "No_Request": "DEL00000001",
         "Vessel_Name": "Evergreen Marine Company",
         "Port_Name": "IDJKT",

@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       masterCustomer.hasMany(models.masterDriver, {foreignKey: "ID_Customer"});
       masterCustomer.hasMany(models.masterTruck, {foreignKey: "ID_Customer"});
       masterCustomer.hasMany(models.requestTruckingCompany, {foreignKey: "ID_Customer"})
+      masterCustomer.hasMany(models.request, {foreignKey: "ID_Customer"})
       // masterCustomer.hasMany(models.booking, {foreignKey: "Customer_ID"});
     }
   }

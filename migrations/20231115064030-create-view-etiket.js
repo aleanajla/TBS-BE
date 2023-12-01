@@ -9,13 +9,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      ID_Request_Container: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: "requestContainers",
-          key: "id",
-        },
-      },
       ID_Request: {
         type: Sequelize.INTEGER,
         references: {
@@ -27,13 +20,6 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: {
           model: "bookings",
-          key: "id",
-        },
-      },
-      ID_Slot: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: "slots",
           key: "id",
         },
       },

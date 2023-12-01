@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      request.belongsTo(models.masterUser, {foreignKey: "ID_User"})
+      request.belongsTo(models.masterCustomer, {foreignKey: "ID_Customer"})
       request.hasOne(models.requestTruckingCompany, {foreignKey: "ID_Request"})
       request.hasOne(models.viewEtiket, { foreignKey: "ID_request" });
       request.hasMany(models.requestContainer, {foreignKey: "ID_Request"})
@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   request.init(
     {
-      ID_User: DataTypes.INTEGER,
+      ID_Customer: DataTypes.INTEGER,
       No_Request: DataTypes.STRING,
       Vessel_Name: DataTypes.STRING,
       Port_Name: DataTypes.STRING,
