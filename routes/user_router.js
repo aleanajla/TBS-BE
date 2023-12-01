@@ -1,6 +1,6 @@
-    const router = require("express").Router();
+const router = require("express").Router();
 
-const {signUp, login, sendResetToken, userVerifyResetPassword, userSetNewPassword, verifyToken} = require('../controllers/authController')
+const {signUp, login, sendResetToken, userVerifyResetPassword, userSetNewPassword, verifyToken, viewProfile} = require('../controllers/authController')
 const {authentication} = require("../middleware/authJWT")
 
 router.post('/users/register', signUp)
@@ -9,5 +9,6 @@ router.post('/auth/user/forgot-password', sendResetToken)
 // router.get('/auth/user/verify-resetpassword/:token', userVerifyResetPassword)
 router.patch("/auth/user/change-password", userSetNewPassword)
 router.get("/auth/user", authentication, verifyToken)
+router.get("/view/profile/:id", viewProfile)
 
 module.exports = router

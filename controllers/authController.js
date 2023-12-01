@@ -1,6 +1,7 @@
 const db = require("../models");
 const User = db.masterUser;
 const Customer = db.masterCustomer;
+const Role = db.roleManagement
 const { hashPassword, compareHash } = require("../bycrpt");
 const transporter = require("../helper/userTransporter");
 const {
@@ -47,34 +48,45 @@ module.exports.signUp = async (req, res) => {
       return res.status(404).send("Password doesn't match.");
     }
 
-    const createCustomer = await Customer.create(
-      {
-        Company_Name: "",
-        Company_Type: "",
-        PMKU: PMKU,
-        Email: "",
-        Address: "",
-        Phone_Number: "",
-        NIB: "",
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      { fields: ["PMKU"] }
-    );
+    const check_PMKU = await Customer.findOne({
+      attributes: ['id'],
+      where: {
+        PMKU: PMKU
+      }
+    })
 
-    const user = await User.create({
+    if(!check_PMKU){
+      res.status(404).send("PKMU Number Does Not Exist!")
+    }
+    console.log(check_PMKU);
+
+    console.log(Role_ID, Username, Name, Password, Phone_Number, Email, new Date());
+
+    const createUser = await User.create({
       Role_ID: Role_ID,
-      Customer_ID: createCustomer.id,
+      Customer_ID: check_PMKU.id,
       Username: Username,
       Name: Name,
-      Password: hashPassword(Password),
-      Phone_Number: Phone_Number,
+      Password:hashPassword(Password),
+      Phone_Number:Phone_Number,
       Email: Email,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    });
+      createdAt:new Date(),
+      updatedAt:new Date()
+    })
 
-    res.status(200).send(user);
+    // const user = await User.create({
+    //   Role_ID: Role_ID,
+    //   Customer_ID: 2,
+    //   Username: Username,
+    //   Name: Name,
+    //   Password: hashPassword(Password),
+    //   Phone_Number: Phone_Number,
+    //   Email: Email,
+    //   createdAt: new Date(),
+    //   updatedAt: new Date()
+    // });
+
+    res.status(200).send(createUser);
   } catch (error) {
     res.status(500).send({ message: error.message });
   }
@@ -153,7 +165,7 @@ module.exports.sendResetToken = async (req, res) => {
       html: `
       <h1 style="text-align: center;">Reset Your Password</h1>
       <p>We have received your request to reset the password for your account</p>
-      <a href='http://localhost:3000/newPassword?token=${token}'>Click here to set new password</a>
+      <a href='http://localhost:3006/newPassword?token=${token}'>Click here to set new password</a>
       `,
     });
     res.status(200).send("Email has been sent to reset your password");
@@ -170,7 +182,7 @@ module.exports.userSetNewPassword = async (req, res) => {
     const ID_User = payloadForgotPassword(authorization.split(' ').pop())
 
     if (password !== confirm_password) {
-      return res.status(400).send("Password and confirm password doesn't match");
+      return res.status(404).send("Password and confirm password doesn't match");
     }
 
     // 1. Verify userId
@@ -198,50 +210,44 @@ module.exports.userSetNewPassword = async (req, res) => {
         },
       }
     );
-
     res.status(200).send("Password Has Been Changed");
   } catch (error) {
     return res.status(500).send({ message: error.message });
   }
 };
 
-// module.exports.userSetNewPassword = async (req, res) => {
-//   const { password, ID_User, confirm_password } = req.body;
-//   try {
-//     if (password !== confirm_password) {
-//       return res
-//         .status(400)
-//         .send("Password and confirm password doesn't match");
-//     }
+module.exports.viewProfile = async (req,res) => {
+  const id = req.params.id
+  try{
+    const response = await User.findOne({
+      attributes: ['Name', 'Username', 'Phone_Number', 'Email'],
+      include: [
+        {
+          model: Customer,
+          attributes: ['Company_Name', 'Company_Type', 'PMKU', 'Email', 'Address', 'NIB']
+        }         
+      ],
+      where: {
+        id: id
+      }
+    })
 
-//     // 1. Verify userId
-//     const CHECK_USER = await User.findOne({
-//       where: {
-//         id: ID_User,
-//       },
-//     });
+    const dataPayload = {
+      Name: response.Name,
+      Username: response.Username,
+      Phone_Number: response.Phone_Number,
+      Email: response.Email,
+      Company_Name: response.masterCustomer.Company_Name,
+      Company_Type: response.masterCustomer.Company_Type,
+      PMKU: response.masterCustomer.PMKU,
+      CusEmail: response.masterCustomer.Email,
+      Address: response.masterCustomer.Address,
+      NIB: response.masterCustomer.NIB
+    }
 
-//     if (!CHECK_USER) {
-//       return res.status(404).send("Account is not found");
-//     }
-
-//     const hashedPassword = hashPassword(password);
-
-//     // 2. Update Password
-//     const update = await User.update(
-//       {
-//         Password: password,
-//         updatedAt: new Date(),
-//       },
-//       {
-//         where: {
-//           id: ID_User,
-//         },
-//       }
-//     );
-
-//     res.status(200).send("Password Has Been Changed");
-//   } catch (error) {
-//     return res.status(500).send("Internal service Error");
-//   }
-// };
+    res.status(200).send(dataPayload)
+  }
+  catch(error){
+    return res.status(500).send({ message: error.message });
+  }
+}

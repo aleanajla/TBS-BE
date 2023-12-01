@@ -3,12 +3,12 @@
         "id": 1,
         "ID_Status": 1,
         "ID_Request": 1,
-        "ID_Customer": 2
+        "ID_Customer": 1
     },
     {
         "id": 2,
         "ID_Status": 1,
-        "ID_Request": 1,
-        "ID_Customer": 2
+        "ID_Request": 2,
+        "ID_Customer": 1
     }
 ]

@@ -44,6 +44,27 @@ module.exports.addSTID = async(req,res) => {
     let STIDNumber = null;
     
     try{
+        // check driver & truck only can be 1
+        const check_driver = await STID.findOne({
+            where: {
+                Driver_ID: Driver_ID
+            }
+        })
+        if(check_driver){
+            return res.status(404).send("Driver Already Assign!");
+        }
+        console.log(check_driver);
+
+        const check_truck = await STID.findOne({
+            where: {
+                Truck_ID: Truck_ID
+            }
+        })
+        if(check_truck){
+            return res.status(404).send("Truck Already Assign!");
+        }
+        console.log(check_truck);
+
         // generate STID_Number
         do{
             const randomNumbers = Math.floor(100000 + Math.random() * 900000);
@@ -60,8 +81,6 @@ module.exports.addSTID = async(req,res) => {
                 break;
             }
         }while(flag == 1);
-
-        console.log(STIDNumber);
 
         const createSTID = await STID.create({
             STID_Number: STIDNumber,
@@ -147,7 +166,7 @@ module.exports.viewSTID = async (req,res) => {
     const ID_Customer = req.params.id
     try{
         const result = await STID.findAll({
-            attributes: ['STID_Number'],
+            attributes: ['id','STID_Number'],
             include: [
                 {
                     model: Driver,

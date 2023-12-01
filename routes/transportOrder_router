@@ -1,7 +1,0 @@
-const { viewRequest } = require("../controllers/transportOrderController");
-
-const router = require("express").Router();
-
-// router.get('/users/view/requestTP', viewRequest)
-
-module.exports = router

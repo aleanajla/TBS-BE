@@ -14,29 +14,36 @@ module.exports = {
         references: {
             model: 'roleManagements',
             key: 'id'
-        }
+        },
+        allowNull: false
       },
       Customer_ID: {
         type: Sequelize.INTEGER,
         references: {
           model: 'masterCustomers',
           key: 'id'
-      }
+        },
+        allowNull: false
       },
       Username: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       Name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       Password: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       Phone_Number: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+
       },
       Email: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       createdAt: {
         allowNull: false,
