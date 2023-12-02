@@ -112,6 +112,92 @@ module.exports.viewCompletedTP = async (req, res) => {
   }
 }
 
+//counting request
+module.exports.countingRequest = async (req, res) => {
+  const ID_Customer = req.params.id
+  try {
+    const counting = await RequestTC.count({
+      where: {
+        ID_Customer,
+        ID_Status: 1
+      }
+    })
+    res.status(200).send(({ totalRequest: counting }))
+  } catch (error) {
+    res.status(500).send({ message: error.message })
+  }
+}
+
+//counting cancelled
+module.exports.countingRejected = async (req, res) => {
+  const ID_Customer = req.params.id
+  try {
+    const counting = await RequestTC.count({
+      where: {
+        ID_Customer,
+        ID_Status: 3
+      }
+    })
+    res.status(200).send(({ totalRejected: counting }))
+  } catch (error) {
+    res.status(500).send({ message: error.message })
+  }
+}
+
+//counting onGoing
+module.exports.countingOnGoing = async (req, res) => {
+  const ID_Customer = req.params.id
+  try {
+    const counting = await RequestTC.count({
+      include: [
+        {
+          model: Request,
+          attributes: [],
+          where: {
+            Closing_Time: {
+              [Op.gt]: db.sequelize.literal('CURRENT_TIMESTAMP')
+            }
+          }
+        }
+      ],
+      where: {
+        ID_Customer,
+        ID_Status: 2
+      }
+    });
+    res.status(200).send(({ totalOnGoing: counting }))
+  } catch (error) {
+    res.status(500).send({ message: error.message })
+  }
+}
+
+//counting onGoing
+module.exports.countingCompleted = async (req, res) => {
+  const ID_Customer = req.params.id
+  try {
+    const counting = await RequestTC.count({
+      include: [
+        {
+          model: Request,
+          attributes: [],
+          where: {
+            Closing_Time: {
+              [Op.lt]: db.sequelize.literal('CURRENT_TIMESTAMP')
+            }
+          }
+        }
+      ],
+      where: {
+        ID_Customer,
+        ID_Status: 2
+      }
+    });
+    res.status(200).send(({ totalCompleted: counting }))
+  } catch (error) {
+    res.status(500).send({ message: error.message })
+  }
+}
+
 module.exports.filterJPT = async (req, res) => {
   const { ID_User, id } = req.query
   try {
@@ -149,23 +235,3 @@ module.exports.filterJPT = async (req, res) => {
 
 
 
-
-
-
-
-
-module.exports.viewFilterJPT = async (req, res) => {
-  try {
-
-  } catch (error) {
-    res.status(500).send({ message: error.message });
-  }
-};
-
-module.exports.filterJPT = async (req, res) => {
-  try {
-
-  } catch (error) {
-    res.status(500).send({ message: error.message });
-  }
-};
