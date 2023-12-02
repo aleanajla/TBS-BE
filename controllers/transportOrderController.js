@@ -3,15 +3,9 @@ const { Op } = require('sequelize');
 
 const Request = db.request
 const Vessel = db.masterVessel
-const Service = db.masterService
-const Port = db.masterPort
-const Terminal = db.masterTerminal
-const RequestContainer = db.requestContainer
 const RequestTC = db.requestTruckingCompany
-const Container = db.masterContainer
-const JPT = db.masterCustomer
-const User = db.masterUser
 
+// view request
 module.exports.viewRequestTP = async (req, res) => {
   const ID_Customer = req.params.id
   try {
@@ -37,6 +31,7 @@ module.exports.viewRequestTP = async (req, res) => {
   }
 }
 
+//view cancelled
 module.exports.viewCancelledTP = async (req, res) => {
   const ID_Customer = req.params.id
   try {
@@ -45,7 +40,7 @@ module.exports.viewCancelledTP = async (req, res) => {
       include: [
         {
           model: Request,
-          attributes: ['No_Request', 'Qty', 'Vessel_Name', 'Port_Name', 'Terminal_Name', 'Service_Name', 'createdAt'],
+          attributes: ['No_Request', 'Qty', 'Vessel_Name', 'Port_Name', 'Terminal_Name', 'Service_Name', 'createdAt', 'Closing_Time'],
           // where: {
           //   ID_Customer
           // }
@@ -62,31 +57,60 @@ module.exports.viewCancelledTP = async (req, res) => {
   }
 }
 
-// module.exports.viewOnGoingTP = async (req, res) => {
-//   const ID_Customer = req.params.ID_Customer
-//   try {
-//     const result = await RequestTC.findAll({
-//       attributes: ['id', 'ID_Request'],
-//       include: [
-//         {
-//           model: Request,
-//           attributes: ['No_Request', 'Qty', 'Vessel_Name', 'Port_Name', 'Terminal_Name', 'Service_Name', 'createdAt'],
-//           where: {
-//             [Op.and]:[
-//             ]
-//           }
-//         }
-//       ],
-//       where: {
-//         ID_Customer,
-//         ID_Status: 3
-//       }
-//     })
-//     res.status(200).send(result)
-//   } catch (error) {
-//     res.status(500).send({ message: error.message })
-//   }
-// }
+module.exports.viewOnGoingTP = async (req, res) => {
+  const ID_Customer = req.params.id
+  try {
+    const result = await RequestTC.findAll({
+      attributes: ['id', 'ID_Request', 'ID_Status'],
+      include: [
+        {
+          model: Request,
+          attributes: ['No_Request', 'Qty', 'Vessel_Name', 'Port_Name', 'Terminal_Name', 'Service_Name', 'createdAt', 'Closing_Time'],
+          where: {
+            Closing_Time: {
+              [Op.gt]: db.sequelize.literal('CURRENT_TIMESTAMP')
+            }
+          }
+        }
+      ],
+      where: {
+        ID_Customer,
+        ID_Status: 2
+      }
+    })
+    res.status(200).send(result)
+  } catch (error) {
+    res.status(500).send({ message: error.message })
+  }
+}
+
+//view complete
+module.exports.viewCompletedTP = async (req, res) => {
+  const ID_Customer = req.params.id
+  try {
+    const result = await RequestTC.findAll({
+      attributes: ['id', 'ID_Request', 'ID_Status'],
+      include: [
+        {
+          model: Request,
+          attributes: ['No_Request', 'Qty', 'Vessel_Name', 'Port_Name', 'Terminal_Name', 'Service_Name', 'createdAt', 'Closing_Time'],
+          where: {
+            Closing_Time: {
+              [Op.lt]: db.sequelize.literal('CURRENT_TIMESTAMP')
+            }
+          }
+        }
+      ],
+      where: {
+        ID_Customer,
+        ID_Status: 2
+      }
+    })
+    res.status(200).send(result)
+  } catch (error) {
+    res.status(500).send({ message: error.message })
+  }
+}
 
 module.exports.filterJPT = async (req, res) => {
   const { ID_User, id } = req.query

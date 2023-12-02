@@ -12,7 +12,7 @@
         "Qty": 5,
         "POD": "IDBLW",
         "FPOD": "IDMKS",
-        "Closing_Time" : "2024-03-28 10:00:00"
+        "Closing_Time" : "2024-03-28 10:00:00.000"
     },
     {
         "id": 2,
@@ -27,7 +27,7 @@
         "Qty": 10,
         "POD": "IDMKS",
         "FPOD": "IDMKS",
-        "Closing_Time" : "2024-03-28 10:00:00"
+        "Closing_Time" : "2024-03-28 10:00:00.000"
     },
     {
         "id": 3,
@@ -42,6 +42,21 @@
         "Qty": 5,
         "POD": "IDBLW",
         "FPOD": "IDBLW",
-        "Closing_Time" : "2024-02-14 12:00:00"
+        "Closing_Time" : "2024-02-14 12:00:00.000"
+    },
+    {
+        "id": 4,
+        "ID_Customer" : 3,
+        "No_Request": "DEL00000002",
+        "Vessel_Name": "Evergreen Marine Company",
+        "Port_Name": "IDJKT",
+        "Terminal_Name": "Jakarta International Container Terminal I (JICT I)",
+        "Service_Name": "Receiving",
+        "Commodity_Name": "Alat Kantor",
+        "IO_Type": "Ocean Going",
+        "Qty": 5,
+        "POD": "IDBLW",
+        "FPOD": "IDBLW",
+        "Closing_Time" : "2023-11-2 14:00:00.000"
     }
 ]
