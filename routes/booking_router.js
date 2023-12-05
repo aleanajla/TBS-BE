@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const {viewRequest, searchBooking, searchRequest, filterVessel, filterPort, filterTerminal, filterService, viewContainer, viewTruckingCompany, sortDate, viewPort, viewTerminal, viewVessel, viewService, newBooking, viewRequestTP, viewCancelledTP} = require('../controllers/bookingController')
 
-router.get('/users/view/request', viewRequest)
+router.get('/users/view/request/:id', viewRequest)
 router.post('/users/search/request', searchRequest)
 // router.get('/users/search/vessel', filterVessel)
 // router.get('/users/search/port', filterPort)

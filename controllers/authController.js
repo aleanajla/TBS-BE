@@ -251,3 +251,40 @@ module.exports.viewProfile = async (req,res) => {
     return res.status(500).send({ message: error.message });
   }
 }
+
+module.exports.changePassword = async (req,res) => {
+  const {OldPassword,NewPassword,ConfirmNewPassword, ID_User} = req.body
+  console.log(OldPassword, NewPassword, ConfirmNewPassword, ID_User);
+  try{
+    const check_old_pass = await User.findOne({
+      where: {
+        id: ID_User
+      }
+    })
+    console.log(check_old_pass.Password);
+    const isValid = compareHash(OldPassword, check_old_pass.Password);
+    console.log(isValid);
+
+    if(!isValid){
+      return res.status(404).send("Old Password Not Match!");
+    }
+
+    if(NewPassword!== ConfirmNewPassword){
+      return res.status(400).send("New Password & Confirm Password Does Not Match!")
+    }
+
+    const response = await User.update({
+      Password: hashPassword(NewPassword),
+      updatedAt: new Date()
+    },{
+      where: {
+        id: ID_User
+      }
+    })
+
+    res.status(200).send("")
+  }
+  catch(error){
+    return res.status(500).send({ message: error.message });
+  }
+}

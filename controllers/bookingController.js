@@ -16,13 +16,19 @@ const Booking = db.booking
 const RequestTC = db.requestTruckingCompany
 
 module.exports.viewRequest = async (req, res) => {
-    const { ID_Customer } = req.body
+    const ID_Customer = req.params.id
+    const search = req.query.search
     try {
         // kurang buat ambil slot dan detail slot
         const request = await Request.findAll({
             attributes: ['No_Request', 'Qty', 'Vessel_Name', 'Port_Name', 'Terminal_Name', 'Service_Name', 'createdAt'],
             where: {
-                ID_Customer: ID_Customer
+                [Op.and]: [
+                    {ID_Customer: ID_Customer},
+                    {No_Request: db.sequelize.where(db.sequelize.fn('lower', db.sequelize.col("No_Request")), {
+                        [Op.like]: `%${search}%`
+                    })}
+                ]
             }
         })
 

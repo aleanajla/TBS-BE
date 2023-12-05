@@ -8,10 +8,14 @@ const STID = db.masterSTID
 
 module.exports.viewTruck = async (req, res) => {
     const ID_Customer = req.params.id
-    try {
+    const search = req.query.search
+    try{
         const dataTruck = await Truck.findAll({
             where: {
-                ID_Customer: ID_Customer
+                ID_Customer: ID_Customer,
+                Plat_Number: db.sequelize.where(db.sequelize.fn("lower",db.sequelize.col("Plat_Number")),{
+                    [Op.like]: `%${search}%`
+                })
             }
         });
 
@@ -24,10 +28,14 @@ module.exports.viewTruck = async (req, res) => {
 
 module.exports.viewDriver = async (req, res) => {
     const ID_Customer = req.params.id
-    try {
+    const search = req.query.search
+    try{
         const dataDriver = await Driver.findAll({
             where: {
-                ID_Customer: ID_Customer
+                ID_Customer: ID_Customer,
+                Driver_Name: db.sequelize.where(db.sequelize.fn("lower",db.sequelize.col("Driver_Name")),{
+                    [Op.like]: `%${search}%`
+                })
             }
         });
 
@@ -168,7 +176,9 @@ module.exports.searchDriver = async (req, res) => {
 
 module.exports.viewSTID = async (req, res) => {
     const ID_Customer = req.params.id
-    try {
+    const search = req.query.search
+
+    try{
         const result = await STID.findAll({
             attributes: ['id', 'STID_Number'],
             include: [
@@ -186,7 +196,12 @@ module.exports.viewSTID = async (req, res) => {
                         ID_Customer: ID_Customer
                     }
                 }
-            ]
+            ],
+            where: {
+                STID_Number: db.sequelize.where(db.sequelize.fn('lower', db.sequelize.col("STID_Number")), {
+                    [Op.like] : `%${search}%`
+                })
+            }
         })
         res.status(200).send(result)
     }
