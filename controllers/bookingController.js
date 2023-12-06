@@ -21,7 +21,7 @@ module.exports.viewRequest = async (req, res) => {
     try {
         // kurang buat ambil slot dan detail slot
         const request = await Request.findAll({
-            attributes: ['No_Request', 'Qty', 'Vessel_Name', 'Port_Name', 'Terminal_Name', 'Service_Name', 'createdAt'],
+            attributes: ['id','No_Request', 'Qty', 'Vessel_Name', 'Port_Name', 'Terminal_Name', 'Service_Name', 'createdAt'],
             where: {
                 [Op.and]: [
                     {ID_Customer: ID_Customer},
