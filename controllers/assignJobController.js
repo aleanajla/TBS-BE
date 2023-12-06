@@ -84,6 +84,21 @@ module.exports.acceptAssignJob = async (req, res) => {
     }
 }
 
+module.exports.viewRequestTruckingCompany = async ( req, res) => {
+    const id = req.params.id
+    try {
+        const view = await RequestTC.findOne({
+            where:{
+                id
+            }
+        })
+
+        res.status(200).send(view)
+    } catch (error) {
+        res.status(500).send({ message: error.message })
+    }
+}
+
 // Reject Job
 module.exports.rejectAssignJob = async (req, res) => {
     const id = req.params.id
