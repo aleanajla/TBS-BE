@@ -2,6 +2,7 @@ const db = require("../models");
 const { Op } = require('sequelize');
 const Trucking = db.masterCustomer
 const RequestTC = db.requestTruckingCompany
+const Status = db.masterStatus
 
 // view trucking company
 module.exports.viewTruckingCompany = async (req, res) => {
@@ -50,7 +51,6 @@ module.exports.createRequestTC = async (req, res) => {
             ID_Request
         })
 
-
         res.status(200).send(create)
     } catch (error) {
         res.status(500).send({ message: error.message })
@@ -88,12 +88,33 @@ module.exports.viewRequestTruckingCompany = async ( req, res) => {
     const id = req.params.id
     try {
         const view = await RequestTC.findOne({
+            attributes: ['id','ID_Status', 'ID_Request'],
             where:{
-                id
-            }
+                ID_Request : id
+            },
+            order: [['createdAt', 'DESC']],
+            limit: 1,
+            include: [
+                {
+                    model: Trucking,
+                    attributes: ['Company_Name']
+                },
+                {
+                    model: Status,
+                    attributes: ['Status_Name']
+                }
+            ]
         })
 
-        res.status(200).send(view)
+        const payload = {
+            id: view.id,
+            ID_Status: view.ID_Status,
+            ID_Request: view.ID_Request,
+            Customer_Name : view.masterCustomer.Company_Name,
+            Status_Name: view.masterStatus.Status_Name,
+        }
+
+        res.status(200).send(payload)
     } catch (error) {
         res.status(500).send({ message: error.message })
     }

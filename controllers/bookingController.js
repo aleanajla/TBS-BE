@@ -8,7 +8,7 @@ const Request = db.request
 // const Port = db.masterPort
 // const Terminal = db.masterTerminal
 const RequestContainer = db.requestContainer
-// const Container = db.masterContainer
+const Container = db.masterContainer
 const Trucking = db.masterCustomer
 const Slot = db.slot
 const detailSlot = db.detailSlot
@@ -21,7 +21,7 @@ module.exports.viewRequest = async (req, res) => {
     try {
         // kurang buat ambil slot dan detail slot
         const request = await Request.findAll({
-            attributes: ['id','No_Request', 'Qty', 'Vessel_Name', 'Port_Name', 'Terminal_Name', 'Service_Name', 'createdAt'],
+            attributes: ['id','No_Request', 'Qty', 'Vessel_Name', 'Port_Name', 'Terminal_Name', 'Service_Name', 'createdAt', 'Closing_Time'],
             where: {
                 [Op.and]: [
                     {ID_Customer: ID_Customer},
@@ -248,34 +248,21 @@ module.exports.searchRequest = async (req, res) => {
 // }
 
 // view container
-// module.exports.viewContainer = async (req, res) => {
-//     const { ID_User, ID_Request } = req.query
-//     try {
-//         const result = await RequestContainer.findAll({
-//             attributes: ['id'],
-//             include: [
-//                 {
-//                     model: Request,
-//                     where: {
-//                         [Op.and]: [
-//                             { ID_User: ID_User },
-//                             { id: ID_Request }
-//                         ]
-//                     },
-//                     attributes: []
-//                 },
-//                 {
-//                     model: Container,
-//                     attributes: ['Container_Number']
-//                 }
-//             ]
-//         })
-//         res.status(200).send(result)
-//     }
-//     catch (error) {
-//         res.status(500).send({ message: error.message })
-//     }
-// }
+module.exports.viewContainer = async (req, res) => {
+    const { ID_Request } = req.query
+    try {
+        const result = await RequestContainer.findAll({
+            attributes: ['id','Container_Number'],
+            where: {
+                ID_Request: ID_Request
+            }
+        })
+        res.status(200).send(result)
+    }
+    catch (error) {
+        res.status(500).send({ message: error.message })
+    }
+}
 
 // view port
 // module.exports.viewPort = async (req, res) => {
