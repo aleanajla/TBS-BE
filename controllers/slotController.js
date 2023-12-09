@@ -101,7 +101,7 @@ module.exports.viewSlot = async (req, res) => {
       include: [
         {
           model: detailSlot,
-          attributes: ["Start", "End", "Qty"],
+          attributes: ["Start", "End", "Qty", "Booking_Qty"],
         },
       ],
     });
