@@ -16,14 +16,12 @@ module.exports = {
           key: "id",
         },
       },
-      TBRCS: {
-        type: Sequelize.STRING
-      },
-      Combo: {
-        type: Sequelize.STRING
-      },
-      STID_Number: {
-        type: Sequelize.STRING
+      ID_STID: {
+        type: Sequelize.INTEGER,
+        references:{
+          model: "masterSTIDs",
+          key: "id"
+        }
       },
       createdAt: {
         allowNull: false,

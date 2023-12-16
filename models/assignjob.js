@@ -14,9 +14,7 @@ module.exports = (sequelize, DataTypes) => {
   assignJob.init(
     {
       ID_Booking: DataTypes.INTEGER,
-      TBRCS: DataTypes.STRING,
-      Combo: DataTypes.STRING,
-      STID_Number: DataTypes.STRING,
+      ID_STID: DataTypes.INTEGER
     },
     {
       sequelize,
@@ -25,7 +23,8 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   assignJob.associate = function (models) {
-    assignJob.belongsTo(models.booking, {foreignKey: "No_Booking", as: "job"})
+    assignJob.belongsTo(models.booking, {foreignKey: "ID_Booking"})
+    assignJob.belongsTo(models.masterSTID, {foreignKey: "ID_STID"})
   };
   return assignJob;
 };

@@ -4,6 +4,7 @@ const booking_router = require("./booking_router")
 const slot_router = require("./slot_router")
 const assignJob_router = require("./assignJob_router")
 const transportOrder_router = require("./transportOrder_router")
+const timeslot_router = require("./timeslot_router")
 
 module.exports = {
     user_router,
@@ -11,5 +12,6 @@ module.exports = {
     booking_router,
     slot_router,
     assignJob_router,
-    transportOrder_router
+    transportOrder_router,
+    timeslot_router
 }

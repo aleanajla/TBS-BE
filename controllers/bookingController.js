@@ -3,16 +3,10 @@ const db = require("../models");
 const { Op, where } = require('sequelize');
 
 const Request = db.request
-// const Vessel = db.masterVessel
-// const Service = db.masterService
-// const Port = db.masterPort
-// const Terminal = db.masterTerminal
 const RequestContainer = db.requestContainer
 const Container = db.masterContainer
 const Trucking = db.masterCustomer
 const Slot = db.slot
-const detailSlot = db.detailSlot
-const Booking = db.booking
 const RequestTC = db.requestTruckingCompany
 
 module.exports.viewRequest = async (req, res) => {
@@ -21,13 +15,15 @@ module.exports.viewRequest = async (req, res) => {
     try {
         // kurang buat ambil slot dan detail slot
         const request = await Request.findAll({
-            attributes: ['id','No_Request', 'Qty', 'Vessel_Name', 'Port_Name', 'Terminal_Name', 'Service_Name', 'createdAt', 'Closing_Time'],
+            attributes: ['id', 'No_Request', 'Qty', 'Vessel_Name', 'Port_Name', 'Terminal_Name', 'Service_Name', 'createdAt', 'Closing_Time'],
             where: {
                 [Op.and]: [
-                    {ID_Customer: ID_Customer},
-                    {No_Request: db.sequelize.where(db.sequelize.fn('lower', db.sequelize.col("No_Request")), {
-                        [Op.like]: `%${search}%`
-                    })}
+                    { ID_Customer: ID_Customer },
+                    {
+                        No_Request: db.sequelize.where(db.sequelize.fn('lower', db.sequelize.col("No_Request")), {
+                            [Op.like]: `%${search}%`
+                        })
+                    }
                 ]
             }
         })
@@ -252,7 +248,7 @@ module.exports.viewContainer = async (req, res) => {
     const { ID_Request } = req.query
     try {
         const result = await RequestContainer.findAll({
-            attributes: ['id','Container_Number'],
+            attributes: ['id', 'Container_Number'],
             where: {
                 ID_Request: ID_Request
             }
@@ -320,67 +316,4 @@ module.exports.viewContainer = async (req, res) => {
 //     }
 // }
 
-//new booking after jpt select TimeSlot
-// module.exports.newBooking = async (req, res) => {
-//     const { ID_Request_TC, ID_Detail_Slot } = req.body
-//     let flag = 0
-//     let No_Booking = null
-//     try {
-//         do {
-//             const generateBookingNo = () => {
-//                 const randomNumbers = Math.floor(100000 + Math.random() * 900000); // Generate 6 random digits
-//                 No_Booking = `BK${randomNumbers}`
-//                 return No_Booking;
-//             };
 
-//             const searchBookingNo = await Booking.findOne({
-//                 where: {
-//                     No_Booking: generateBookingNo()
-//                 }
-//             })
-//             console.log(No_Booking)
-
-//             if (!searchBookingNo) {
-//                 flag = 1;
-//                 break;
-//             }
-//         } while (flag == 1);
-
-//         const createBooking = await Booking.create({
-//             ID_Request_TC,
-//             ID_Detail_Slot,
-//             No_Booking
-//         })
-
-//         const updateDetailSlot = await detailSlot.decrement({
-//             Booking_Qty: 1
-//         }, {
-//             where: {
-//                 id: ID_Detail_Slot
-//             }
-//         })
-
-//     //     const updatedData = await Booking.findOne({
-//     //         attributes: ['id'],
-//     //         where: {
-//     //             No_Booking
-//     //         },
-//     //         include: [
-//     //             {
-//     //                 model: Booking
-//     //             },
-//     //             {
-//     //                 model: detailSlot
-//     //             },
-//     //             {
-//     //                 model: 
-//     //             }
-                
-//     //         ]
-//     // })
-
-//     res.status(200).send(updatedData)
-// } catch (error) {
-//     res.status(500).send({ message: error.message })
-// }
-// }

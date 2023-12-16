@@ -14,7 +14,7 @@ app.use("/api", router.booking_router)
 app.use("/api", router.slot_router)
 app.use("/api", router.assignJob_router)
 app.use("/api", router.transportOrder_router)
-// app.use("/api", router.)
+app.use("/api", router.timeslot_router)
 
 // console.log(app._router.stack)
 app.listen(port, () =>{

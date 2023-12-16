@@ -16,10 +16,8 @@ module.exports = (sequelize, DataTypes) => {
       //   foreignKey: "Customer_ID"
       // })
       // as: "mst_slot",
-      booking.belongsTo(models.slot, {
-        foreignKey: "ID_Detail_Slot"
-      });
       booking.belongsTo(models.requestTruckingCompany, { foreignKey: "ID_Request_TC" })
+      booking.belongsTo(models.requestContainer, {foreignKey: "ID_Request_Container"})
       booking.hasOne(models.assignJob, { foreignKey: "ID_Booking" });
       booking.hasOne(models.viewEtiket, { as: "ID_Booking" });
       booking.belongsTo(models.detailSlot, {foreignKey: "ID_Detail_Slot"})
@@ -31,7 +29,8 @@ module.exports = (sequelize, DataTypes) => {
       // Customer_ID: DataTypes.INTEGER,
       ID_Request_TC: DataTypes.INTEGER,
       ID_Detail_Slot: DataTypes.INTEGER,
-      No_Booking: DataTypes.STRING,
+      ID_Request_Container: DataTypes.INTEGER,
+      No_Booking: DataTypes.STRING
     },
     {
       sequelize,

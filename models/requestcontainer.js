@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       requestContainer.belongsTo(models.request, {foreignKey: "ID_Request"})
+      requestContainer.hasOne(models.booking, {foreignKey: "ID_Request_Container"})
     }
   }
   requestContainer.init({

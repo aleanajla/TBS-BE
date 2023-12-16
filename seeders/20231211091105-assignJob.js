@@ -3,8 +3,8 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    const detailSlot = require("../data/detailSlot.json");
-    detailSlot.forEach((e) => {
+    const assignJob = require("../data/assignJob.json");
+    assignJob.forEach((e) => {
       e.createdAt = new Date(),
       e.updatedAt = new Date();
     });
@@ -17,8 +17,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    await queryInterface.bulkInsert("detailSlots", detailSlot, {});
-    // await queryInterface.
+    await queryInterface.bulkInsert("assignJobs", assignJob, {});
   },
 
   async down (queryInterface, Sequelize) {
@@ -28,6 +27,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete("detailSlots", null, {});
+    await queryInterface.bulkDelete("assignJobs", null, {});
   }
 };

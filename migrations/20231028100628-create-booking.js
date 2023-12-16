@@ -37,6 +37,13 @@ module.exports = {
           key: "id",
         },
       },
+      ID_Request_Container:{
+        type: Sequelize.INTEGER,
+        references:{
+          model: "requestContainers",
+          key: "id"
+        },
+      },
       No_Booking: {
         type: Sequelize.STRING,
       },

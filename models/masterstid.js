@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       masterSTID.belongsTo(models.masterDriver, { foreignKey: "Driver_ID"})
       masterSTID.belongsTo(models.masterTruck, { foreignKey: "Truck_ID"})
+      masterSTID.hasMany(models.assignJob, {foreignKey: "ID_STID"})
     }
   }
   masterSTID.init({
