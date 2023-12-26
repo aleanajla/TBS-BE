@@ -1,6 +1,5 @@
 [
     {
-        "id":1,
         "ID_Customer" : "1",
         "Driver_Name": "Balidin Halim",
         "Driver_ID": "D0001",
@@ -8,7 +7,6 @@
         "SIM_Number": "1127-7346-000032"
     },
     {
-        "id":2,
         "ID_Customer" : "1",
         "Driver_Name": "Lasmanto Pratama",
         "Driver_ID": "D0002",
@@ -16,7 +14,6 @@
         "SIM_Number": "1348-1983-000345"
     },
     {
-        "id":3,
         "ID_Customer" : "1",
         "Driver_Name": "Laksana Firgantoro",
         "Driver_ID": "D0003",
@@ -24,7 +21,6 @@
         "SIM_Number": "2312-3412-000698"
     },
     {
-        "id":4,
         "ID_Customer" : "4",
         "Driver_Name": "Kawaca Utama",
         "Driver_ID": "D0004",
@@ -32,7 +28,6 @@
         "SIM_Number": "9832-3212-023287"
     },
     {
-        "id":5,
         "ID_Customer" : "4",
         "Driver_Name": "Mahfud Nainggolan",
         "Driver_ID": "D0005",
@@ -40,7 +35,6 @@
         "SIM_Number": "8123-2314-000128"
     },
     {
-        "id":6,
         "ID_Customer" : "8",
         "Driver_Name": "Umaya Gunarto",
         "Driver_ID": "D0006",
@@ -48,7 +42,6 @@
         "SIM_Number": "2391-3124-000432"
     },
     {
-        "id":7,
         "ID_Customer" : "8",
         "Driver_Name": "Manah Anggriawan",
         "Driver_ID": "D0007",

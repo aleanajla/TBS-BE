@@ -107,7 +107,7 @@ module.exports.viewRequestTruckingCompany = async (req, res) => {
             include: [
                 {
                     model: Trucking,
-                    attributes: ['Company_Name']
+                    attributes: ['id','Company_Name']
                 },
                 {
                     model: Status,
@@ -122,6 +122,7 @@ module.exports.viewRequestTruckingCompany = async (req, res) => {
             ID_Request: view.ID_Request,
             Customer_Name: view.masterCustomer.Company_Name,
             Status_Name: view.masterStatus.Status_Name,
+            ID_Trucking : view.masterCustomer.id
         }
 
         res.status(200).send(payload)
@@ -161,38 +162,42 @@ module.exports.rejectAssignJob = async (req, res) => {
 module.exports.tca = async (req, res) => {
     const { ID_Booking, ID_STID } = req.body
 
+    console.log(ID_Booking, ID_STID)
+
     try {
         const createTCA = await assignJob.create({
             ID_Booking,
-            ID_STID
+            ID_STID,
+            createdAt: new Date(),
+            updatedAt: new Date()
         })
 
-        const viewTCA = await assignJob.findOne({
-            attributes: ["id"],
-            where: {
-                ID_Booking
-            },
-            include: [
-                {
-                    model: Booking,
-                    attributes: ["No_Booking"],
-                },
-                {
-                    model: stid,
-                    attributes: ["STID_Number"],
-                    include: [
-                        {
-                            model: Driver,
-                            attributes: ["Driver_Name"]
-                        },
-                        {
-                            model: Truck,
-                            attributes: ["Plat_Number"]
-                        }
-                    ]
-                }
-            ]
-        });
+        // const viewTCA = await assignJob.findOne({
+        //     attributes: ["id"],
+        //     where: {
+        //         ID_Booking
+        //     },
+        //     include: [
+        //         {
+        //             model: Booking,
+        //             attributes: ["No_Booking"],
+        //         },
+        //         {
+        //             model: stid,
+        //             attributes: ["STID_Number"],
+        //             include: [
+        //                 {
+        //                     model: Driver,
+        //                     attributes: ["Driver_Name"]
+        //                 },
+        //                 {
+        //                     model: Truck,
+        //                     attributes: ["Plat_Number"]
+        //                 }
+        //             ]
+        //         }
+        //     ]
+        // });
     
         res.status(200).json("TCA Successfully Created");
     } catch (error) {

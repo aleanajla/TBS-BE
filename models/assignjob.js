@@ -8,7 +8,9 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      // assignJob.belongsTo(models.booking, {foreignKey: "No_Booking"})
+      assignJob.belongsTo(models.booking, {foreignKey: "ID_Booking"})
+      assignJob.belongsTo(models.masterSTID, {foreignKey: "ID_STID"})
     }
   }
   assignJob.init(
@@ -21,10 +23,5 @@ module.exports = (sequelize, DataTypes) => {
       modelName: "assignJob",
     }
   );
-
-  assignJob.associate = function (models) {
-    assignJob.belongsTo(models.booking, {foreignKey: "ID_Booking"})
-    assignJob.belongsTo(models.masterSTID, {foreignKey: "ID_STID"})
-  };
   return assignJob;
 };

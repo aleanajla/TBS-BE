@@ -39,9 +39,11 @@ const booking = db.booking;
 // };
 
 module.exports.addSlot = async (req, res) => {
-  let { ID_Terminal, startDate, endDate, detailTimeSlot } = req.body
+  let { ID_Terminal, startDate, endDate, detailTimeSlot, datafe } = req.body
   startDate = new Date(startDate)
   endDate = new Date(endDate)
+  data1.start
+  data1.end
   // console.log(ID_Terminal, date, Start, End, Qty);
   try {
     const totalDays = Math.floor((endDate - startDate) / (1000 * 60 * 60 * 24) + 1);
@@ -149,15 +151,10 @@ module.exports.viewSlot = async (req, res) => {
       include: [
         {
           model: detailSlot,
-          attributes: ["Start", "End", "Qty", "Booking_Qty"],
+          attributes: ["id","Start", "End", "Qty", "Booking_Qty"],
         },
       ],
     });
-    // const viewSlot = await detailSlot.findAll({
-    //     where: {
-    //         ID_Slot
-    //     }
-    // });
 
     res.status(200).send(response);
   } catch (error) {

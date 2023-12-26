@@ -1,66 +1,95 @@
 const { setDefaultHighWaterMark } = require("nodemailer/lib/xoauth2");
 const db = require("../models");
-const { Op, where } = require('sequelize');
+const { Op, where, Model } = require("sequelize");
 
-const Request = db.request
-const RequestContainer = db.requestContainer
-const Container = db.masterContainer
-const Trucking = db.masterCustomer
-const Slot = db.slot
-const RequestTC = db.requestTruckingCompany
+const Request = db.request;
+// const Vessel = db.masterVessel
+// const Service = db.masterService
+// const Port = db.masterPort
+// const Terminal = db.masterTerminal
+const RequestContainer = db.requestContainer;
+const Container = db.masterContainer;
+const Trucking = db.masterCustomer;
+const Slot = db.slot;
+const detailSlot = db.detailSlot;
+const Booking = db.booking;
+const RequestTC = db.requestTruckingCompany;
+const assignJob = db.assignJob;
+const STID = db.masterSTID;
 
 module.exports.viewRequest = async (req, res) => {
-    const ID_Customer = req.params.id
-    const search = req.query.search
-    try {
-        // kurang buat ambil slot dan detail slot
-        const request = await Request.findAll({
-            attributes: ['id', 'No_Request', 'Qty', 'Vessel_Name', 'Port_Name', 'Terminal_Name', 'Service_Name', 'createdAt', 'Closing_Time'],
-            where: {
-                [Op.and]: [
-                    { ID_Customer: ID_Customer },
-                    {
-                        No_Request: db.sequelize.where(db.sequelize.fn('lower', db.sequelize.col("No_Request")), {
-                            [Op.like]: `%${search}%`
-                        })
-                    }
-                ]
-            }
-        })
+  const ID_Customer = req.params.id;
+  const search = req.query.search;
+  try {
+    // kurang buat ambil slot dan detail slot
+    const request = await Request.findAll({
+      attributes: [
+        "id",
+        "No_Request",
+        "Qty",
+        "Vessel_Name",
+        "Port_Name",
+        "Terminal_Name",
+        "Service_Name",
+        "createdAt",
+        "Closing_Time",
+      ],
+      where: {
+        [Op.and]: [
+          { ID_Customer: ID_Customer },
+          {
+            No_Request: db.sequelize.where(
+              db.sequelize.fn("lower", db.sequelize.col("No_Request")),
+              {
+                [Op.like]: `%${search}%`,
+              }
+            ),
+          },
+        ],
+      },
+    });
 
-        res.status(200).send(request)
-    }
-    catch (error) {
-        console.log(error);
-        res.status(500).send({ message: error.message })
-    }
-}
-
+    res.status(200).send(request);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: error.message });
+  }
+};
 
 module.exports.searchRequest = async (req, res) => {
-    const { search, ID_Customer } = req.query
-    try {
-        const result = await Request.findAll({
-            attributes: ['No_Request', 'Qty', 'Vessel_Name', 'Port_Name', 'Terminal_Name', 'Service_Name', 'createdAt'],
-            where: {
-                [Op.and]: [
-                    { ID_Customer: ID_Customer },
-                    {
-                        No_Request: db.sequelize.where(db.sequelize.fn('lower', db.sequelize.col("No_Request")), {
-                            [Op.like]: `%${search}%`
-                        })
-                    }
-                ]
-            }
-        })
-        console.log(result);
-        res.status(200).send(result)
-    }
-    catch (error) {
-        console.log(error);
-        res.status(500).send({ message: error.message })
-    }
-}
+  const { search, ID_Customer } = req.query;
+  try {
+    const result = await Request.findAll({
+      attributes: [
+        "No_Request",
+        "Qty",
+        "Vessel_Name",
+        "Port_Name",
+        "Terminal_Name",
+        "Service_Name",
+        "createdAt",
+      ],
+      where: {
+        [Op.and]: [
+          { ID_Customer: ID_Customer },
+          {
+            No_Request: db.sequelize.where(
+              db.sequelize.fn("lower", db.sequelize.col("No_Request")),
+              {
+                [Op.like]: `%${search}%`,
+              }
+            ),
+          },
+        ],
+      },
+    });
+    console.log(result);
+    res.status(200).send(result);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: error.message });
+  }
+};
 
 // search by vessel
 // module.exports.filterVessel = async (req, res) => {
@@ -245,20 +274,80 @@ module.exports.searchRequest = async (req, res) => {
 
 // view container
 module.exports.viewContainer = async (req, res) => {
-    const { ID_Request } = req.query
-    try {
-        const result = await RequestContainer.findAll({
-            attributes: ['id', 'Container_Number'],
-            where: {
-                ID_Request: ID_Request
-            }
-        })
-        res.status(200).send(result)
-    }
-    catch (error) {
-        res.status(500).send({ message: error.message })
-    }
-}
+  const { ID_Request } = req.query;
+  console.log(ID_Request, "id request");
+  try {
+    const resultContainer = await RequestContainer.findAll({
+      attributes: ["id", "Container_Number"],
+      where: {
+        ID_Request: ID_Request,
+      },
+    });
+
+    const resultBooking = await Booking.findAll({
+      attributes: ["id"],
+      include: [
+        {
+          model: RequestContainer,
+          attributes: ["Container_Number"],
+          where: {
+            ID_Request: ID_Request,
+          },
+        },
+        {
+          model: detailSlot,
+          attributes: ["Start", "End"],
+        },
+      ],
+    });
+
+    let mergedData = []
+
+    resultContainer.forEach((container) => {
+      let bookingData = resultBooking.find(booking => container.Container_Number === booking.requestContainer.Container_Number)
+      if(bookingData){
+        mergedData.push(bookingData)
+      } else {
+        mergedData.push(container)
+      }
+      
+    })
+    
+    let result = {
+      mergedData,
+    };
+
+    res.status(200).send(result);
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
+};
+
+module.exports.viewBooking = async (req, res) => {
+  const { ID_Request } = req.query;
+  try {
+    const result = await Booking.findAll({
+      attributes: ["id"],
+      include: [
+        {
+          model: RequestContainer,
+          attributes: ["Container_Number"],
+          where: {
+            ID_Request: ID_Request,
+          },
+        },
+        {
+          model: detailSlot,
+          attributes: ["Start", "End"],
+        },
+      ],
+    });
+
+    res.status(200).send(result);
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
+};
 
 // view port
 // module.exports.viewPort = async (req, res) => {
@@ -316,4 +405,74 @@ module.exports.viewContainer = async (req, res) => {
 //     }
 // }
 
+//new booking after jpt select TimeSlot
+module.exports.newBooking = async (req, res) => {
+  const { ID_Request_Container, ID_Request_TC, ID_Detail_Slot } = req.body;
+  console.log(ID_Request_Container, ID_Request_TC, ID_Detail_Slot);
+  let flag = 0;
+  let No_Booking = null;
+  try {
+    do {
+      const generateBookingNo = () => {
+        const randomNumbers = Math.floor(100000 + Math.random() * 900000); // Generate 6 random digits
+        No_Booking = `BK${randomNumbers}`;
+        return No_Booking;
+      };
 
+      const searchBookingNo = await Booking.findOne({
+        where: {
+          No_Booking: generateBookingNo(),
+        },
+      });
+      console.log(No_Booking);
+
+      if (!searchBookingNo) {
+        flag = 1;
+        break;
+      }
+    } while (flag == 1);
+
+    const createBooking = await Booking.create({
+      ID_Request_TC,
+      ID_Detail_Slot,
+      ID_Request_Container,
+      No_Booking,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
+
+    const updateDetailSlot = await detailSlot.increment(
+      {
+        Booking_Qty: 1,
+      },
+      {
+        attributes: [],
+        where: {
+          id: ID_Detail_Slot,
+        },
+      }
+    );
+
+    const viewBooking = await Booking.findOne({
+      attributes: [],
+      where: {
+        No_Booking,
+      },
+      include: [
+        {
+          model: detailSlot,
+          attributes: ["Start", "End"],
+        },
+      ],
+    });
+
+    // const payload = {
+    //   Start: viewBooking.Start,
+    //   End: viewBooking.End,
+    // };
+
+    res.status(200).send(viewBooking);
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
+};

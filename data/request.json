@@ -1,6 +1,5 @@
 [
     {
-        "id": 1,
         "ID_Customer" : 2,
         "No_Request": "REC00000001",
         "Vessel_Name": "THEMAS LINE",
@@ -15,7 +14,6 @@
         "Closing_Time" : "2024-03-28 10:00:00.000"
     },
     {
-        "id": 2,
         "ID_Customer": 2,
         "No_Request": "REC00000002",
         "Vessel_Name": "THEMAS LINE",
@@ -30,7 +28,6 @@
         "Closing_Time" : "2024-03-28 10:00:00.000"
     },
     {
-        "id": 3,
         "ID_Customer" : 3,
         "No_Request": "DEL00000001",
         "Vessel_Name": "Evergreen Marine Company",
@@ -45,7 +42,6 @@
         "Closing_Time" : "2024-02-14 12:00:00.000"
     },
     {
-        "id": 4,
         "ID_Customer" : 3,
         "No_Request": "DEL00000002",
         "Vessel_Name": "Evergreen Marine Company",

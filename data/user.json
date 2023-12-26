@@ -1,6 +1,5 @@
 [
     {
-        "id":1,
         "Role_ID": 2,
         "Customer_ID": 1,
         "Username": "andre_p",
@@ -10,7 +9,6 @@
         "Email": "andre_putra@gmail.com"
     },
     {
-        "id":2,
         "Role_ID": 1,
         "Customer_ID": 2,
         "Username": "kamal_budiman",
@@ -20,7 +18,6 @@
         "Email": "kamal_budiman@gmail.com"
     },
     {
-        "id":3,
         "Role_ID": 1,
         "Customer_ID": 3,
         "Username": "martani_sirait",
@@ -30,7 +27,6 @@
         "Email": "martani_sirait@gmail.com"
     },
     {
-        "id":4,
         "Role_ID": 2,
         "Customer_ID": 4,
         "Username": "lanjar_parnowo",
@@ -40,7 +36,6 @@
         "Email": "lanjar_pranowo@gmail.com"
     },
     {
-        "id":5,
         "Role_ID": 1,
         "Customer_ID": 5,
         "Username": "raditya_ardianto",
@@ -50,7 +45,6 @@
         "Email": "raditya_ardianto@gmail.com"
     },
     {
-        "id":6,
         "Role_ID": 1,
         "Customer_ID": 6,
         "Username": "ikin_ramadan",
@@ -60,7 +54,6 @@
         "Email": "ikin_ramadan@gmail.com"
     },
     {
-        "id":7,
         "Role_ID": 1,
         "Customer_ID": 7,
         "Username": "daliono_mandala",
@@ -68,8 +61,8 @@
         "Password": "Daliono123",
         "Phone_Number": "081212987643",
         "Email": "daliono_mandala@gmail.com"
-    },{
-        "id":8,
+    },
+    {
         "Role_ID": 2,
         "Customer_ID": 8,
         "Username": "usman_widodo",
@@ -79,7 +72,6 @@
         "Email": "usman_widodo@gmail.com"
     },
     {
-        "id":9,
         "Role_ID": 2,
         "Customer_ID": 9,
         "Username": "kacung_permadi",
@@ -89,7 +81,6 @@
         "Email": "kacung_permadi@gmail.com"
     },
     {
-        "id":10,
         "Role_ID": 2,
         "Customer_ID": 10,
         "Username": "mulyono_nababan",
@@ -99,7 +90,6 @@
         "Email": "mulyono_nababan@gmail.com"
     },
     {
-        "id":11,
         "Role_ID": 2,
         "Customer_ID": 11,
         "Username": "koko_tamba",
@@ -109,7 +99,6 @@
         "Email": "koko_tamba@gmail.com"
     },
     {
-        "id":12,
         "Role_ID": 1,
         "Customer_ID": 12,
         "Username": "karman_budiyanto",
@@ -119,7 +108,6 @@
         "Email": "karman_budiyanto@gmail.com"
     },
     {
-        "id":13,
         "Role_ID": 1,
         "Customer_ID": 13,
         "Username": "wisnu_mansur",
@@ -129,7 +117,6 @@
         "Email": "wisnu_mansur@gmail.com"
     },
     {
-        "id":14,
         "Role_ID": 1,
         "Customer_ID": 14,
         "Username": "cahyono_wijaya",
@@ -139,7 +126,6 @@
         "Email": "cahyono_wijaya@gmail.com"
     },
     {
-        "id":15,
         "Role_ID": 1,
         "Customer_ID": 14,
         "Username": "wira_wibisono",
@@ -149,7 +135,6 @@
         "Email": "wira_wibisono@gmail.com"
     },
     {
-        "id":16,
         "Role_ID": 3,
         "Customer_ID": 16,
         "Username": "TPK_Koja",
@@ -158,5 +143,4 @@
         "Phone_Number": "0214374142",
         "Email": "tpk_koja@gmail.com"
     }
-    
 ]

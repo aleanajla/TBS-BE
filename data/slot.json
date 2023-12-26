@@ -1,26 +1,21 @@
 [
     {
-        "id": 1,
         "ID_Terminal": 1,
         "Date": "2023-12-08"
     },
     {
-        "id": 2,
         "ID_Terminal": 1,
         "Date": "2023-12-09"
     },
     {
-        "id": 3,
         "ID_Terminal": 1,
         "Date": "2023-12-10"
     },
     {
-        "id": 4,
         "ID_Terminal": 1,
         "Date": "2023-12-11"
     },
     {
-        "id": 5,
         "ID_Terminal": 1,
         "Date": "2023-12-12"
     }

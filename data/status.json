@@ -1,14 +1,11 @@
 [
     {
-        "id": 1,
         "Status_Name": "Waiting Approval"
     },
     {
-        "id": 2,
         "Status_Name": "Approved"
     },
     {
-        "id": 3,
         "Status_Name": "Rejected"
     }
 ]
