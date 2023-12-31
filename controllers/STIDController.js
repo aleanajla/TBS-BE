@@ -248,6 +248,7 @@ module.exports.editSTID = async (req, res) => {
         res.status(200).send(updatedData);
     }
     catch (error) {
+        console.log(error);
         res.status(500).send({ message: error.message })
     }
 }
@@ -261,7 +262,7 @@ module.exports.deleteSTID = async (req, res) => {
                 id
             }
         })
-        console.log(remove);
+        console.log(remove, "remove");
         res.status(200).send("Successfully Deleted")
     }
     catch (error) {

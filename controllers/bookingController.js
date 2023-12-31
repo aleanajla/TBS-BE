@@ -1,6 +1,6 @@
 const { setDefaultHighWaterMark } = require("nodemailer/lib/xoauth2");
 const db = require("../models");
-const { Op, where, Model } = require("sequelize");
+const { Op, where, Model, Sequelize } = require("sequelize");
 
 const Request = db.request;
 // const Vessel = db.masterVessel
@@ -16,6 +16,7 @@ const Booking = db.booking;
 const RequestTC = db.requestTruckingCompany;
 const assignJob = db.assignJob;
 const STID = db.masterSTID;
+const Driver = db.masterDriver;
 
 module.exports.viewRequest = async (req, res) => {
   const ID_Customer = req.params.id;
@@ -297,24 +298,92 @@ module.exports.viewContainer = async (req, res) => {
         {
           model: detailSlot,
           attributes: ["Start", "End"],
+          include: [
+            {
+              model: Slot,
+              attributes: ["Date"]
+            }
+          ]
         },
       ],
     });
 
-    let mergedData = []
+    const resultAssign = await Booking.findAll({
+      attributes: ["id"],
+      include: [
+        {
+          model: RequestContainer,
+          attributes: ["Container_Number"],
+          where: {
+            ID_Request: ID_Request,
+          },
+        },
+        {
+          model: detailSlot,
+          attributes: ["Start", "End"],
+          include: [
+            {
+              model: Slot,
+              attributes: ["Date"]
+            }
+          ]
+        },
+        {
+          model: assignJob,
+          attributes: ["id"],
+          where: {
+            id: {
+              [Sequelize.Op.ne]: null
+            }
+          },
+          include: [
+            {
+              model: STID,
+              attributes: ["STID_Number"],
+              include: [
+                {
+                  model: Driver,
+                  attributes: ["Driver_Name"]
+                }
+              ] 
+            }
+          ]
+        }
+      ],
+    });
+
+    let mergedData = [];
 
     resultContainer.forEach((container) => {
-      let bookingData = resultBooking.find(booking => container.Container_Number === booking.requestContainer.Container_Number)
-      if(bookingData){
-        mergedData.push(bookingData)
+      let bookingData = resultBooking.find(
+        (booking) =>
+          container.Container_Number ===
+          booking.requestContainer.Container_Number
+      );
+      let assignJobData = resultAssign.find(
+        (assignJob) =>
+          container.Container_Number ===
+          assignJob.requestContainer.Container_Number
+      );
+
+      if (assignJobData) {
+        mergedData.push(assignJobData);
+      } else if (bookingData) {
+        mergedData.push(bookingData);
       } else {
-        mergedData.push(container)
+        mergedData.push(container);
       }
-      
-    })
-    
+
+      // if (bookingData) {
+      //   mergedData.push(bookingData);
+      // } else {
+      //   mergedData.push(container);
+      // }
+    });
+
     let result = {
       mergedData,
+      // resultAssign
     };
 
     res.status(200).send(result);

@@ -6,57 +6,28 @@ const Slot = db.slot;
 const detailSlot = db.detailSlot;
 const booking = db.booking;
 
-// module.exports.addSlot = async (req, res) => {
-//   const { ID_Terminal, date, Start, End, Qty } = req.body;
-//   console.log(ID_Terminal, date, Start, End, Qty);
-//   try {
-//     const createSlot = await Slot.create({
-//       ID_Terminal: ID_Terminal,
-//       Date: date,
-//       createdAt: new Date(),
-//       updatedAt: new Date(),
-//     });
-
-//     console.log(createSlot.id);
-
-//     const createDetailSlot = await detailSlot.create(
-//       {
-//         ID_Slot: createSlot.id,
-//         Start: Start,
-//         End: End,
-//         Qty: Qty,
-//         Booking_Qty: null,
-//         createdAt: new Date(),
-//         updatedAt: new Date(),
-//       },
-//       { field: ["Start", "End", "Qty"] }
-//     );
-
-//     res.status(200).send({ createSlot, createDetailSlot });
-//   } catch (error) {
-//     res.status(500).send({ message: error.message });
-//   }
-// };
-
 module.exports.addSlot = async (req, res) => {
-  let { ID_Terminal, startDate, endDate, detailTimeSlot, datafe } = req.body
+  let { ID_Terminal, startDate, endDate, from, to, capacity} = req.body
   startDate = new Date(startDate)
   endDate = new Date(endDate)
-  data1.start
-  data1.end
+  console.log(startDate, endDate);
   // console.log(ID_Terminal, date, Start, End, Qty);
+
   try {
     const totalDays = Math.floor((endDate - startDate) / (1000 * 60 * 60 * 24) + 1);
     const slotList = [...new Array(totalDays).keys()].map((value) => ({ ID_Terminal, Date: new Date(startDate).setDate(startDate.getDate() + value) }))
 
     const createSlot = await Slot.bulkCreate(slotList);
 
-    console.log(createSlot.map((value) => value.id));
-    console.log(detailTimeSlot)
+    // console.log(createSlot.map((value) => value.id));
+    // console.log(detailTimeSlot)
 
-    detailTimeSlot = createSlot.flatMap((value) =>
-      detailTimeSlot.map((timeslot) => ({ ID_Slot: value.id, ...timeslot }))
-    )
+    const detailTimeSlot = createSlot.flatMap((value) => ({
+      ID_Slot: value.id,
+      Start: from,
+      End: to,
+      Qty: capacity
+    }))
     console.log(detailTimeSlot)
     const createDetailSlot = await detailSlot.bulkCreate(detailTimeSlot);
 

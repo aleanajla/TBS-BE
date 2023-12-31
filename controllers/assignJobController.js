@@ -96,6 +96,7 @@ module.exports.acceptAssignJob = async (req, res) => {
 
 module.exports.viewRequestTruckingCompany = async (req, res) => {
     const id = req.params.id
+    console.log(id,"id");
     try {
         const view = await RequestTC.findOne({
             attributes: ['id', 'ID_Status', 'ID_Request'],
