@@ -1,4 +1,4 @@
-const { viewRequestTP, viewCancelledTP, viewOnGoingTP, viewCompletedTP, countingRequest, countingCompleted, countingRejected, countingOnGoing } = require("../controllers/transportOrderController");
+const { viewRequestTP, viewCancelledTP, viewOnGoingTP, viewCompletedTP, countingRequest, countingCompleted, countingRejected, countingOnGoing, countingTCA} = require("../controllers/transportOrderController");
 
 const router = require("express").Router();
 
@@ -10,5 +10,7 @@ router.get('/users/view/countingRequest/:id', countingRequest)
 router.get('/users/view/countingRejected/:id', countingRejected)
 router.get('/users/view/countingOnGoing/:id', countingOnGoing)
 router.get('/users/view/countingCompleted/:id', countingCompleted)
+router.get('/users/view/countingTCA/:id', countingTCA)
+
 
 module.exports = router

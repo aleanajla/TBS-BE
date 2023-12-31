@@ -13,6 +13,7 @@ const Slot = db.slot
 const RequestContainer = db.requestContainer
 const Request = db.request
 const Customer = db.masterCustomer
+const qrcode = require('qrcode');
 
 // view trucking company
 module.exports.viewTruckingCompany = async (req, res) => {
@@ -173,33 +174,33 @@ module.exports.tca = async (req, res) => {
             updatedAt: new Date()
         })
 
-        // const viewTCA = await assignJob.findOne({
-        //     attributes: ["id"],
-        //     where: {
-        //         ID_Booking
-        //     },
-        //     include: [
-        //         {
-        //             model: Booking,
-        //             attributes: ["No_Booking"],
-        //         },
-        //         {
-        //             model: stid,
-        //             attributes: ["STID_Number"],
-        //             include: [
-        //                 {
-        //                     model: Driver,
-        //                     attributes: ["Driver_Name"]
-        //                 },
-        //                 {
-        //                     model: Truck,
-        //                     attributes: ["Plat_Number"]
-        //                 }
-        //             ]
-        //         }
-        //     ]
-        // });
-    
+        const viewTCA = await assignJob.findOne({
+            attributes: ["id"],
+            where: {
+                ID_Booking
+            },
+            include: [
+                {
+                    model: Booking,
+                    attributes: ["No_Booking"],
+                },
+                {
+                    model: stid,
+                    attributes: ["STID_Number"],
+                    include: [
+                        {
+                            model: Driver,
+                            attributes: ["Driver_Name"]
+                        },
+                        {
+                            model: Truck,
+                            attributes: ["Plat_Number"]
+                        }
+                    ]
+                }
+            ]
+        });
+
         res.status(200).json("TCA Successfully Created");
     } catch (error) {
         res.status(500).send({ message: error.message })
@@ -209,39 +210,39 @@ module.exports.tca = async (req, res) => {
 
 // view e-ticket
 
-module.exports.viewTicket = async (req, res)=>{
+module.exports.viewTicket = async (req, res) => {
     const id = req.params.id
 
     try {
         const viewData = await assignJob.findOne({
-            where:{
-                ID_Booking : id
+            where: {
+                ID_Booking: id
             },
-            include : [
+            include: [
                 {
-                    model : Booking,
-                    attributes : ["No_Booking"],
-                    include : [
+                    model: Booking,
+                    attributes: ["No_Booking"],
+                    include: [
                         {
-                            model : DetailSlot,
-                            attributes : ["Start", "End"],
-                            include : [
+                            model: DetailSlot,
+                            attributes: ["Start", "End"],
+                            include: [
                                 {
-                                    model : Slot,
-                                    attributes : ["Date"]
+                                    model: Slot,
+                                    attributes: ["Date"]
                                 }
                             ]
                         },
                         {
-                            model : RequestContainer,
-                            attributes : ["Container_Number", "Container_Type", "Container_Size", "OD", "Weight", "Sling"],
-                            include : [
+                            model: RequestContainer,
+                            attributes: ["Container_Number", "Container_Type", "Container_Size", "OD", "Weight", "Sling"],
+                            include: [
                                 {
-                                    model : Request,
-                                    include : [
+                                    model: Request,
+                                    include: [
                                         {
-                                            model : Customer,
-                                            attributes : ["Company_Name"]
+                                            model: Customer,
+                                            attributes: ["Company_Name"]
                                         }
                                     ]
                                 }
@@ -259,3 +260,16 @@ module.exports.viewTicket = async (req, res)=>{
     }
 }
 
+module.exports.generateQr = async (req, res)=>{
+    try {
+        const data = 'hello world'
+        const dataString = JSON.stringify(data);
+
+        const qrCodeDataURL = await qrcode.toDataURL(dataString);
+
+        res.send(qrCodeDataURL);
+    } catch (error) {
+        console.error('Error generating QR code:', error);
+        res.status(500).send('Internal Server Error');
+    }
+}

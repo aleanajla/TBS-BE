@@ -1,9 +1,13 @@
 const db = require("../models");
-const { Op } = require("sequelize");
+const { Op, Sequelize } = require("sequelize");
 
 const Request = db.request;
 const Vessel = db.masterVessel;
 const RequestTC = db.requestTruckingCompany;
+const assignJob = db.assignJob
+const Booking = db.booking
+const requestContainer = db.requestContainer
+
 
 // view request
 module.exports.viewRequestTP = async (req, res) => {
@@ -290,3 +294,25 @@ module.exports.filterJPT = async (req, res) => {
     res.status(500).send({ message: error.message });
   }
 };
+
+module.exports.countingTCA = async (req, res) => {
+  const ID_Request = req.params.id;
+
+  try {
+    const result = await db.sequelize.query(
+      'SELECT COUNT(*) FROM "assignJobs" aj ' +
+      'JOIN "bookings" b ON aj."ID_Booking" = b."id" ' +
+      'JOIN "requestContainers" rc ON rc."id" = b."ID_Request_Container" ' +
+      'WHERE rc."ID_Request" = :requestId',
+      {
+        replacements: { requestId: ID_Request }, 
+        type: db.sequelize.QueryTypes.SELECT,
+      }
+    );
+    
+    const count = result[0].count; 
+    res.status(200).send({totalTCA: count});
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
+}
