@@ -23,6 +23,7 @@ module.exports.signUp = async (req, res) => {
     Role_ID,
   } = req.body;
   try {
+    
     // check username is unique
     const check_username = await User.findOne({
       where: {
@@ -74,18 +75,6 @@ module.exports.signUp = async (req, res) => {
       updatedAt:new Date()
     })
 
-    // const user = await User.create({
-    //   Role_ID: Role_ID,
-    //   Customer_ID: 2,
-    //   Username: Username,
-    //   Name: Name,
-    //   Password: hashPassword(Password),
-    //   Phone_Number: Phone_Number,
-    //   Email: Email,
-    //   createdAt: new Date(),
-    //   updatedAt: new Date()
-    // });
-
     res.status(200).send(createUser);
   } catch (error) {
     res.status(500).send({ message: error.message });
@@ -108,7 +97,7 @@ module.exports.login = async (req, res) => {
     // if user existed, validate password
     const isValid = compareHash(Password, check_user.Password);
     if (!isValid) {
-      return res.status(404).send("Invalid Password", check_user.password);
+      return res.status(404).send("Invalid Password");
     }
 
     const dataToken = {

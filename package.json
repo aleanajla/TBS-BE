@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon",
+    "start": "node",
+    "dev": "nodemon",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -26,6 +27,7 @@
     "jsonwebtoken": "^9.0.2",
     "nodemailer": "^6.9.7",
     "pg": "^8.11.3",
+    "qrcode": "^1.5.3",
     "sequelize": "^6.35.0"
   },
   "devDependencies": {

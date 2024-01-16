@@ -5,8 +5,6 @@ const { Op, where } = require('sequelize');
 const Booking = db.booking
 const detailSlot = db.detailSlot
 
-
-//new booking after jpt select TimeSlot
 module.exports.newBooking = async (req, res) => {
     const { ID_Request_Container, ID_Request_TC, ID_Detail_Slot } = req.body
     let flag = 0
@@ -54,22 +52,46 @@ module.exports.newBooking = async (req, res) => {
 }
 
 // Edit Timeslot
-// module.exports.newBooking = async (req, res) => {
-//     const { ID_Booking, Old_Timeslot, New_Timeslot } = req.body
-//     let flag = 0
-//     let No_Booking = null
-//     try {
+module.exports.editTimeslot = async (req, res) => {
+    const { ID_Booking, New_Timeslot } = req.body
+    console.log(ID_Booking, "ID Booking")
+    console.log(New_Timeslot, "New Time Slot")
+    try {
 
-//         const updateNewDetailSlot = await detailSlot.increment({
-//             Booking_Qty: 1
-//         }, {
-//             where: {
-//                 id: New_Timeslot
-//             }
-//         })
+        const findOldTimeslot = await Booking.findOne({
+            attributes: ['ID_Detail_Slot'],
+            where: { id: ID_Booking }
+        });
+        
+        const oldTimeslot = findOldTimeslot ? findOldTimeslot.dataValues.ID_Detail_Slot : null;
+        console.log(oldTimeslot);
 
-//         res.status(200).send("Booking Successfully created!")
-//     } catch (error) {
-//         res.status(500).send({ message: error.message })
-//     }
-// }
+        const updateOldTimeslot = await detailSlot.decrement({
+            Booking_Qty: 1
+        }, {
+            where:{
+                id: oldTimeslot
+            }
+        })
+
+        const updateNewDetailSlot = await detailSlot.increment({
+            Booking_Qty: 1
+        }, {
+            where: {
+                id: New_Timeslot
+            }
+        })
+
+        const updateTimeslot = await Booking.update({
+            ID_Detail_Slot : New_Timeslot
+        }, {
+            where : {
+                id : ID_Booking
+            }
+        })
+
+        res.status(200).send("Timeslot Successfully Updated!")
+    } catch (error) {
+        res.status(500).send({ message: error.message })
+    }
+}

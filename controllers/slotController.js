@@ -7,67 +7,191 @@ const detailSlot = db.detailSlot;
 const booking = db.booking;
 
 module.exports.addSlot = async (req, res) => {
-  let { ID_Terminal, startDate, endDate, from, to, capacity} = req.body
-  startDate = new Date(startDate)
-  endDate = new Date(endDate)
-  console.log(startDate, endDate);
-  // console.log(ID_Terminal, date, Start, End, Qty);
+  let { ID_Terminal, startDate, endDate, from, to, capacity } = req.body;
+  startDate = new Date(startDate);
+  endDate = new Date(endDate);
 
   try {
-    const totalDays = Math.floor((endDate - startDate) / (1000 * 60 * 60 * 24) + 1);
-    const slotList = [...new Array(totalDays).keys()].map((value) => ({ ID_Terminal, Date: new Date(startDate).setDate(startDate.getDate() + value) }))
+    const totalDays = Math.floor(
+      (endDate - startDate) / (1000 * 60 * 60 * 24) + 1
+    );
+    console.log(totalDays, "Total Days");
+    const slotList = [...new Array(totalDays).keys()]
+      .map((value) => ({
+        ID_Terminal,
+        Date: new Date(startDate).setDate(startDate.getDate() + value + 1),
+      }))
+      .map((slot) => ({
+        ...slot,
+        Date: new Date(slot.Date).toISOString().split("T")[0],
+      }));
+    console.log(slotList, "Slot List");
 
-    const createSlot = await Slot.bulkCreate(slotList);
+    // Check if slots already exist in the database
+    const existingSlots = await Slot.findAll({
+      where: {
+        ID_Terminal,
+        Date: slotList.map((slot) => slot.Date),
+      },
+    });
 
-    // console.log(createSlot.map((value) => value.id));
-    // console.log(detailTimeSlot)
+    if (existingSlots) {
+      console.log(existingSlots, "Existing Slots");
+    }
 
-    const detailTimeSlot = createSlot.flatMap((value) => ({
+    const listCreateSlot = [];
+
+    slotList.forEach((slot) => {
+      let matchDate = existingSlots.find((i) => slot.Date === i.Date);
+      if (!matchDate) {
+        listCreateSlot.push(slot);
+      }
+    });
+
+    console.log(listCreateSlot, "List Create Slot");
+
+    const createSlot = await Slot.bulkCreate(listCreateSlot);
+    console.log(createSlot, "Create Slot");
+
+    const detailTimeSlot = [];
+
+    if (existingSlots) {
+      const existingDetailSlot = await detailSlot.findAll({
+        where: {
+          ID_Slot: existingSlots.map((slot) => slot.id),
+        },
+      });
+      if (existingDetailSlot) {
+        existingSlots.flatMap((value) => {
+          const dataValue = {
+            ID_Slot: value.id,
+            Start: from,
+            End: to,
+            Qty: capacity,
+            Booking_Qty: 0,
+          };
+
+          const DataDetailSlot = existingDetailSlot.find((slots) => {
+            const [startHour, startMinutes] = slots.Start.split(":");
+            const [endHour, endMinutes] = slots.End.split(":");
+            if (value.id === slots.ID_Slot) {
+              return (
+                `${startHour}:${startMinutes}` == from &&
+                `${endHour}:${endMinutes}` == to
+              );
+            } else {
+              return null;
+            }
+          });
+          console.log(DataDetailSlot, "Data Detail Slot");
+          if (!DataDetailSlot) {
+            detailTimeSlot.push(dataValue);
+          }
+        });
+      }
+    }
+
+    console.log(detailTimeSlot, "Detail Time Slot");
+
+    const detailTimeSlot2 = createSlot.flatMap((value) => ({
       ID_Slot: value.id,
       Start: from,
       End: to,
-      Qty: capacity
-    }))
-    console.log(detailTimeSlot)
-    const createDetailSlot = await detailSlot.bulkCreate(detailTimeSlot);
+      Qty: capacity,
+      Booking_Qty: 0,
+    }));
+    console.log(detailTimeSlot2, "Detail Time Slot 2");
 
-    res.status(200).send({ createSlot, createDetailSlot });
+    const mergedData = [...detailTimeSlot, ...detailTimeSlot2];
+    console.log(mergedData, "Merge Data");
+    const createDetailSlot = await detailSlot.bulkCreate(mergedData);
+    console.log(createDetailSlot, mergedData);
+
+    res.status(200).send("Success");
   } catch (error) {
-    console.log(error)
+    console.log(error);
     res.status(500).send({ message: error.message });
   }
 };
 
-module.exports.addDetailSlot = async (req, res) => {
-  let { ID_Slot, Start, End, Qty } = req.body
+module.exports.checkTimeSlot = async (req, res) => {
+  let { ID_Terminal, startDate, endDate, from, to, capacity } = req.body;
 
-  // console.log(ID_Terminal, date, Start, End, Qty);
+  startDate = new Date(startDate);
+  endDate = new Date(endDate);
+  let err;
   try {
-    
-    const createDetailSlot = await detailSlot.create({
-      ID_Slot,
-      Start,
-      End,
-      Qty
+    const totalDays = Math.floor(
+      (endDate - startDate) / (1000 * 60 * 60 * 24) + 1
+    );
+    const slotList = [...new Array(totalDays).keys()]
+      .map((value) => ({
+        ID_Terminal,
+        Date: new Date(startDate).setDate(startDate.getDate() + value + 1),
+      }))
+      .map((slot) => ({
+        ...slot,
+        Date: new Date(slot.Date).toISOString().split("T")[0],
+      }));
+    console.log(slotList, "Slot List");
+
+    // Check if slots already exist in the database
+    const existingSlots = await Slot.findAll({
+      where: {
+        ID_Terminal,
+        Date: slotList.map((slot) => slot.Date),
+      },
     });
 
-    res.status(200).send({ createDetailSlot });
+    if (existingSlots) {
+      console.log(existingSlots, "Existing Slots");
+      const existingDetailSlot = await detailSlot.findAll({
+        where: {
+          ID_Slot: existingSlots.map((slot) => slot.id),
+        },
+      });
+
+      console.log(existingDetailSlot, "Existinf Detail Slot");
+      if (existingDetailSlot) {
+        existingSlots.flatMap((value) => {
+          const DataDetailSlot = existingDetailSlot.find((slots) => {
+            const [startHour, startMinutes] = slots.Start.split(":");
+            console.log(`${startHour}:${startMinutes}`, "Start");
+            const [endHour, endMinutes] = slots.End.split(":");
+            console.log(`${endHour}:${endMinutes}`, "End");
+            if (value.id === slots.ID_Slot) {
+              console.log(
+                from >= `${startHour}:${startMinutes}` &&
+                  to <= `${endHour}:${endMinutes}`
+              );
+              if (
+                from >= `${startHour}:${startMinutes}` &&
+                to <= `${endHour}:${endMinutes}`
+              ) {
+                err = "data range not valid";
+              }
+            }
+          });
+        });
+      }
+    }
+    if (err) {
+      res.status(400).send({ Message: "Data Range Is Not Valid!" });
+    } else {
+      res.status(200).send("valid");
+    }
   } catch (error) {
-    console.log(error)
-    res.status(500).send({ message: error.message });
+    res.status(500).send(error);
   }
 };
 
 module.exports.editSlot = async (req, res) => {
   console.log(req.body);
-  const { Start, End, Qty, id } = req.body;
+  const { Qty, id } = req.body;
   try {
     const update = await detailSlot.update(
       {
-        Start,
-        End,
         Qty,
-        updatedAt: new Date(),
       },
       {
         where: {
@@ -82,22 +206,7 @@ module.exports.editSlot = async (req, res) => {
       },
     });
 
-    res.status(200).json(updatedData);
-  } catch (error) {
-    res.status(500).send({ message: error.message });
-  }
-};
-
-module.exports.deleteSlot = async (req, res) => {
-  const id = req.params.id;
-  try {
-    const removeSlot = await detailSlot.destroy({
-      where: {
-        id,
-      },
-    });
-    console.log(removeSlot);
-    res.status(200).send("Successfully Deleted");
+    res.status(200).json("Successfully Updated!");
   } catch (error) {
     res.status(500).send({ message: error.message });
   }
@@ -122,9 +231,10 @@ module.exports.viewSlot = async (req, res) => {
       include: [
         {
           model: detailSlot,
-          attributes: ["id","Start", "End", "Qty", "Booking_Qty"],
+          attributes: ["id", "Start", "End", "Qty", "Booking_Qty"],
         },
       ],
+      order: [[{ model: detailSlot }, "Start", "ASC"]],
     });
 
     res.status(200).send(response);
@@ -132,62 +242,3 @@ module.exports.viewSlot = async (req, res) => {
     res.status(500).send({ message: error.message });
   }
 };
-
-// module.exports.addTimeSlot = async (req, res) => {
-//   const id = req.params.id;
-//   try {
-//     const updateBookingQty = await detailSlot.increment(
-//       {
-//         Booking_Qty: 1,
-//       },
-//       {
-//         where: {
-//           id,
-//         },
-//       }
-//     );
-
-//     const updatedData = await detailSlot.findOne({
-//       where: {
-//         id,
-//       },
-//     });
-
-//     res.status(200).send(updatedData);
-//   } catch (error) {
-//     res.status(500).send({ message: error.message });
-//   }
-// };
-
-// module.exports.editTimeSlot = async (req, res) => {
-//   const prevId = req.params.id;
-//   const updatedId = req.params.id;
-
-//   try {
-//     const updatePrevBookingQty = await detailSlot.decrement(
-//       {
-//         Booking_Qty: 1,
-//       },
-//       {
-//         where: {
-//           id: prevId,
-//         },
-//       }
-//     );
-
-//     const updateBookingQty = await detailSlot.increment(
-//       {
-//         Booking_Qty: 1,
-//       },
-//       {
-//         where: {
-//           id: updatedId,
-//         },
-//       }
-//     );
-
-//     res.status(200).send("edit success!");
-//   } catch (error) {
-//     res.status(500).send({ message: error.message });
-//   }
-// };

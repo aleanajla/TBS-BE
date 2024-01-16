@@ -26,9 +26,6 @@ module.exports.viewRequestTP = async (req, res) => {
             "createdAt",
             "Closing_Time",
           ],
-          // where: {
-          //   ID_Customer: ID_Customer
-          // }
         },
       ],
       where: {
@@ -69,9 +66,6 @@ module.exports.viewCancelledTP = async (req, res) => {
             "createdAt",
             "Closing_Time",
           ],
-          // where: {
-          //   ID_Customer
-          // }
         },
       ],
       where: {
@@ -290,3 +284,25 @@ module.exports.filterJPT = async (req, res) => {
     res.status(500).send({ message: error.message });
   }
 };
+
+module.exports.countingTCA = async (req, res) => {
+  const ID_Request = req.params.id;
+
+  try {
+    const result = await db.sequelize.query(
+      'SELECT COUNT(*) FROM "assignJobs" aj ' +
+      'JOIN "bookings" b ON aj."ID_Booking" = b."id" ' +
+      'JOIN "requestContainers" rc ON rc."id" = b."ID_Request_Container" ' +
+      'WHERE rc."ID_Request" = :requestId',
+      {
+        replacements: { requestId: ID_Request }, 
+        type: db.sequelize.QueryTypes.SELECT,
+      }
+    );
+    
+    const count = result[0].count; 
+    res.status(200).send({totalTCA: count});
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
+}

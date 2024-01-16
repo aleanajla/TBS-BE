@@ -12,6 +12,7 @@ const authentication = async (req,res,next) => {
         if(!foundUser){
             res.status(404).send("User not found")
         }
+        console.log(foundUser, "founduser")
 
         req.dataToken = {
             id: foundUser.id,
