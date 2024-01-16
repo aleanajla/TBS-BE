@@ -4,6 +4,7 @@ const { Op, where } = require('sequelize');
 
 const Booking = db.booking
 const detailSlot = db.detailSlot
+const requestContainer = db.requestContainer
 
 module.exports.newBooking = async (req, res) => {
     const { ID_Request_Container, ID_Request_TC, ID_Detail_Slot } = req.body
@@ -48,6 +49,27 @@ module.exports.newBooking = async (req, res) => {
         res.status(200).send("Booking Successfully created!")
     } catch (error) {
         res.status(500).send({ message: error.message })
+    }
+}
+
+module.exports.countingTimeslot = async (req, res) => {
+    const ID_Request = req.params.id;
+
+    try {
+        const counting = await Booking.count({
+            include : [
+                {
+                    model : requestContainer,
+                    where:{
+                        ID_Request
+                    }
+                }
+            ]
+        })
+
+        res.status(200).send({ timeslot: counting });
+    } catch (error) {
+        res.status(500).send({ message: error.message });
     }
 }
 

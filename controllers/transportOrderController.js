@@ -1,9 +1,13 @@
 const db = require("../models");
-const { Op } = require("sequelize");
+const { Op, Sequelize } = require("sequelize");
 
 const Request = db.request;
 const Vessel = db.masterVessel;
 const RequestTC = db.requestTruckingCompany;
+const assignJob = db.assignJob
+const Booking = db.booking
+const requestContainer = db.requestContainer
+
 
 // view request
 module.exports.viewRequestTP = async (req, res) => {

@@ -260,6 +260,22 @@ module.exports.viewBooking = async (req, res) => {
   }
 };
 
+module.exports.countingContainer = async (req, res) => {
+    const ID_Request = req.params.id;
+
+    try {
+        const counting = await RequestContainer.count({
+            where: {
+                ID_Request
+            }
+        })
+
+        res.status(200).send({ totalContainer: counting });
+    } catch (error) {
+        res.status(500).send({ message: error.message });
+    }
+}
+
 //new booking after jpt select TimeSlot
 module.exports.newBooking = async (req, res) => {
   const { ID_Request_Container, ID_Request_TC, ID_Detail_Slot } = req.body;
