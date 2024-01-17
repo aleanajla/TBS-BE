@@ -230,6 +230,8 @@ module.exports.viewSTIDBooking = async (req, res) => {
   const search = req.query.search;
   const date = req.query.date;
 
+  console.log("Cust ID", ID_Customer, "Search", search, "Date", date);
+
   try {
     const allSTID = await STID.findAll({
       attributes: ["id", "STID_Number"],
@@ -239,6 +241,12 @@ module.exports.viewSTIDBooking = async (req, res) => {
           attributes: ["Driver_Name"],
           where: {
             ID_Customer: ID_Customer,
+            Driver_Name: db.sequelize.where(
+              db.sequelize.fn("lower", db.sequelize.col("Driver_Name")),
+              {
+                [Op.like]: `%${search}%`,
+              }
+            ),
           },
         },
         {
@@ -275,7 +283,7 @@ module.exports.viewSTIDBooking = async (req, res) => {
       }
     });
 
-    res.status(200).send(result);
+    res.status(200).send(allSTID);
   } catch (error) {
     res.status(500).send({ message: error.message });
   }

@@ -5,6 +5,8 @@ const slot = require("../models/slot");
 const Slot = db.slot;
 const detailSlot = db.detailSlot;
 const booking = db.booking;
+const Terminal = db.masterTerminal
+const Customer = db.masterCustomer
 
 module.exports.addSlot = async (req, res) => {
   let { ID_Terminal, startDate, endDate, from, to, capacity } = req.body;
@@ -113,6 +115,31 @@ module.exports.addSlot = async (req, res) => {
     res.status(500).send({ message: error.message });
   }
 };
+
+module.exports.getIDTerminal = async (req,res) => {
+  let Customer_ID = req.query.Customer_ID
+
+  try{
+    const getCustomer = await Customer.findOne({
+      attributes: ["Company_Name"],
+      where: {
+        id: Customer_ID
+      }
+    })
+
+    const result = await Terminal.findOne({
+      attributes: ['id'],
+      where: {
+        Terminal_Name : {
+          [Op.like]: `%${getCustomer.Company_Name}%`
+        }
+      }
+    })
+    res.status(200).send(result)
+  }catch(error){
+    res.status(500).send(error);
+  }
+}
 
 module.exports.checkTimeSlot = async (req, res) => {
   let { ID_Terminal, startDate, endDate, from, to, capacity } = req.body;

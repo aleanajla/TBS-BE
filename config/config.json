@@ -1,9 +1,9 @@
 {
   "development": {
     "username": "postgres",
-    "password": "120802",
+    "password": "Alea554499!",
     "database": "tbs",
-    "host": "localhost",
+    "host": "db.buceirviobqjlpzuwqwl.supabase.co",
     "dialect": "postgres"
   }
 }
