@@ -81,7 +81,7 @@
         "NIB": "9120001375849"
     },
     {
-        "Company_Name": "PT . Sidomulyo Selaras",
+        "Company_Name": "PT. Sidomulyo Selaras",
         "Company_Type": "Trucking Company",
         "PMKU": "PMKU.IDJKT.0501.000010",
         "Email": "enquiry@sidomulyo.com",
@@ -135,21 +135,30 @@
         "NIB": "9120001904192"
     },
     {
-        "Company_Name": "Terminal Peti Kemas Koja",
+        "Company_Name": "Terminal Petikemas Koja",
         "Company_Type": "Terminal",
         "PMKU": "",
         "Email": "",
         "Address": "RW.1, Koja, Kec. Koja, Jkt Utara, Daerah Khusus Ibukota Jakarta 14220",
-        "Phone_Number": "0214374142",
+        "Phone_Number": "021678599",
         "NIB": ""
     },
     {
-        "Company_Name": null,
-        "Company_Type": null,
-        "PMKU": "PMKU.IDJKT.2341.000233",
-        "Email": null,
-        "Address": null,
-        "Phone_Number": null,
-        "NIB": null
+        "Company_Name": "Jakarta International Container Terminal I",
+        "Company_Type": "Terminal",
+        "PMKU": "",
+        "Email": "",
+        "Address": "VVVX+Q93, RT.1/RW.1, Koja, North Jakarta City, Jakarta 14220",
+        "Phone_Number": "021678569",
+        "NIB": ""
+    },
+    {
+        "Company_Name": "Jakarta International Container Terminal II",
+        "Company_Type": "Terminal",
+        "PMKU": "",
+        "Email": "",
+        "Address": "VVVX+Q93, RT.1/RW.1, Koja, North Jakarta City, Jakarta 14220",
+        "Phone_Number": "021678565",
+        "NIB": ""
     }
 ]

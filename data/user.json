@@ -138,9 +138,27 @@
         "Role_ID": 3,
         "Customer_ID": 16,
         "Username": "TPK_Koja",
-        "Name": "Terminal Peti Kemas Koja",
+        "Name": "Terminal Petikemas Koja",
         "Password": "TPK_Koja123",
         "Phone_Number": "0214374142",
         "Email": "tpk_koja@gmail.com"
+    },
+    {
+        "Role_ID": 3,
+        "Customer_ID": 17,
+        "Username": "JICT_I",
+        "Name": "Jakarta International Container Terminal I",
+        "Password": "JICT1234",
+        "Phone_Number": "021678569",
+        "Email": "JITC_I@gmail.com"
+    },
+    {
+        "Role_ID": 3,
+        "Customer_ID": 18,
+        "Username": "JICT_II",
+        "Name": "Jakarta International Container Terminal II",
+        "Password": "JICT1234",
+        "Phone_Number": "021678565",
+        "Email": "JITC_II@gmail.com"
     }
 ]

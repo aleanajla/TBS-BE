@@ -1,6 +1,6 @@
 [
     {
-        "ID_Status": 3,
+        "ID_Status": 2,
         "ID_Request": 1,
         "ID_Customer": 1
     },
@@ -12,11 +12,11 @@
     {
         "ID_Status": 2,
         "ID_Request": 3,
-        "ID_Customer": 1
+        "ID_Customer": 4
     },
     {
-        "ID_Status": 3,
+        "ID_Status": 2,
         "ID_Request": 4,
-        "ID_Customer": 1
+        "ID_Customer": 4
     }
 ]

@@ -2,7 +2,7 @@
   "development": {
     "username": "postgres",
     "password": "Alea554499!",
-    "database": "tbs",
+    "database": "postgres",
     "host": "db.buceirviobqjlpzuwqwl.supabase.co",
     "dialect": "postgres"
   }

@@ -10,6 +10,36 @@
         "Size": "40"
     },
     {
+        "ID_Customer": "1",
+        "Plat_Number": "B 3874 DHU",
+        "Size": "20"
+    },
+    {
+        "ID_Customer": "1",
+        "Plat_Number": "B 2837 HUI",
+        "Size": "40"
+    },
+    {
+        "ID_Customer": "1",
+        "Plat_Number": "B 9347 JDK",
+        "Size": "40"
+    },
+    {
+        "ID_Customer": "1",
+        "Plat_Number": "B 2982 AOK",
+        "Size": "20"
+    },
+    {
+        "ID_Customer": "1",
+        "Plat_Number": "B 2982 ASH",
+        "Size": "20"
+    },
+    {
+        "ID_Customer": "1",
+        "Plat_Number": "B 8473 SHI",
+        "Size": "40"
+    },
+    {
         "ID_Customer": "4",
         "Plat_Number": "B 2908 HJF",
         "Size": "20"
@@ -25,6 +55,31 @@
         "Size": "20"
     },
     {
+        "ID_Customer": "4",
+        "Plat_Number": "B 3298 SIJ",
+        "Size": "20"
+    },
+    {
+        "ID_Customer": "4",
+        "Plat_Number": "B 3298 SIJ",
+        "Size": "40"
+    },
+    {
+        "ID_Customer": "4",
+        "Plat_Number": "B 8973 JIS",
+        "Size": "40"
+    },
+    {
+        "ID_Customer": "4",
+        "Plat_Number": "B 9983 AKO",
+        "Size": "20"
+    },
+    {
+        "ID_Customer": "4",
+        "Plat_Number": "B 1093 ABU",
+        "Size": "40"
+    },
+    {
         "ID_Customer": "8",
         "Plat_Number": "B 8108 UFG",
         "Size": "40"
@@ -32,6 +87,141 @@
     {
         "ID_Customer": "8",
         "Plat_Number": "B 0129 EHJ",
+        "Size": "20"
+    },
+    {
+        "ID_Customer": "8",
+        "Plat_Number": "B 9028 OSJ",
+        "Size": "40"
+    },
+    {
+        "ID_Customer": "8",
+        "Plat_Number": "B 0892 AOK",
+        "Size": "20"
+    },
+    {
+        "ID_Customer": "8",
+        "Plat_Number": "B 7839 OKC",
+        "Size": "40"
+    },
+    {
+        "ID_Customer": "8",
+        "Plat_Number": "B 0893 ODK",
+        "Size": "40"
+    },
+    {
+        "ID_Customer": "9",
+        "Plat_Number": "B 9737 USH",
+        "Size": "20"
+    },
+    {
+        "ID_Customer": "9",
+        "Plat_Number": "B 9643 HAS",
+        "Size": "20"
+    },
+    {
+        "ID_Customer": "9",
+        "Plat_Number": "B 8263 SCU",
+        "Size": "40"
+    },
+    {
+        "ID_Customer": "9",
+        "Plat_Number": "B 3567 STA",
+        "Size": "20"
+    },
+    {
+        "ID_Customer": "9",
+        "Plat_Number": "B 2981 SCB",
+        "Size": "40"
+    },
+    {
+        "ID_Customer": "9",
+        "Plat_Number": "B 2736 CHJ",
+        "Size": "40"
+    },
+    {
+        "ID_Customer": "9",
+        "Plat_Number": "B 0183 WER",
+        "Size": "20"
+    },
+    {
+        "ID_Customer": "9",
+        "Plat_Number": "B 3527 JAM",
+        "Size": "40"
+    },
+    {
+        "ID_Customer": "10",
+        "Plat_Number": "B 0826 AST",
+        "Size": "20"
+    },
+    {
+        "ID_Customer": "10",
+        "Plat_Number": "B 2751 SGH",
+        "Size": "20"
+    },
+    {
+        "ID_Customer": "10",
+        "Plat_Number": "B 3733 AWO",
+        "Size": "40"
+    },
+    {
+        "ID_Customer": "10",
+        "Plat_Number": "B 1927 SGS",
+        "Size": "40"
+    },
+    {
+        "ID_Customer": "10",
+        "Plat_Number": "B 7663 MCH",
+        "Size": "20"
+    },
+    {
+        "ID_Customer": "10",
+        "Plat_Number": "B 3674 NJC",
+        "Size": "40"
+    },
+    {
+        "ID_Customer": "10",
+        "Plat_Number": "B 6378 DHJ",
+        "Size": "20"
+    },
+    {
+        "ID_Customer": "11",
+        "Plat_Number": "B 9983 JKM",
+        "Size": "40"
+    },
+    {
+        "ID_Customer": "11",
+        "Plat_Number": "B 6829 DGH",
+        "Size": "20"
+    },
+    {
+        "ID_Customer": "11",
+        "Plat_Number": "B 2979 JDN",
+        "Size": "40"
+    },
+    {
+        "ID_Customer": "11",
+        "Plat_Number": "B 8683 BCH",
+        "Size": "40"
+    },
+    {
+        "ID_Customer": "11",
+        "Plat_Number": "B 5387 NHI",
+        "Size": "20"
+    },
+    {
+        "ID_Customer": "11",
+        "Plat_Number": "B 5278 HCI",
+        "Size": "20"
+    },
+    {
+        "ID_Customer": "11",
+        "Plat_Number": "B 2329 CDU",
+        "Size": "40"
+    },
+    {
+        "ID_Customer": "11",
+        "Plat_Number": "B 3256 NAS",
         "Size": "20"
     }
 ]
