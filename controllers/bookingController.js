@@ -127,7 +127,7 @@ module.exports.viewContainer = async (req, res) => {
   console.log(ID_Request, "id request");
   try {
     const resultContainer = await RequestContainer.findAll({
-      attributes: ["id", "Container_Number"],
+      attributes: ["id", "Container_Size", "Container_Number"],
       where: {
         ID_Request: ID_Request,
       },
@@ -138,7 +138,7 @@ module.exports.viewContainer = async (req, res) => {
       include: [
         {
           model: RequestContainer,
-          attributes: ["Container_Number"],
+          attributes: ["Container_Number", "Container_Size"],
           where: {
             ID_Request: ID_Request,
           },
@@ -161,7 +161,7 @@ module.exports.viewContainer = async (req, res) => {
       include: [
         {
           model: RequestContainer,
-          attributes: ["Container_Number"],
+          attributes: ["Container_Number", "Container_Size"],
           where: {
             ID_Request: ID_Request,
           },
