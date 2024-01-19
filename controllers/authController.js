@@ -154,7 +154,7 @@ module.exports.sendResetToken = async (req, res) => {
       html: `
       <h1 style="text-align: center;">Reset Your Password</h1>
       <p>We have received your request to reset the password for your account</p>
-      <a href='http://localhost:3006/newPassword?token=${token}'>Click here to set new password</a>
+      <a href='https://terminal-booking-system-cf17b.web.app/newPassword?token=${token}'>Click here to set new password</a>
       `,
     });
     res.status(200).send("Email has been sent to reset your password");
