@@ -7,6 +7,7 @@ const RequestTC = db.requestTruckingCompany;
 const assignJob = db.assignJob
 const Booking = db.booking
 const requestContainer = db.requestContainer
+const Customer = db.masterCustomer
 
 
 // view request
@@ -29,8 +30,9 @@ module.exports.viewRequestTP = async (req, res) => {
             "Service_Name",
             "createdAt",
             "Closing_Time",
+            "ID_Customer"
           ],
-        },
+        }
       ],
       where: {
         ID_Customer,
@@ -43,7 +45,32 @@ module.exports.viewRequestTP = async (req, res) => {
         ),
       },
     });
-    res.status(200).send(result);
+
+    const allCust = await Customer.findAll();
+
+    const data_result = [];
+
+    result.forEach((data) => {
+      let cust = allCust.find((cust) => cust.id === data.request.ID_Customer)
+
+      if(cust) {
+        data_result.push({
+          "id" : data.id, 
+          "ID_Request": data.ID_Request, 
+          "ID_Status" : data.ID_Status,
+          "No_Request" : data.request.No_Request,
+          "Qty": data.request.Qty,
+          "Vessel_Name": data.request.Vessel_Name,
+          "Port_Name" : data.request.Port_Name,
+          "Terminal_Name": data.request.Terminal_Name,
+          "Service_Name": data.request.Service_Name,
+          "createdAt": data.request.createdAt,
+          "Closing_Time": data.request.Closing_Time,
+          "Company_Name": cust.Company_Name
+        })
+      }
+    })
+    res.status(200).send(data_result);
   } catch (error) {
     res.status(500).send({ message: error.message });
   }
@@ -69,8 +96,9 @@ module.exports.viewCancelledTP = async (req, res) => {
             "Service_Name",
             "createdAt",
             "Closing_Time",
+            "ID_Customer"
           ],
-        },
+        }
       ],
       where: {
         ID_Customer,
@@ -83,7 +111,32 @@ module.exports.viewCancelledTP = async (req, res) => {
         ),
       },
     });
-    res.status(200).send(result);
+
+    const allCust = await Customer.findAll();
+
+    const data_result = [];
+
+    result.forEach((data) => {
+      let cust = allCust.find((cust) => cust.id === data.request.ID_Customer)
+
+      if(cust) {
+        data_result.push({
+          "id" : data.id, 
+          "ID_Request": data.ID_Request, 
+          "ID_Status" : data.ID_Status,
+          "No_Request" : data.request.No_Request,
+          "Qty": data.request.Qty,
+          "Vessel_Name": data.request.Vessel_Name,
+          "Port_Name" : data.request.Port_Name,
+          "Terminal_Name": data.request.Terminal_Name,
+          "Service_Name": data.request.Service_Name,
+          "createdAt": data.request.createdAt,
+          "Closing_Time": data.request.Closing_Time,
+          "Company_Name": cust.Company_Name
+        })
+      }
+    })
+    res.status(200).send(data_result);
   } catch (error) {
     res.status(500).send({ message: error.message });
   }
@@ -108,13 +161,14 @@ module.exports.viewOnGoingTP = async (req, res) => {
             "Service_Name",
             "createdAt",
             "Closing_Time",
+            "ID_Customer"
           ],
           where: {
             Closing_Time: {
               [Op.gt]: db.sequelize.literal("CURRENT_TIMESTAMP"),
             },
           },
-        },
+        }
       ],
       where: {
         ID_Customer,
@@ -127,7 +181,32 @@ module.exports.viewOnGoingTP = async (req, res) => {
         ),
       },
     });
-    res.status(200).send(result);
+
+    const allCust = await Customer.findAll();
+
+    const data_result = [];
+
+    result.forEach((data) => {
+      let cust = allCust.find((cust) => cust.id === data.request.ID_Customer)
+
+      if(cust) {
+        data_result.push({
+          "id" : data.id, 
+          "ID_Request": data.ID_Request, 
+          "ID_Status" : data.ID_Status,
+          "No_Request" : data.request.No_Request,
+          "Qty": data.request.Qty,
+          "Vessel_Name": data.request.Vessel_Name,
+          "Port_Name" : data.request.Port_Name,
+          "Terminal_Name": data.request.Terminal_Name,
+          "Service_Name": data.request.Service_Name,
+          "createdAt": data.request.createdAt,
+          "Closing_Time": data.request.Closing_Time,
+          "Company_Name": cust.Company_Name
+        })
+      }
+    })
+    res.status(200).send(data_result);
   } catch (error) {
     res.status(500).send({ message: error.message });
   }
@@ -153,13 +232,14 @@ module.exports.viewCompletedTP = async (req, res) => {
             "Service_Name",
             "createdAt",
             "Closing_Time",
+            "ID_Customer"
           ],
           where: {
             Closing_Time: {
               [Op.lt]: db.sequelize.literal("CURRENT_TIMESTAMP"),
             },
           },
-        },
+        }
       ],
       where: {
         ID_Customer,
@@ -172,7 +252,32 @@ module.exports.viewCompletedTP = async (req, res) => {
         ),
       },
     });
-    res.status(200).send(result);
+
+    const allCust = await Customer.findAll();
+
+    const data_result = [];
+
+    result.forEach((data) => {
+      let cust = allCust.find((cust) => cust.id === data.request.ID_Customer)
+
+      if(cust) {
+        data_result.push({
+          "id" : data.id, 
+          "ID_Request": data.ID_Request, 
+          "ID_Status" : data.ID_Status,
+          "No_Request" : data.request.No_Request,
+          "Qty": data.request.Qty,
+          "Vessel_Name": data.request.Vessel_Name,
+          "Port_Name" : data.request.Port_Name,
+          "Terminal_Name": data.request.Terminal_Name,
+          "Service_Name": data.request.Service_Name,
+          "createdAt": data.request.createdAt,
+          "Closing_Time": data.request.Closing_Time,
+          "Company_Name": cust.Company_Name
+        })
+      }
+    })
+    res.status(200).send(data_result);
   } catch (error) {
     res.status(500).send({ message: error.message });
   }

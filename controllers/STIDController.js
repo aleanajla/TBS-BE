@@ -197,17 +197,11 @@ module.exports.viewSTID = async (req,res) => {
       include: [
         {
           model: Driver,
-          attributes: ["Driver_Name"],
-          where: {
-            ID_Customer: ID_Customer,
-          },
+          attributes: ["Driver_Name"]
         },
         {
           model: Truck,
           attributes: ["Plat_Number", "Size"],
-          where: {
-            ID_Customer: ID_Customer,
-          },
         },
       ],
       where: {

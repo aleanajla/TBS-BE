@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "postgres",
+    "username": "postgres.buceirviobqjlpzuwqwl",
     "password": "Alea554499!",
     "database": "postgres",
-    "host": "db.buceirviobqjlpzuwqwl.supabase.co",
+    "host": "aws-0-ap-southeast-1.pooler.supabase.com",
     "dialect": "postgres"
   }
 }

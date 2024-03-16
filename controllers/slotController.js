@@ -120,21 +120,35 @@ module.exports.getIDTerminal = async (req,res) => {
   let Customer_ID = req.query.Customer_ID
 
   try{
-    const getCustomer = await Customer.findOne({
-      attributes: ["Company_Name"],
-      where: {
-        id: Customer_ID
-      }
-    })
+    if(!isNaN(Customer_ID)){
+      const getCustomer = await Customer.findOne({
+        attributes: ["Company_Name"],
+        where: {
+          id: Customer_ID
+        }
+      })
+
+      const result = await Terminal.findOne({
+        attributes: ['id'],
+        where: {
+          Terminal_Name : {
+            [Op.like]: `%${getCustomer.Company_Name}%`
+          }
+        }
+      })
+
+      return res.status(200).send(result)
+    }
 
     const result = await Terminal.findOne({
       attributes: ['id'],
       where: {
         Terminal_Name : {
-          [Op.like]: `%${getCustomer.Company_Name}%`
+          [Op.like]: `%${Customer_ID}%`
         }
       }
     })
+
     res.status(200).send(result)
   }catch(error){
     res.status(500).send(error);
@@ -241,7 +255,10 @@ module.exports.editSlot = async (req, res) => {
 
 module.exports.viewSlot = async (req, res) => {
   const date = req.params.date;
+  const ID_Terminal = req.query.ID_Terminal;
   const inputDate = new Date(date);
+  console.log(ID_Terminal, "ID TERMINAL");
+  console.log(date, "date");
 
   const year = inputDate.getFullYear();
   const month = (inputDate.getMonth() + 1).toString().padStart(2, "0"); // Month is 0-indexed
@@ -254,6 +271,7 @@ module.exports.viewSlot = async (req, res) => {
       attributes: [],
       where: {
         Date: formattedDateString,
+        ID_Terminal: ID_Terminal
       },
       include: [
         {
